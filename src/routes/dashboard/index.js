@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'dva'
 import { Row, Col, Card } from 'antd'
-import { NumberCard, Quote, Sales, Weather, RecentSales, Comments, Completed, Browser, Cpu, User } from './components'
+import { NumberCard, Quote, Temps, Weather, RecentSales, Comments, Completed, Browser, Cpu, User } from './components'
 import styles from './index.less'
 import { color } from 'utils'
 
@@ -14,7 +14,7 @@ const bodyStyle = {
 }
 
 function Dashboard ({ dashboard }) {
-  const { weather, sales, quote, numbers, recentSales, comments, completed, browser, cpu, user } = dashboard
+  const { weather, temps, quote, numbers, recentSales, comments, completed, browser, cpu, user } = dashboard
   const numberCards = numbers.map((item, key) => <Col key={key} lg={6} md={12}>
     <NumberCard {...item} />
   </Col>)
@@ -26,7 +26,7 @@ function Dashboard ({ dashboard }) {
         <Card bordered={false} bodyStyle={{
           padding: '24px 36px 24px 0',
         }}>
-          <Sales data={sales} />
+          <Temps data={temps} />
         </Card>
       </Col>
       <Col lg={6} md={24}>

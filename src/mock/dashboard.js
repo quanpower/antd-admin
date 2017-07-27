@@ -4,12 +4,12 @@ const config = require('../utils/config')
 const { apiPrefix } = config
 
 const Dashboard = Mock.mock({
-  'sales|8': [
+  'temps|10': [
     {
-      'name|+1': 2008,
-      'Clothes|200-500': 1,
-      'Food|180-400': 1,
-      'Electronics|300-550': 1,
+      'time|+1': 1,
+      'Temp1|280-300': 1,
+      'Temp2|280-300': 1,
+      'Temp3|280-300': 1,
     },
   ],
   cpu: {
@@ -55,8 +55,8 @@ const Dashboard = Mock.mock({
     },
   ],
   user: {
-    name: 'zuiidea',
-    email: 'zuiiidea@.gmail.com',
+    name: 'quanpower',
+    email: 'quanpower@gmail.com',
     sales: 3241,
     sold: 3556,
     avatar: 'http://tva4.sinaimg.cn/crop.0.0.996.996.180/6ee6a3a3jw8f0ks5pk7btj20ro0rodi0.jpg',
@@ -100,25 +100,25 @@ const Dashboard = Mock.mock({
   },
   numbers: [
     {
-      icon: 'pay-circle-o',
+      icon: 'team',
       color: color.green,
-      title: 'Online Review',
-      number: 2781,
+      title: 'Temperature1',
+      number: 27.8,
     }, {
       icon: 'team',
       color: color.blue,
-      title: 'New Customers',
-      number: 3241,
+      title: 'Temperature2',
+      number: 27.6,
+    }, {
+      icon: 'team',
+      color: color.purple,
+      title: 'Temperature3',
+      number: 27.3,
     }, {
       icon: 'message',
-      color: color.purple,
-      title: 'Active Projects',
-      number: 253,
-    }, {
-      icon: 'shopping-cart',
       color: color.red,
-      title: 'Referrals',
-      number: 4324,
+      title: 'Battery_Vol',
+      number: 2,
     },
   ],
 })

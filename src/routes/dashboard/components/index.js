@@ -1,6 +1,6 @@
 import NumberCard from './numberCard'
 import Quote from './quote'
-import Sales from './sales'
+import Temps from './temps'
 import Weather from './weather'
 import RecentSales from './recentSales'
 import Comments from './comments'
@@ -9,4 +9,4 @@ import Browser from './browser'
 import Cpu from './cpu'
 import User from './user'
 
-export { NumberCard, Quote, Sales, Weather, RecentSales, Comments, Completed, Browser, Cpu, User }
+export { NumberCard, Quote, Temps, Weather, RecentSales, Comments, Completed, Browser, Cpu, User }

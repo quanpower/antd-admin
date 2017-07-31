@@ -8,7 +8,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsi
 function Temps ({ data }) {
   return (
     <div className={styles.temps}>
-      <div className={styles.title}>Grain Temperatures</div>
+      <div className={styles.title}>TEMPERATURE</div>
       <ResponsiveContainer minHeight={360}>
         <LineChart data={data}>
           <Legend verticalAlign="top"

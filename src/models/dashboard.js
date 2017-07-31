@@ -174,7 +174,7 @@ export default {
       icon: 'http://www.zuimeitianqi.com/res/icon/0_big.png',
       dateTime: new Date().format('MM-dd hh:mm'),
     },
-    sales: [],
+    temps: [],
     quote: {
       avatar: 'http://img.hb.aicdn.com/bc442cf0cc6f7940dcc567e465048d1a8d634493198c4-sPx5BR_fw236',
     },
@@ -190,17 +190,36 @@ export default {
   },
   subscriptions: {
     setup ({ dispatch }) {
-      dispatch({ type: 'query' })
-      dispatch({ type: 'queryWeather' })
+      // setInterval("myInterval()",1000);
+      // function myInterval(){
+        // alert('hahaha!')
+        dispatch({ type: 'query' })
+        dispatch({ type: 'queryWeather' })
+      // }
+
     },
   },
   effects: {
-    *query ({
-      payload,
-    }, { call, put }) {
-      const data = yield call(query, parse(payload))
-      yield put({ type: 'queryWeather', payload: { ...data } })
-    },
+    // *query ({
+    //   payload,
+    // }, { call, put }) {
+    //   const data = yield call(query, parse(payload))
+    //   yield put({ type: 'queryWeather', payload: { ...data } })
+    //   yield call (alert('lllllll'))
+    //   const delay = timeout => {
+    //     return new Promise(resolve => {
+    //     setTimeout(resolve, timeout);
+    //     });
+    //   };
+
+    //   while (true) {
+    //     yield call(delay, 1000);
+    //     yield call (alert('pppppp'))
+
+    //     yield call(query, parse(payload));
+    //     yield put({ type: 'queryWeather', payload: { ...data } })
+    //   }
+    // },
     *queryWeather ({
       payload,
     }, { call, put }) {
@@ -221,6 +240,13 @@ export default {
       }
     },
     queryWeather (state, action) {
+      return {
+        ...state,
+        ...action.payload,
+      }
+    },
+
+    queryDashboard (state, action) {
       return {
         ...state,
         ...action.payload,

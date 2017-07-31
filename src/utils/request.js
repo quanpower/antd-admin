@@ -92,7 +92,8 @@ export default function request (options) {
     if (data instanceof Array) {
       data = {
         list: data,
-      }
+      } 
+
     }
 
     return {

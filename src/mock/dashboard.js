@@ -7,9 +7,9 @@ const Dashboard = Mock.mock({
   'temps|10': [
     {
       'time|+1': 1,
-      'Temp1|280-300': 1,
-      'Temp2|280-300': 1,
-      'Temp3|280-300': 1,
+      'Temp1|280-500': 1,
+      'Temp2|280-500': 1,
+      'Temp3|280-500': 1,
     },
   ],
   cpu: {
@@ -102,17 +102,17 @@ const Dashboard = Mock.mock({
     {
       icon: 'team',
       color: color.green,
-      title: 'Temperature1',
+      title: 'Temp1',
       number: 27.8,
     }, {
       icon: 'team',
       color: color.blue,
-      title: 'Temperature2',
+      title: 'Temp2',
       number: 27.6,
     }, {
       icon: 'team',
       color: color.purple,
-      title: 'Temperature3',
+      title: 'Temp3',
       number: 27.3,
     }, {
       icon: 'message',
@@ -124,7 +124,8 @@ const Dashboard = Mock.mock({
 })
 
 module.exports = {
-  [`GET ${apiPrefix}/dashboard`] (req, res) {
+  [`GET ${apiPrefix}/dashboard1`] (req, res) {
+
     res.json(Dashboard)
   },
 }

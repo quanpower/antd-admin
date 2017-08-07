@@ -30,6 +30,7 @@ function Dashboard ({ dashboard }) {
         >
           <Temps data={temps} />
         </Card>
+
       </Col>
       <Col lg={6} md={24}>
         <Row gutter={24}>

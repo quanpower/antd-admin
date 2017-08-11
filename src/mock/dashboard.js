@@ -105,22 +105,22 @@ const Dashboard = Mock.mock({
       icon: 'team',
       color: color.green,
       title: 'Temp1',
-      number: 27.8,
+      number: 31.1,
     }, {
       icon: 'team',
       color: color.blue,
       title: 'Temp2',
-      number: 27.6,
+      number: 32.2,
     }, {
       icon: 'team',
       color: color.purple,
       title: 'Temp3',
-      number: 27.3,
+      number: 33.3,
     }, {
       icon: 'message',
       color: color.red,
       title: 'Battery_Vol',
-      number: 2,
+      number: 1,
     },
   ],
 })

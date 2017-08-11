@@ -211,8 +211,7 @@ export default {
             dispatch({type: 'fetchNumbers'})
           }, 1000);
         } else{
-          console.log('we are at:');
-          console.log(pathname);
+          console.log('we are at:',pathname);
         }
       })
     },

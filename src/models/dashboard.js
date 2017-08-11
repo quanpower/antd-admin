@@ -1,5 +1,6 @@
 import { parse } from 'qs'
 import { myCity, queryWeather, query } from 'services/dashboard'
+import key from 'keymaster';
 
 // zuimei 摘自 http://www.zuimeitianqi.com/res/js/index.js
 let zuimei = {
@@ -162,6 +163,13 @@ let zuimei = {
   },
 }
 
+
+function delay(timeout){
+  return new Promise(resolve => {
+    setTimeout(resolve, timeout);
+  });
+}
+
 export default {
   namespace: 'dashboard',
   state: {
@@ -187,22 +195,38 @@ export default {
     },
   },
   subscriptions: {
-    setup ({ dispatch }) {
-      // setInterval("myInterval()",1000);
-      // function myInterval(){
-        // alert('hahaha!')
-        dispatch({ type: 'query' })
-        dispatch({ type: 'queryWeather' })
-      // }
+    setup ({ dispatch, history }) {
+      function myInterval(){
+        dispatch({ type: 'query', payload: {} })
+        dispatch({ type: 'queryWeather', payload: {} })
+      }
 
+      history.listen(({pathname}) => {
+        if (pathname == '/dashboard') {
+          setInterval("myInterval()",1000);
+        }
+      })
     },
+
+    // keyboardWatcher({ dispatch }) {
+    //   key('⌘+up, ctrl+up', () => {
+    //     console.log('key down!');
+    //     dispatch({type:'query'});
+    //     dispatch({ type: 'queryWeather' })
+    //   });
+    // },
   },
   effects: {
     * query ({
       payload,
     }, { call, put }) {
-      const data = yield call(query, parse(payload))
-      yield put({ type: 'queryWeather', payload: { ...data } })
+      // while (true) {
+        const data = yield call(query, parse(payload));
+        yield put({ type: 'queryWeather', payload: { ...data } });
+
+        // yield call(console.log('delay 1s'));
+        // yield call(delay, 1000);
+      // }
     },
     * queryWeather (action, { call, put }) {
       const myCityResult = yield call(myCity, { flg: 0 })

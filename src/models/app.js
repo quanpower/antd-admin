@@ -21,7 +21,7 @@ export default {
       {
         id: 1,
         icon: 'laptop',
-        name: 'Dashboard',
+        name: 'dashboard',
         router: '/dashboard',
       },
     ],

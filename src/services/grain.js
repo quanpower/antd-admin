@@ -1,9 +1,9 @@
 import { request, config } from 'utils'
 
 const { api } = config
-const { lora_temp, lora_bat } = api
+const { lora_temp, lora_temps, lora_bat } = api
 
-export async function grainTemp (params) {
+export async function loraTemp (params) {
   return request({
     // url: 'http://101.200.158.2:8888/api/v2/loranode_temperature/1/1',
     // # todo
@@ -13,7 +13,17 @@ export async function grainTemp (params) {
   })
 }
 
-export async function grainBattery (params) {
+export async function loraTemps (params) {
+  return request({
+    // url: 'http://101.200.158.2:8888/api/v2/loranode_temperatures/1/1',
+    // # todo
+    url: lora_temps,
+    method: 'get',
+    data: params,
+  })
+}
+
+export async function loraBattery (params) {
   return request({
     // url: 'http://101.200.158.2:8888/api/v2/loranode_battery/<gateway_addr>/<node_addr>',
     url: lora_bat,

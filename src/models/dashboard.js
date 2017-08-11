@@ -1,6 +1,6 @@
 import { parse } from 'qs'
 import { myCity, queryWeather, query } from 'services/dashboard'
-import { grainTemp, grainBattery } from "../services/grain"
+import { loraTemp, loraTemps, loraBattery } from "../services/grain"
 import key from 'keymaster';
 
 // zuimei 摘自 http://www.zuimeitianqi.com/res/js/index.js
@@ -205,13 +205,14 @@ export default {
       // }
 
       history.listen(({pathname}) => {
-        if (pathname == '/dashboard') {
+        if (pathname === '/dashboard') {
           console.log('update numbers begin---');
           setInterval(() => {
-            dispatch({type: 'fetchNumbers'})
-          }, 1000);
-        } else{
-          console.log('we are at:',pathname);
+            dispatch({type: 'fetchNumbers'});
+            dispatch({type: 'fetchTemps'});
+          }, 5000);
+        } else {
+          console.log('we are at:', pathname);
         }
       })
     },
@@ -224,6 +225,8 @@ export default {
     //   });
     // },
   },
+
+
   effects: {
     * query ({
       payload,
@@ -231,6 +234,7 @@ export default {
       const data = yield call(query, parse(payload));
       yield put({ type: 'queryWeather', payload: { ...data } });
     },
+
     * queryWeather (action, { call, put }) {
       const myCityResult = yield call(myCity, { flg: 0 })
       const result = yield call(queryWeather, { cityCode: myCityResult.selectCityCode })
@@ -241,29 +245,51 @@ export default {
           weather,
         } })
     },
-    * fetchNumbers ({payload}, { call, put }) {
-      const temp = yield call(grainTemp, {});
+
+    * fetchNumbers ( { payload }, { call, put }) {
+      const temp = yield call(loraTemp, {});
       console.log('ldj',temp);
       yield put({
-        type:'updateNumbers',
-        payload:{
+        type: 'updateNumbers',
+        payload: {
           numbers: temp.numbers,
         }
       });
     },
+
+    * fetchTemps ( {payload }, { call, put }) {
+      const temps = yield call(loraTemps, {});
+      console.log('ldj', temps);
+      yield put({
+        type: 'updateTemps',
+        payload: {
+          temps: temps.temps,
+        }
+      });
+    },
   },
+
+
   reducers: {
-    updateNumbers(state, {payload: {numbers}}){
+    updateNumbers (state, { payload: {numbers} }) {
       return {
         ...state, numbers: numbers,
       }
     },
+
+    updateTemps (state, { payload: {temps} }) {
+      return {
+        ...state, temps: temps,
+      }
+    },
+
     queryWeatherSuccess (state, action) {
       return {
         ...state,
         ...action.payload,
       }
     },
+
     queryWeather (state, action) {
       return {
         ...state,

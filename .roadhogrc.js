@@ -14,16 +14,16 @@ export default {
   outputPath : `./dist/${version}`,
   // 接口代理示例
   "proxy": {
-    "/api/v1/dashboard": {
+    "/api/v2": {
       "target": "http://101.200.158.2:8888",
       "changeOrigin": true,
-      "pathRewrite": { "^/api/v1/dashboard" : "/api/v1/dashboard" }
+      "pathRewrite": { "^/api/v2" : "/api/v1" }
     },
-    "/api/v1/loranode_temperature": {
-      "target": "http://101.200.158.2:8888",
-      "changeOrigin": true,
-      "pathRewrite": { "^/api/v1/loranode_temperature" : "/api/v1/loranode_temperature" }
-    },
+    // "/api/v1/loranode_temperature": {
+    //   "target": "http://101.200.158.2:8888",
+    //   "changeOrigin": true,
+    //   "pathRewrite": { "^/api/v1/loranode_temperature" : "/api/v1/loranode_temperature" }
+    // },
     // "/api/v2": {
     //   "target": "http://192.168.0.110",
     //   "changeOrigin": true,

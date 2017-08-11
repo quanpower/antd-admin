@@ -23,6 +23,8 @@ module.exports = {
     menus: `${APIV1}/menus`,
     v1test: `${APIV1}/test`,
     v2test: `${APIV2}/test`,
-    loranode: `${APIV1}/loranode_temperature/1/1`,
+    lora_temp: `${APIV2}/loranode_temperature/1/1`,
+    lora_bat: `${APIV2}/loranode_battery/1/1`,
+
   },
 }

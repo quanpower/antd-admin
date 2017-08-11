@@ -210,6 +210,9 @@ export default {
           setInterval(() => {
             dispatch({type: 'fetchNumbers'})
           }, 1000);
+        } else{
+          console.log('we are at:');
+          console.log(pathname);
         }
       })
     },
@@ -243,7 +246,7 @@ export default {
       const temp = yield call(grainTemp, {});
       console.log(temp);
       yield put({
-        type:"updateNumbers",
+        type:'updateNumbers',
         payload:{
           numbers: temp.numbers,
         }

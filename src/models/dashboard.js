@@ -1,5 +1,6 @@
 import { parse } from 'qs'
 import { myCity, queryWeather, query } from 'services/dashboard'
+import { grainTemp, grainBattery } from "../services/grain"
 import key from 'keymaster';
 
 // zuimei 摘自 http://www.zuimeitianqi.com/res/js/index.js
@@ -196,14 +197,19 @@ export default {
   },
   subscriptions: {
     setup ({ dispatch, history }) {
-      function myInterval(){
-        dispatch({ type: 'query', payload: {} })
-        dispatch({ type: 'queryWeather', payload: {} })
-      }
+      dispatch({ type: 'query', payload: {} })
+      dispatch({ type: 'queryWeather', payload: {} })
+
+      // function myInterval(){
+      //   dispatch({ type: 'fetchNumbers', payload: {} })
+      // }
 
       history.listen(({pathname}) => {
         if (pathname == '/dashboard') {
-          setInterval("myInterval()",1000);
+          console.log('update numbers begin---');
+          setInterval(() => {
+            dispatch({type: 'fetchNumbers'})
+          }, 1000);
         }
       })
     },
@@ -220,13 +226,8 @@ export default {
     * query ({
       payload,
     }, { call, put }) {
-      // while (true) {
-        const data = yield call(query, parse(payload));
-        yield put({ type: 'queryWeather', payload: { ...data } });
-
-        // yield call(console.log('delay 1s'));
-        // yield call(delay, 1000);
-      // }
+      const data = yield call(query, parse(payload));
+      yield put({ type: 'queryWeather', payload: { ...data } });
     },
     * queryWeather (action, { call, put }) {
       const myCityResult = yield call(myCity, { flg: 0 })
@@ -238,8 +239,23 @@ export default {
           weather,
         } })
     },
+    * fetchNumbers ({payload}, { call, put }) {
+      const temp = yield call(grainTemp, {});
+      console.log(temp);
+      yield put({
+        type:"updateNumbers",
+        payload:{
+          numbers: temp.numbers,
+        }
+      });
+    },
   },
   reducers: {
+    updateNumbers(state, {payload: {numbers}}){
+      return {
+        ...state, numbers: numbers,
+      }
+    },
     queryWeatherSuccess (state, action) {
       return {
         ...state,

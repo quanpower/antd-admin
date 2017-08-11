@@ -244,7 +244,7 @@ export default {
     },
     * fetchNumbers ({payload}, { call, put }) {
       const temp = yield call(grainTemp, {});
-      console.log(temp);
+      console.log('ldj',temp);
       yield put({
         type:'updateNumbers',
         payload:{

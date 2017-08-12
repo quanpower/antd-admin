@@ -3,8 +3,9 @@ import PropTypes from 'prop-types'
 import { connect } from 'dva'
 import { Row, Col, Card } from 'antd'
 import { color } from 'utils'
-import { NumberCard, Quote, Temps, Weather, RecentSales, Comments, Completed, Browser, Cpu, User } from './components'
+import { NumberCard, Quote, Temps, Weather, RecentSales, Comments, Completed, Browser, Cpu, User, TempRecord } from './components'
 import styles from './index.less'
+// import TempRecordList from "./components/temprecord";
 
 const bodyStyle = {
   bodyStyle: {
@@ -14,7 +15,7 @@ const bodyStyle = {
 }
 
 function Dashboard ({ dashboard }) {
-  const { weather, temps, quote, numbers, recentSales, comments, completed, browser, cpu, user } = dashboard
+  const { weather, temps, quote, numbers, recentSales, comments, completed, browser, cpu, user, tempRecord } = dashboard
   const numberCards = numbers.map((item, key) => (<Col key={key} lg={6} md={12}>
     <NumberCard {...item} />
   </Col>))
@@ -60,6 +61,18 @@ function Dashboard ({ dashboard }) {
           </Col>
         </Row>
       </Col>
+
+      <Col lg={24} md={24}>
+        <Card bordered={false}
+          bodyStyle={{
+            padding: '24px 36px 24px 0',
+          }}
+        >
+          <TempRecord tempRecord={tempRecord} />
+        </Card>
+      </Col>
+
+
       <Col lg={12} md={24}>
         <Card bordered={false} {...bodyStyle}>
           <RecentSales data={recentSales} />

@@ -8,5 +8,6 @@ import Completed from './completed'
 import Browser from './browser'
 import Cpu from './cpu'
 import User from './user'
+import TempRecord from './temprecord'
 
-export { NumberCard, Quote, Temps, Weather, RecentSales, Comments, Completed, Browser, Cpu, User }
+export { NumberCard, Quote, Temps, Weather, RecentSales, Comments, Completed, Browser, Cpu, User, TempRecord }

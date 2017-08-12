@@ -167,7 +167,7 @@ let zuimei = {
 
 function delay(timeout){
   return new Promise(resolve => {
-    setTimeout(resolve, timeout);
+    setTimeout(resolve, timeout)
   });
 }
 
@@ -194,6 +194,7 @@ export default {
     user: {
       avatar: 'http://img.hb.aicdn.com/bc442cf0cc6f7940dcc567e465048d1a8d634493198c4-sPx5BR_fw236',
     },
+    tempRecordList: [],
   },
   subscriptions: {
     setup ({ dispatch, history }) {
@@ -206,13 +207,14 @@ export default {
 
       history.listen(({pathname}) => {
         if (pathname === '/dashboard') {
-          console.log('update numbers begin---');
+          console.log('update numbers begin---')
           setInterval(() => {
-            dispatch({type: 'fetchNumbers'});
-            dispatch({type: 'fetchTemps'});
+            dispatch({ type: 'fetchNumbers' })
+            dispatch({ type: 'fetchTemps' })
+            dispatch({ type: 'fetchTempRecord' })
           }, 5000);
         } else {
-          console.log('we are at:', pathname);
+          console.log('we are at:', pathname)
         }
       })
     },
@@ -231,8 +233,8 @@ export default {
     * query ({
       payload,
     }, { call, put }) {
-      const data = yield call(query, parse(payload));
-      yield put({ type: 'queryWeather', payload: { ...data } });
+      const data = yield call(query, parse(payload))
+      yield put({ type: 'queryWeather', payload: { ...data } })
     },
 
     * queryWeather (action, { call, put }) {
@@ -247,8 +249,7 @@ export default {
     },
 
     * fetchNumbers ( { payload }, { call, put }) {
-      const temp = yield call(loraTemp, {});
-      console.log('ldj',temp);
+      const temp = yield call(loraTemp, {})
       yield put({
         type: 'updateNumbers',
         payload: {
@@ -258,8 +259,7 @@ export default {
     },
 
     * fetchTemps ( {payload }, { call, put }) {
-      const temps = yield call(loraTemps, {});
-      console.log('ldj', temps);
+      const temps = yield call(loraTemps, {})
       yield put({
         type: 'updateTemps',
         payload: {
@@ -267,6 +267,18 @@ export default {
         }
       });
     },
+
+    * fetchTempRecord ( {payload }, { call, put }) {
+      const temps = yield call(loraTemps, {})
+      yield put({
+        type: 'updateTempRecord',
+        payload: {
+          tempRecord: temps.temps,
+        }
+      });
+    },
+
+
   },
 
 
@@ -280,6 +292,12 @@ export default {
     updateTemps (state, { payload: {temps} }) {
       return {
         ...state, temps: temps,
+      }
+    },
+
+    updateTempRecord (state, { payload: {tempRecord} }) {
+      return {
+        ...state, tempRecord: tempRecord,
       }
     },
 

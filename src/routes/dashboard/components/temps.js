@@ -8,7 +8,7 @@ import styles from './temps.less'
 function Temps ({ data }) {
   return (
     <div className={styles.temps}>
-      <div className={styles.title}>TEMPERATURE</div>
+      <div className={styles.title}>温度曲线</div>
       <ResponsiveContainer minHeight={360}>
         <LineChart data={data}>
           <Legend verticalAlign="top"
@@ -19,7 +19,7 @@ function Temps ({ data }) {
               </ul>)
             }}
           />
-          <XAxis dataKey="time" axisLine={{ stroke: color.borderBase, strokeWidth: 1 }} tickLine={false} />
+          <XAxis dataKey="时间" axisLine={{ stroke: color.borderBase, strokeWidth: 1 }} tickLine={false} />
           <YAxis axisLine={false} tickLine={false} />
           <CartesianGrid vertical={false} stroke={color.borderBase} strokeDasharray="3 3" />
           <Tooltip
@@ -29,9 +29,9 @@ function Temps ({ data }) {
               return <div className={styles.tooltip}><p className={styles.tiptitle}>{content.label}</p><ul>{list}</ul></div>
             }}
           />
-          <Line type="monotone" dataKey="Temp1" stroke={color.purple} strokeWidth={3} dot={{ fill: color.purple }} activeDot={{ r: 5, strokeWidth: 0 }} />
-          <Line type="monotone" dataKey="Temp2" stroke={color.red} strokeWidth={3} dot={{ fill: color.red }} activeDot={{ r: 5, strokeWidth: 0 }} />
-          <Line type="monotone" dataKey="Temp3" stroke={color.green} strokeWidth={3} dot={{ fill: color.green }} activeDot={{ r: 5, strokeWidth: 0 }} />
+          <Line type="monotone" dataKey="温度1" stroke={color.purple} strokeWidth={3} dot={{ fill: color.purple }} activeDot={{ r: 5, strokeWidth: 0 }} />
+          <Line type="monotone" dataKey="温度2" stroke={color.red} strokeWidth={3} dot={{ fill: color.red }} activeDot={{ r: 5, strokeWidth: 0 }} />
+          <Line type="monotone" dataKey="温度3" stroke={color.green} strokeWidth={3} dot={{ fill: color.green }} activeDot={{ r: 5, strokeWidth: 0 }} />
         </LineChart>
       </ResponsiveContainer>
     </div>

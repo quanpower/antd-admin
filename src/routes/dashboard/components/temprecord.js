@@ -5,20 +5,20 @@ import { Table, Popconfirm, Button ,DatePicker, message} from 'antd';
 const TempRecord = ({ tempRecord }) => {
   const columns = [{
     title: '时间',
-    dataIndex: 'time',
-    key: 'time',
+    dataIndex: '时间',
+    key: '时间',
   }, {
     title: '温度1',
-    dataIndex: 'Temp1',
-    key: 'Temp1',
+    dataIndex: '温度1',
+    key: '温度1',
   }, {
     title: '温度2',
-    dataIndex: 'Temp2',
-    key: 'Temp2',
+    dataIndex: '温度2',
+    key: '温度2',
   },{
     title: '温度3',
-    dataIndex: 'Temp3',
-    key: 'Temp3',
+    dataIndex: '温度3',
+    key: '温度3',
   },
   ];
 

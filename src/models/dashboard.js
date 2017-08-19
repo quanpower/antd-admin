@@ -114,6 +114,7 @@ export default modelExtend(model, {
 
     * fetchTempRecord ( {payload }, { call, put }) {
       const temps = yield call(loraTemps, {})
+      console.log(temps)
       yield put({
         type: 'updateTempRecord',
         payload: {

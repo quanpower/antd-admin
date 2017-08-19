@@ -23,7 +23,7 @@ function Dashboard ({ dashboard, loading }) {
 
   return (
     <div>
-      <Loader spinning={loading.models.dashboard} />
+      {/*<Loader spinning={loading.models.dashboard} />*/}
       <Row gutter={24}>
         {numberCards}
         <Col lg={18} md={24}>

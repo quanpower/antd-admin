@@ -13,7 +13,7 @@ export default {
   publicPath : `/${version}/`,
   outputPath : `./dist/${version}`,
   // 接口代理示例
-  "proxy": {
+  proxy : {
     "/api/v2": {
       "target": "http://101.200.158.2:8888",
       "changeOrigin": true,

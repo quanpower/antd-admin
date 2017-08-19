@@ -41,7 +41,7 @@ export default modelExtend(model, {
             dispatch({ type: 'fetchNumbers' })
             dispatch({ type: 'fetchTemps' })
             dispatch({ type: 'fetchTempRecord' })
-          }, 5000);
+          }, 60000);
         } else {
           console.log('we are at:', pathname)
         }
@@ -68,6 +68,7 @@ export default modelExtend(model, {
         payload: data,
       })
     },
+
     * queryWeather ({
       payload = {},
     }, { call, put }) {
@@ -90,7 +91,8 @@ export default modelExtend(model, {
         })
       }
     },
-* fetchNumbers ( { payload }, { call, put }) {
+
+    * fetchNumbers ( { payload }, { call, put }) {
       const temp = yield call(loraTemp, {})
       yield put({
         type: 'updateNumbers',

@@ -41,7 +41,7 @@ export default modelExtend(model, {
             dispatch({ type: 'fetchNumbers' })
             dispatch({ type: 'fetchTemps' })
             dispatch({ type: 'fetchTempRecord' })
-          }, 60000);
+          }, 5000);
         } else {
           console.log('we are at:', pathname)
         }

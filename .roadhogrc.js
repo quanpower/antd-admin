@@ -16,6 +16,7 @@ export default {
   proxy : {
     "/api/v2": {
       "target": "http://127.0.0.1:8888",
+      "secure": false,
       "changeOrigin": true,
       "pathRewrite": { "^/api/v2" : "/api/v1" }
     },

@@ -15,7 +15,7 @@ export default {
   // 接口代理示例
   proxy : {
     "/api/v2": {
-      "target": "http://101.200.158.2:8888",
+      "target": "http://127.0.0.1:8888",
       "changeOrigin": true,
       "pathRewrite": { "^/api/v2" : "/api/v1" }
     },

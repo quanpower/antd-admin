@@ -1,7 +1,7 @@
 import { request, config } from 'utils'
 
 const { api } = config
-const { loraTemperature, loraTemperatures, loraTemperatureRecord, loraBat } = api
+const { loraTemperature, loraTemperatures, loraTemperatureRecord, loraBat, barns } = api
 
 export async function loraTemp (params) {
   return request({
@@ -38,6 +38,16 @@ export async function loraBattery (params) {
   return request({
     // url: 'http://101.200.158.2:8888/api/v2/loranode_battery/<gateway_addr>/<node_addr>',
     url: loraBat.concat('/1/1'),
+    method: 'get',
+    data: params,
+  })
+}
+
+
+export async function getBarns (params) {
+  return request({
+    // url: 'http://101.200.158.2:8888/api/v2/loranode_battery/<gateway_addr>/<node_addr>',
+    url: barns,
     method: 'get',
     data: params,
   })

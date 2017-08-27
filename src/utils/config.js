@@ -30,6 +30,8 @@ module.exports = {
     loraTemperatureRecord: `${APIV2}/loranode_temperature_record`,
 
     loraBat: `${APIV2}/loranode_battery`,
+    barns: `${APIV2}/barns`,
+
 
   },
 }

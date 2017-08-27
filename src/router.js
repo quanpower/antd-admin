@@ -20,6 +20,7 @@ const Routers = function ({ history, app }) {
           cb(null, { component: require('routes/dashboard/') })
         }, 'dashboard')
       },
+
       childRoutes: [
         {
           path: 'dashboard',
@@ -130,6 +131,14 @@ const Routers = function ({ history, app }) {
               registerModel(app, require('models/post'))
               cb(null, require('routes/post/'))
             }, 'post')
+          },
+        }, {
+          path: 'grain',
+          getComponent (nextState, cb) {
+            require.ensure([], (require) => {
+              registerModel(app, require('models/grain'))
+              cb(null, require('routes/grain/'))
+            }, 'grain')
           },
         }, {
           path: '*',

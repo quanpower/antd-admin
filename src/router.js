@@ -140,6 +140,14 @@ const Routers = function ({ history, app }) {
               cb(null, require('routes/grain/'))
             }, 'grain')
           },
+        },{
+          path: 'concrete',
+          getComponent (nextState, cb) {
+            require.ensure([], (require) => {
+              registerModel(app, require('models/concrete'))
+              cb(null, require('routes/concrete/'))
+            }, 'concrete')
+          },
         }, {
           path: '*',
           getComponent (nextState, cb) {

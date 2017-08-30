@@ -1,11 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Icon, Card } from 'antd'
-import styles from './concTemperature.less'
+import styles from './concRealtimeTemp.less'
 
-function ConcTemperature ({ icon, color, title, number }) {
+function ConcRealtimeTemp ({ icon, color, title, number }) {
   return (
-    <Card className={styles.concTemperature} bordered={false} bodyStyle={{ padding: 0 }}>
+    <Card className={styles.concRealtimeTemp} bordered={false} bodyStyle={{ padding: 0 }}>
       <Icon className={styles.iconWarp} style={{ color }} type={icon} />
       <div className={styles.content}>
         <p className={styles.title}>{title || 'No Title'}</p>
@@ -17,11 +17,11 @@ function ConcTemperature ({ icon, color, title, number }) {
   )
 }
 
-ConcTemperature.propTypes = {
+ConcRealtimeTemp.propTypes = {
   icon: PropTypes.string,
   color: PropTypes.string,
   title: PropTypes.string,
   number: PropTypes.number,
 }
 
-export default ConcTemperature
+export default ConcRealtimeTemp

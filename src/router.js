@@ -149,6 +149,14 @@ const Routers = function ({ history, app }) {
             }, 'concrete')
           },
         }, {
+          path: 'concdetail',
+          getComponent (nextState, cb) {
+            require.ensure([], (require) => {
+              registerModel(app, require('models/concdetail'))
+              cb(null, require('routes/concdetail/'))
+            }, 'concdetail')
+          },
+        }, {
           path: '*',
           getComponent (nextState, cb) {
             require.ensure([], (require) => {

@@ -11,15 +11,15 @@ export default modelExtend(model, {
   state: {
     weather: {
       city: '上海',
-      temperature: '41',
+      temperature: '31',
       name: '晴',
       icon: '//s5.sencdn.com/web/icons/3d_50/2.png',
     },
-    temps: [],
+    concTemps: [],
     quote: {
       avatar: 'http://img.hb.aicdn.com/bc442cf0cc6f7940dcc567e465048d1a8d634493198c4-sPx5BR_fw236',
     },
-    numbers: [],
+    concRealtimeTemp: [],
     recentSales: [],
     comments: [],
     completed: [],
@@ -28,7 +28,7 @@ export default modelExtend(model, {
     user: {
       avatar: 'http://img.hb.aicdn.com/bc442cf0cc6f7940dcc567e465048d1a8d634493198c4-sPx5BR_fw236',
     },
-    tempRecordList: [],
+    concTempRecord: [],
   },
   subscriptions: {
     setup ({ dispatch, history }) {
@@ -36,11 +36,11 @@ export default modelExtend(model, {
         if (pathname === '/dashboard' || pathname === '/') {
           dispatch({ type: 'query' })
           dispatch({ type: 'queryWeather' })
-          console.log('update numbers begin---')
+          console.log('update concRealtimeTemp begin---')
           setInterval(() => {
-            dispatch({ type: 'fetchNumbers' })
-            dispatch({ type: 'fetchTemps' })
-            dispatch({ type: 'fetchTempRecord' })
+            dispatch({ type: 'fetchConcRealtimeTemp' })
+            dispatch({ type: 'fetchConcTemps' })
+            dispatch({ type: 'fetchConcTempRecord' })
           }, 5000);
         } else {
           console.log('we are at:', pathname)
@@ -92,33 +92,33 @@ export default modelExtend(model, {
       }
     },
 
-    * fetchNumbers ( { payload }, { call, put }) {
+    * fetchConcRealtimeTemp ({ payload }, { call, put }) {
       const temp = yield call(loraTemp, {})
       yield put({
-        type: 'updateNumbers',
+        type: 'updateConcRealtimeTemp',
         payload: {
-          numbers: temp.numbers,
+          numbers: temp.concRealtimeTemp,
         }
       });
     },
 
-    * fetchTemps ( {payload }, { call, put }) {
+    * fetchConcTemps ({payload }, { call, put }) {
       const temps = yield call(loraTemps, {})
       yield put({
-        type: 'updateTemps',
+        type: 'updateConcTemps',
         payload: {
-          temps: temps.temps,
+          temps: temps.concTemps,
         }
       });
     },
 
-    * fetchTempRecord ( {payload }, { call, put }) {
+    * fetchConcTempRecord ({payload }, { call, put }) {
       const temps = yield call(loraTemps, {})
       console.log(temps)
       yield put({
-        type: 'updateTempRecord',
+        type: 'updateConcTempRecord',
         payload: {
-          tempRecord: temps.temps,
+          tempRecord: temps.concTemps,
         }
       });
     },
@@ -127,19 +127,19 @@ export default modelExtend(model, {
   },
 
   reducers: {
-    updateNumbers (state, { payload: {numbers} }) {
+    updateConcRealtimeTemp (state, { payload: {numbers} }) {
       return {
         ...state, numbers: numbers,
       }
     },
 
-    updateTemps (state, { payload: {temps} }) {
+    updateConcTemps (state, { payload: {temps} }) {
       return {
         ...state, temps: temps,
       }
     },
 
-    updateTempRecord (state, { payload: {tempRecord} }) {
+    updateConcTempRecord (state, { payload: {tempRecord} }) {
       return {
         ...state, tempRecord: tempRecord,
       }

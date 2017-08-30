@@ -79,7 +79,7 @@ const Dashboard = Mock.mock({
         return Mock.Random.image('48x48', Mock.Random.color(), '#757575', 'png', this.name.substr(0, 1))
       },
       date () {
-        return `2016-${Mock.Random.date('MM-dd')} ${Mock.Random.time('HH:mm:ss')}`
+        return `2017-${Mock.Random.date('MM-dd')} ${Mock.Random.time('HH:mm:ss')}`
       },
     },
   ],
@@ -95,12 +95,12 @@ const Dashboard = Mock.mock({
     },
   ],
   quote: {
-    name: 'Joho Doe',
-    title: 'Graphic Designer',
-    content: 'I\'m selfish, impatient and a little insecure. I make mistakes, I am out of control and at times hard to handle. But if you can\'t handle me at my worst, then you sure as hell don\'t deserve me at my best.',
+    name: '江苏扬建',
+    title: '公告栏',
+    content: '江苏扬建集团印象城项目部欢迎您!',
     avatar: 'http://img.hb.aicdn.com/bc442cf0cc6f7940dcc567e465048d1a8d634493198c4-sPx5BR_fw236',
   },
-  numbers: [
+  concRealtimeTemp: [
     {
       icon: 'team',
       color: color.green,

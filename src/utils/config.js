@@ -31,7 +31,13 @@ module.exports = {
 
     loraBat: `${APIV2}/loranode_battery`,
     barns: `${APIV2}/barns`,
+
     concTemp: `${APIV2}/concrete_temperature`,
+    concTemps: `${APIV2}/concrete_temperatures`,
+    concTempRecord: `${APIV2}/concrete_temperature_record`,
+
+    concDashboard: `${APIV2}/concrete_dashboard`,
+
 
 
   },

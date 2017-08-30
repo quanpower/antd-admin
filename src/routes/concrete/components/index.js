@@ -1,4 +1,7 @@
 
-import ConcTemperature from './concTemperature'
+import ConcDashboard from './dashboard'
+import Weather from './weather'
+import Quote from './quote'
 
-export { ConcTemperature }
+
+export { ConcDashboard, Weather, Quote }

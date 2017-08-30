@@ -3,20 +3,31 @@ import modelExtend from 'dva-model-extend'
 import { query } from 'services/dashboard'
 import { model } from 'models/common'
 import * as weatherService from 'services/weather'
-import { getConcTemps } from "../services/concrete"
+import { getConcTemps, getConcDashboard } from '../services/concrete'
 
 export default modelExtend(model, {
   namespace: 'concrete',
   state: {
-    concTemps: [],
+    weather: {
+      city: '上海',
+      temperature: '31',
+      name: '晴',
+      icon: '//s5.sencdn.com/web/icons/3d_50/2.png',
+    },
+    concDash: [],
+    quote: {
+      avatar: 'http://img.hb.aicdn.com/bc442cf0cc6f7940dcc567e465048d1a8d634493198c4-sPx5BR_fw236',
+    },
   },
   subscriptions: {
     setup ({ dispatch, history }) {
       history.listen(({pathname}) => {
         if (pathname === '/concrete') {
+          dispatch({ type: 'query' })
           console.log('update ConcTemps begin---')
           setInterval(() => {
-            dispatch({type: 'fetchConcTemps'})
+            dispatch({type: 'fetchConcDashboard'})
+
           }, 5000)
         } else {
           console.log('we are at:', pathname)
@@ -25,25 +36,33 @@ export default modelExtend(model, {
     }
   },
 
-
   effects: {
-    * fetchConcTemps ( { payload }, { call, put }) {
-      const concTemps = yield call(getConcTemps)
-      console.log('concTemps are :', concTemps)
+    * query ({ payload }, { call, put }) {
+      const data = yield call(query, parse(payload))
+      console.log('dashboard data is:', data)
       yield put({
-        type: 'updateConcTemps',
+        type: 'updateState',
+        payload: data,
+      })
+    },
+
+    * fetchConcDashboard ({ payload }, { call, put }) {
+      const concDash = yield call(getConcDashboard)
+      console.log('concDash are :', concDash)
+      yield put({
+        type: 'updateConcDashboard',
         payload: {
-          concTemps: concTemps.concTemps,
+          concDash: concDash.concDash,
         }
       })
     },
   },
 
   reducers: {
-    updateConcTemps (state, { payload: {concTemps} }) {
-      console.log('reducers concTemps are :', concTemps)
+    updateConcDashboard (state, { payload: { concDash } }) {
+      console.log('reducers concDash are :', concDash)
 
-      return { ...state, concTemps: concTemps }
+      return { ...state, concDash: concDash }
     },
   },
 })

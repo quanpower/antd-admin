@@ -2,37 +2,37 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Table, Popconfirm, Button ,DatePicker, message} from 'antd';
 
-const ConcTempRecord = ({ concTempRecord }) => {
+const AirConTempRecord = ({ airConTempRecord }) => {
   const columns = [{
     title: '时间',
     dataIndex: 'time',
     key: 'time',
   }, {
-    title: '上',
+    title: '1',
     dataIndex: 'Temp1',
     key: 'Temp1',
   }, {
-    title: '中',
+    title: '2',
     dataIndex: 'Temp2',
     key: 'Temp2',
   },{
-    title: '下',
+    title: '3',
     dataIndex: 'Temp3',
     key: 'Temp3',
   },
   ];
-  console.log('concTempRecord', concTempRecord)
+  console.log('airConTempRecord', airConTempRecord)
 
   return (
     <Table
-      dataSource={concTempRecord}
+      dataSource={airConTempRecord}
       columns={columns}
     />
   );
 };
 
-ConcTempRecord.propTypes = {
-  concTempRecord: PropTypes.array,
+AirConTempRecord.propTypes = {
+  airConTempRecord: PropTypes.array,
 };
 
 //
@@ -58,4 +58,4 @@ ConcTempRecord.propTypes = {
 // }
 
 
-export default ConcTempRecord
+export default AirConTempRecord

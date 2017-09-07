@@ -1,7 +1,7 @@
 import { request, config } from 'utils'
 
 const { api } = config
-const { loraTemperature, loraTemperatures, loraTemperatureRecord, loraBat, barns } = api
+const { loraTemperature, loraTemperatures, loraTemperatureRecord, loraBat, barns, airConTemp, airConTemps, airConTempRecord, airConDashboard  } = api
 
 export async function loraTemp (params) {
   return request({
@@ -52,3 +52,45 @@ export async function getBarns (params) {
     data: params,
   })
 }
+
+
+export async function getAirConTemp (params) {
+  return request({
+    // url: 'http://101.200.158.2:8888/api/v2/loranode_battery/<gateway_addr>/<node_addr>',
+    url: airConTemp.concat('/1/1'),
+    method: 'get',
+    data: params,
+  })
+}
+
+
+export async function getAirConTemps (params) {
+  return request({
+    // url: 'http://101.200.158.2:8888/api/v2/loranode_battery/<gateway_addr>/<node_addr>',
+    url: airConTemps.concat('/1/1'),
+    method: 'get',
+    data: params,
+  })
+}
+
+
+export async function getAirConTempRecord (params) {
+  return request({
+    // url: 'http://101.200.158.2:8888/api/v2/loranode_battery/<gateway_addr>/<node_addr>',
+    url: airConTempRecord.concat('/1/1/2017-9-7 00:00:00/2017-9-7 23:00:00'),
+    method: 'get',
+    data: params,
+  })
+}
+
+
+export async function getAirConDashboard (params) {
+  return request({
+    // url: 'http://101.200.158.2:8888/api/v2/loranode_battery/<gateway_addr>/<node_addr>',
+    url: airConDashboard,
+    method: 'get',
+    data: params,
+  })
+}
+
+

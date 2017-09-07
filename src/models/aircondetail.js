@@ -2,20 +2,20 @@ import { parse } from 'qs'
 import modelExtend from 'dva-model-extend'
 // import { query } from 'services/dashboard'
 import { model } from 'models/common'
-import { getConcTemp, getConcTemps, getConcTempRecord, getConcDashboard } from "../services/concrete"
+import { getAirConTemp, getAirConTemps, getAirConTempRecord, getAirConDashboard } from "../services/grain"
 
 export default modelExtend(model, {
-  namespace: 'concdetail',
+  namespace: 'aircondetail',
   state: {
-    concRealtimeTemp: [],
-    concTemps: [],
-    concTempRecord: [],
+    airConRealtimeTemp: [],
+    airConTemps: [],
+    airConTempRecord: [],
   },
   subscriptions: {
     setup ({ dispatch, history }) {
       history.listen(({ pathname }) => {
-        if (pathname === '/concdetail') {
-          console.log('update concRealtimeTemp begin---')
+        if (pathname === '/aircondetail') {
+          console.log('update airConRealtimeTemp begin---')
           setInterval(() => {
             dispatch({ type: 'fetchAirConRealtimeTemp' })
             dispatch({ type: 'fetchAirConTemps' })
@@ -31,56 +31,56 @@ export default modelExtend(model, {
 
   effects: {
     * fetchAirConRealtimeTemp ({ payload }, { call, put }) {
-      const concRealtimeTemp = yield call(getConcTemp, {})
-      console.log('concRealtimeTemp', concRealtimeTemp)
+      const airConRealtimeTemp = yield call(getAirConTemp, {})
+      console.log('airConRealtimeTemp', airConRealtimeTemp)
       yield put({
         type: 'updateAirConRealtimeTemp',
         payload: {
-          concRealtimeTemp: concRealtimeTemp.concRealtimeTemp,
+          airConRealtimeTemp: airConRealtimeTemp.airConRealtimeTemp,
         }
       })
     },
 
     * fetchAirConTemps ({payload }, { call, put }) {
-      const concTemps = yield call(getConcTemps, {})
-      console.log('concTemps', concTemps)
+      const airConTemps = yield call(getAirConTemps, {})
+      console.log('airConTemps', airConTemps)
 
       yield put({
         type: 'updateAirConTemps',
         payload: {
-          concTemps: concTemps.concTemps,
+          airConTemps: airConTemps.airConTemps,
         }
       })
     },
 
     * fetchAirConTempRecord ({payload }, { call, put }) {
-      const concTempRecord = yield call(getConcTempRecord, {})
-      console.log('concTempRecord', concTempRecord)
+      const airConTempRecord = yield call(getAirConTempRecord, {})
+      console.log('airConTempRecord', airConTempRecord)
       yield put({
         type: 'updateAirConTempRecord',
         payload: {
-          concTempRecord: concTempRecord.concTempRecord,
+          airConTempRecord: airConTempRecord.airConTempRecord,
         }
       })
     },
   },
 
   reducers: {
-    updateAirConRealtimeTemp (state, { payload: {concRealtimeTemp} }) {
+    updateAirConRealtimeTemp (state, { payload: {airConRealtimeTemp} }) {
       return {
-        ...state, concRealtimeTemp: concRealtimeTemp,
+        ...state, airConRealtimeTemp: airConRealtimeTemp,
       }
     },
 
-    updateAirConTemps (state, { payload: {concTemps} }) {
+    updateAirConTemps (state, { payload: {airConTemps} }) {
       return {
-        ...state, concTemps: concTemps,
+        ...state, airConTemps: airConTemps,
       }
     },
 
-    updateAirConTempRecord (state, { payload: {concTempRecord} }) {
+    updateAirConTempRecord (state, { payload: {airConTempRecord} }) {
       return {
-        ...state, concTempRecord: concTempRecord,
+        ...state, airConTempRecord: airConTempRecord,
       }
     },
   },

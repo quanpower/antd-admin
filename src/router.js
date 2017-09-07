@@ -140,7 +140,15 @@ const Routers = function ({ history, app }) {
               cb(null, require('routes/grain/'))
             }, 'grain')
           },
-        },{
+        }, {
+          path: 'aircondetail',
+          getComponent (nextState, cb) {
+            require.ensure([], (require) => {
+              registerModel(app, require('models/aircondetail'))
+              cb(null, require('routes/aircondetail/'))
+            }, 'aircondetail')
+          },
+        }, {
           path: 'concrete',
           getComponent (nextState, cb) {
             require.ensure([], (require) => {

@@ -11,16 +11,16 @@ let database = [
   {
     id: '2',
     bpid: '1',
-    name: '混凝土测温仪表板',
+    name: '粮库仪表板',
     icon: 'bulb',
-    route: '/concrete',
+    route: '/grain',
   },
   {
     id: '21',
     bpid: '1',
-    name: '混凝土测温点',
+    name: '粮仓测温点',
     icon: 'bulb',
-    route: '/concdetail',
+    route: '/aircondetail',
   },
   {
     id: '9',

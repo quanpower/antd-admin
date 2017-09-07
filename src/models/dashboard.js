@@ -38,9 +38,9 @@ export default modelExtend(model, {
           dispatch({ type: 'queryWeather' })
           console.log('update concRealtimeTemp begin---')
           setInterval(() => {
-            dispatch({ type: 'fetchConcRealtimeTemp' })
-            dispatch({ type: 'fetchConcTemps' })
-            dispatch({ type: 'fetchConcTempRecord' })
+            dispatch({ type: 'fetchAirConRealtimeTemp' })
+            dispatch({ type: 'fetchAirConTemps' })
+            dispatch({ type: 'fetchAirConTempRecord' })
           }, 5000);
         } else {
           console.log('we are at:', pathname)
@@ -92,31 +92,31 @@ export default modelExtend(model, {
       }
     },
 
-    * fetchConcRealtimeTemp ({ payload }, { call, put }) {
+    * fetchAirConRealtimeTemp ({ payload }, { call, put }) {
       const temp = yield call(loraTemp, {})
       yield put({
-        type: 'updateConcRealtimeTemp',
+        type: 'updateAirConRealtimeTemp',
         payload: {
           numbers: temp.concRealtimeTemp,
         }
       });
     },
 
-    * fetchConcTemps ({payload }, { call, put }) {
+    * fetchAirConTemps ({payload }, { call, put }) {
       const temps = yield call(loraTemps, {})
       yield put({
-        type: 'updateConcTemps',
+        type: 'updateAirConTemps',
         payload: {
           temps: temps.concTemps,
         }
       });
     },
 
-    * fetchConcTempRecord ({payload }, { call, put }) {
+    * fetchAirConTempRecord ({payload }, { call, put }) {
       const temps = yield call(loraTemps, {})
       console.log(temps)
       yield put({
-        type: 'updateConcTempRecord',
+        type: 'updateAirConTempRecord',
         payload: {
           tempRecord: temps.concTemps,
         }
@@ -127,19 +127,19 @@ export default modelExtend(model, {
   },
 
   reducers: {
-    updateConcRealtimeTemp (state, { payload: {numbers} }) {
+    updateAirConRealtimeTemp (state, { payload: {numbers} }) {
       return {
         ...state, numbers: numbers,
       }
     },
 
-    updateConcTemps (state, { payload: {temps} }) {
+    updateAirConTemps (state, { payload: {temps} }) {
       return {
         ...state, temps: temps,
       }
     },
 
-    updateConcTempRecord (state, { payload: {tempRecord} }) {
+    updateAirConTempRecord (state, { payload: {tempRecord} }) {
       return {
         ...state, tempRecord: tempRecord,
       }

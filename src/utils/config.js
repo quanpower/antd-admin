@@ -21,10 +21,12 @@ module.exports = {
     posts: `${APIV1}/posts`,
     user: `${APIV1}/user/:id`,
     dashboard: `${APIV1}/dashboard`,
-    menus: `${APIV1}/menus`,
     weather: `${APIV1}/weather`,
     v1test: `${APIV1}/test`,
     v2test: `${APIV2}/test`,
+
+    menus: `${APIV2}/menus`,
+
     loraTemperature: `${APIV2}/loranode_temperature`,
     loraTemperatures: `${APIV2}/loranode_temperatures`,
     loraTemperatureRecord: `${APIV2}/loranode_temperature_record`,
@@ -35,8 +37,12 @@ module.exports = {
     concTemp: `${APIV2}/concrete_temperature`,
     concTemps: `${APIV2}/concrete_temperatures`,
     concTempRecord: `${APIV2}/concrete_temperature_record`,
-
     concDashboard: `${APIV2}/concrete_dashboard`,
+
+    airConTemp: `${APIV2}/air-conditioner_temperature`,
+    airConTemps: `${APIV2}/air-conditioner_temperatures`,
+    airConTempRecord: `${APIV2}/air-conditioner_temperature_record`,
+    airConDashboard: `${APIV2}/air-conditioner_dashboard`,
 
 
 

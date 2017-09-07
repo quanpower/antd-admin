@@ -96,13 +96,12 @@ export default function request (options) {
       } 
 
     }
-
-    return {
+    return Promise.resolve({
       success: true,
       message: statusText,
       statusCode: status,
       ...data,
-    }
+    })
   }).catch((error) => {
     const { response } = error
     let msg
@@ -115,6 +114,6 @@ export default function request (options) {
       statusCode = 600
       msg = error.message || 'Network Error'
     }
-    return { success: false, statusCode, message: msg }
+    return Promise.reject({ success: false, statusCode, message: msg })
   })
 }

@@ -13,7 +13,12 @@ export default {
   publicPath : `/${version}/`,
   outputPath : `./dist/${version}`,
   // 接口代理示例
-  proxy : {
+  proxy: {
+    "/api/v1/weather": {
+      "target": "https://api.seniverse.com/",
+      "changeOrigin": true,
+      "pathRewrite": { "^/api/v1/weather" : "/v3/weather" }
+    },
     "/api/v2": {
       "target": "http://127.0.0.1:8888",
       "secure": false,

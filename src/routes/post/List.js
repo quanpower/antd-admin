@@ -26,7 +26,7 @@ const List = ({ ...tableProps }) => {
       title: 'Visibility',
       dataIndex: 'visibility',
     }, {
-      title: 'ConcDashboard',
+      title: 'AirConDashboard',
       dataIndex: 'comments',
     }, {
       title: 'Views',

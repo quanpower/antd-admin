@@ -141,6 +141,14 @@ const Routers = function ({ history, app }) {
             }, 'grain')
           },
         }, {
+          path: 'graindashboard',
+          getComponent (nextState, cb) {
+            require.ensure([], (require) => {
+              registerModel(app, require('models/graindash'))
+              cb(null, require('routes/graindash/'))
+            }, 'graindash')
+          },
+        },{
           path: 'aircondetail',
           getComponent (nextState, cb) {
             require.ensure([], (require) => {

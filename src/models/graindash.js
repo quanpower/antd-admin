@@ -3,10 +3,10 @@ import modelExtend from 'dva-model-extend'
 import { query } from 'services/dashboard'
 import { model } from 'models/common'
 import * as weatherService from 'services/weather'
-import { getConcTemps, getConcDashboard } from '../services/concrete'
+import { getAirConTemps, getAirConDashboard, getGrainQuote } from '../services/grain'
 
 export default modelExtend(model, {
-  namespace: 'concrete',
+  namespace: 'graindash',
   state: {
     weather: {
       city: '上海',
@@ -14,7 +14,7 @@ export default modelExtend(model, {
       name: '晴',
       icon: '//s5.sencdn.com/web/icons/3d_50/2.png',
     },
-    concDash: [],
+    airConDash: [],
     quote: {
       avatar: 'http://img.hb.aicdn.com/bc442cf0cc6f7940dcc567e465048d1a8d634493198c4-sPx5BR_fw236',
     },
@@ -22,11 +22,12 @@ export default modelExtend(model, {
   subscriptions: {
     setup ({ dispatch, history }) {
       history.listen(({pathname}) => {
-        if (pathname === '/concrete') {
-          dispatch({ type: 'query' })
-          console.log('update ConcTemps begin---')
+        if (pathname === '/graindashboard') {
+          // dispatch({ type: 'query' })
+          console.log('update graindashboard begin---')
           setInterval(() => {
             dispatch({type: 'fetchAirConDashboard'})
+            dispatch({type: 'fetchGrainQuote'})
 
           }, 5000)
         } else {
@@ -47,22 +48,39 @@ export default modelExtend(model, {
     },
 
     * fetchAirConDashboard ({ payload }, { call, put }) {
-      const concDash = yield call(getConcDashboard)
-      console.log('concDash are :', concDash)
+      const airConDash = yield call(getAirConDashboard)
+      console.log('airConDash are :', airConDash)
       yield put({
         type: 'updateAirConDashboard',
         payload: {
-          concDash: concDash.concDash,
+          airConDash: airConDash.airConDash,
+        }
+      })
+    },
+
+    * fetchGrainQuote ({ payload }, { call, put }) {
+      const quote = yield call(getGrainQuote)
+      console.log('quote is :', quote)
+      yield put({
+        type: 'updateAirConDashboard',
+        payload: {
+          quote: quote.quote,
         }
       })
     },
   },
 
   reducers: {
-    updateAirConDashboard (state, { payload: { concDash } }) {
-      console.log('reducers concDash are :', concDash)
+    updateAirConDashboard (state, { payload: { airConDash } }) {
+      console.log('reducers airConDash are :', airConDash)
 
-      return { ...state, concDash: concDash }
+      return { ...state, airConDash: airConDash }
+    },
+
+    updateGrainQuote (state, { payload: { quote } }) {
+      console.log('reducers quote are :', quote)
+
+      return { ...state, quote: quote }
     },
   },
 })

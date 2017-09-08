@@ -1,7 +1,9 @@
 import { request, config } from 'utils'
 
 const { api } = config
-const { loraTemperature, loraTemperatures, loraTemperatureRecord, loraBat, barns, grainQuote, airConTemp, airConTemps, airConTempRecord, airConDashboard  } = api
+const { loraTemperature, loraTemperatures, loraTemperatureRecord, loraBat, barns, grainQuote,
+  airConTemp, airConTemps, airConTempRecord, airConDashboard, grainSmartTempCtrl, grainRealtimeTemp, grainFireAlarm,
+  grainDynamicLinkage, grainSecurity  } = api
 
 export async function loraTemp (params) {
   return request({
@@ -99,7 +101,53 @@ export async function getAirConDashboard (params) {
 export async function getGrainQuote (params) {
   return request({
     // url: 'http://101.200.158.2:8888/api/v2/loranode_battery/<gateway_addr>/<node_addr>',
-    url: grainQuote,
+    url: grainQuote.concat('/1/1'),
+    method: 'get',
+    data: params,
+  })
+}
+
+
+export async function getSmartTempCtrl (params) {
+  return request({
+    // url: 'http://101.200.158.2:8888/api/v2/loranode_battery/<gateway_addr>/<node_addr>',
+    url: grainSmartTempCtrl.concat('/1/1'),
+    method: 'get',
+    data: params,
+  })
+}
+
+export async function getRealtimeTemp (params) {
+  return request({
+    // url: 'http://101.200.158.2:8888/api/v2/loranode_battery/<gateway_addr>/<node_addr>',
+    url: grainRealtimeTemp.concat('/1/1'),
+    method: 'get',
+    data: params,
+  })
+}
+
+export async function getFireAlarm (params) {
+  return request({
+    // url: 'http://101.200.158.2:8888/api/v2/loranode_battery/<gateway_addr>/<node_addr>',
+    url: grainFireAlarm.concat('/1/1'),
+    method: 'get',
+    data: params,
+  })
+}
+
+export async function getDynamicLinkage (params) {
+  return request({
+    // url: 'http://101.200.158.2:8888/api/v2/loranode_battery/<gateway_addr>/<node_addr>',
+    url: grainDynamicLinkage.concat('/1/1'),
+    method: 'get',
+    data: params,
+  })
+}
+
+export async function getSecurity (params) {
+  return request({
+    // url: 'http://101.200.158.2:8888/api/v2/loranode_battery/<gateway_addr>/<node_addr>',
+    url: grainSecurity.concat('/1/1'),
     method: 'get',
     data: params,
   })

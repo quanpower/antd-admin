@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styles from './quote.less'
+import styles from './firealarm.less'
 
-function Quote ({ name, content, title, avatar }) {
+function FireAlarm ({ name, content, title, avatar }) {
   return (
     <div className={styles.quote}>
       <div className={styles.inner}>
@@ -19,11 +19,11 @@ function Quote ({ name, content, title, avatar }) {
   )
 }
 
-Quote.propTypes = {
+FireAlarm.propTypes = {
   name: PropTypes.string,
   content: PropTypes.string,
   title: PropTypes.string,
   avatar: PropTypes.string,
 }
 
-export default Quote
+export default FireAlarm

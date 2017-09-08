@@ -3,7 +3,7 @@ import modelExtend from 'dva-model-extend'
 import { query } from 'services/dashboard'
 import { model } from 'models/common'
 import * as weatherService from 'services/weather'
-import { getAirConTemps, getAirConDashboard, getGrainQuote } from '../services/grain'
+import { getAirConDashboard, getGrainQuote, getSmartTempCtrl, getRealtimeTemp, getFireAlarm, getDynamicLinkage, getSecurity } from '../services/grain'
 
 export default modelExtend(model, {
   namespace: 'graindash',
@@ -18,17 +18,36 @@ export default modelExtend(model, {
     quote: {
       avatar: 'http://img.hb.aicdn.com/bc442cf0cc6f7940dcc567e465048d1a8d634493198c4-sPx5BR_fw236',
     },
+    dynamiclinkage: {
+      avatar: 'http://img.hb.aicdn.com/bc442cf0cc6f7940dcc567e465048d1a8d634493198c4-sPx5BR_fw236',
+    },
+    firealarm: {
+      avatar: 'http://img.hb.aicdn.com/bc442cf0cc6f7940dcc567e465048d1a8d634493198c4-sPx5BR_fw236',
+    },
+    realtimetemp: {
+      avatar: 'http://img.hb.aicdn.com/bc442cf0cc6f7940dcc567e465048d1a8d634493198c4-sPx5BR_fw236',
+    },
+    security: {
+      avatar: 'http://img.hb.aicdn.com/bc442cf0cc6f7940dcc567e465048d1a8d634493198c4-sPx5BR_fw236',
+    },
+    smarttempctrl: {
+      avatar: 'http://img.hb.aicdn.com/bc442cf0cc6f7940dcc567e465048d1a8d634493198c4-sPx5BR_fw236',
+    }
   },
   subscriptions: {
     setup ({ dispatch, history }) {
       history.listen(({pathname}) => {
         if (pathname === '/graindashboard') {
-          // dispatch({ type: 'query' })
           console.log('update graindashboard begin---')
-          setInterval(() => {
-            dispatch({type: 'fetchAirConDashboard'})
-            dispatch({type: 'fetchGrainQuote'})
+          dispatch({ type: 'fetchGrainQuote' })
+          dispatch({ type: 'fetchSmartTempCtrl' })
+          dispatch({ type: 'fetchRealtimeTemp' })
+          dispatch({ type: 'fetchFireAlarm' })
+          dispatch({ type: 'fetchDynamicLinkage' })
+          dispatch({ type: 'fetchSecurity' })
 
+          setInterval(() => {
+            dispatch({ type: 'fetchAirConDashboard' })
           }, 5000)
         } else {
           console.log('we are at:', pathname)
@@ -38,18 +57,10 @@ export default modelExtend(model, {
   },
 
   effects: {
-    * query ({ payload }, { call, put }) {
-      const data = yield call(query, parse(payload))
-      console.log('dashboard data is:', data)
-      yield put({
-        type: 'updateState',
-        payload: data,
-      })
-    },
 
     * fetchAirConDashboard ({ payload }, { call, put }) {
       const airConDash = yield call(getAirConDashboard)
-      console.log('airConDash are :', airConDash)
+      console.log('airConDash is :', airConDash)
       yield put({
         type: 'updateAirConDashboard',
         payload: {
@@ -62,17 +73,73 @@ export default modelExtend(model, {
       const quote = yield call(getGrainQuote)
       console.log('quote is :', quote)
       yield put({
-        type: 'updateAirConDashboard',
+        type: 'updateGrainQuote',
         payload: {
           quote: quote.quote,
         }
       })
     },
+
+    * fetchSmartTempCtrl ({ payload }, { call, put }) {
+      const smarttempctrl = yield call(getSmartTempCtrl)
+      console.log('smarttempctrl is :', smarttempctrl)
+      yield put({
+        type: 'updateSmartTempCtrl',
+        payload: {
+          smarttempctrl: smarttempctrl.smarttempctrl,
+        }
+      })
+    },
+
+    * fetchRealtimeTemp ({ payload }, { call, put }) {
+      const realtimetemp = yield call(getRealtimeTemp)
+      console.log('realtimetemp is :', realtimetemp)
+      yield put({
+        type: 'updateRealtimeTemp',
+        payload: {
+          realtimetemp: realtimetemp.realtimetemp,
+        }
+      })
+    },
+
+    * fetchFireAlarm ({ payload }, { call, put }) {
+      const firealarm = yield call(getFireAlarm)
+      console.log('firealarm is :', firealarm)
+      yield put({
+        type: 'updateFireAlarm',
+        payload: {
+          firealarm: firealarm.firealarm,
+        }
+      })
+    },
+
+    * fetchDynamicLinkage ({ payload }, { call, put }) {
+      const dynamiclinkage = yield call(getDynamicLinkage)
+      console.log('dynamiclinkage is :', dynamiclinkage)
+      yield put({
+        type: 'updateDynamicLinkage',
+        payload: {
+          dynamiclinkage: dynamiclinkage.dynamiclinkage,
+        }
+      })
+    },
+
+    * fetchSecurity ({ payload }, { call, put }) {
+      const security = yield call(getSecurity)
+      console.log('security is :', security)
+      yield put({
+        type: 'updateSecurity',
+        payload: {
+          security: security.security,
+        }
+      })
+    },
+
   },
 
   reducers: {
     updateAirConDashboard (state, { payload: { airConDash } }) {
-      console.log('reducers airConDash are :', airConDash)
+      console.log('reducers airConDash is :', airConDash)
 
       return { ...state, airConDash: airConDash }
     },
@@ -82,5 +149,36 @@ export default modelExtend(model, {
 
       return { ...state, quote: quote }
     },
+
+    updateSmartTempCtrl (state, { payload: { smarttempctrl } }) {
+      console.log('reducers smarttempctrl are :', smarttempctrl)
+
+      return { ...state, smarttempctrl: smarttempctrl }
+    },
+
+    updateRealtimeTemp (state, { payload: { realtimetemp } }) {
+      console.log('reducers realtimetemp are :', realtimetemp)
+
+      return { ...state, realtimetemp: realtimetemp }
+    },
+
+    updateFireAlarm (state, { payload: { firealarm } }) {
+      console.log('reducers firealarm are :', firealarm)
+
+      return { ...state, firealarm: firealarm }
+    },
+
+    updateDynamicLinkage (state, { payload: { dynamiclinkage } }) {
+      console.log('reducers dynamiclinkage are :', dynamiclinkage)
+
+      return { ...state, dynamiclinkage: dynamiclinkage }
+    },
+
+    updateSecurity (state, { payload: { security } }) {
+      console.log('reducers security are :', security)
+
+      return { ...state, security: security }
+    },
+
   },
 })

@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styles from './quote.less'
+import styles from './realtimetemp.less'
 
-function Quote ({ name, content, title, avatar }) {
+function RealtimeTemp ({ name, content, title, avatar }) {
   return (
     <div className={styles.quote}>
       <div className={styles.inner}>
@@ -19,11 +19,11 @@ function Quote ({ name, content, title, avatar }) {
   )
 }
 
-Quote.propTypes = {
+RealtimeTemp.propTypes = {
   name: PropTypes.string,
   content: PropTypes.string,
   title: PropTypes.string,
   avatar: PropTypes.string,
 }
 
-export default Quote
+export default RealtimeTemp

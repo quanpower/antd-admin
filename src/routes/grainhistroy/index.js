@@ -20,7 +20,7 @@ const Index = ({ post, dispatch, loading, location }) => {
   const listProps = {
     pagination,
     dataSource: list,
-    loading: loading.effects['post/query'],
+    loading: loading.effects['grainhistroy/query'],
     onChange (page) {
       dispatch(routerRedux.push({
         pathname,
@@ -45,10 +45,10 @@ const Index = ({ post, dispatch, loading, location }) => {
 
   return (<div className="content-inner">
     <Tabs activeKey={query.status === String(EnumPostStatus.UNPUBLISH) ? String(EnumPostStatus.UNPUBLISH) : String(EnumPostStatus.PUBLISHED)} onTabClick={handleTabClick}>
-      <TabPane tab="Publised" key={String(EnumPostStatus.PUBLISHED)}>
+      <TabPane tab="历史记录" key={String(EnumPostStatus.PUBLISHED)}>
         <List {...listProps} />
       </TabPane>
-      <TabPane tab="Unpublish" key={String(EnumPostStatus.UNPUBLISH)}>
+      <TabPane tab="报警记录" key={String(EnumPostStatus.UNPUBLISH)}>
         <List {...listProps} />
       </TabPane>
     </Tabs>

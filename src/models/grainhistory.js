@@ -1,5 +1,5 @@
 import modelExtend from 'dva-model-extend'
-import { query } from 'services/posts'
+import { getGrainHistory } from 'services/grain'
 import { pageModel } from 'models/common'
 
 export default modelExtend(pageModel, {
@@ -9,7 +9,7 @@ export default modelExtend(pageModel, {
   subscriptions: {
     setup ({ dispatch, history }) {
       history.listen((location) => {
-        if (location.pathname === '/post') {
+        if (location.pathname === '/grain_history') {
           dispatch({ type: 'query',
             payload: {
               status: 2,
@@ -22,9 +22,9 @@ export default modelExtend(pageModel, {
 
   effects: {
     * query ({
-      payload,
-    }, { call, put }) {
-      const data = yield call(query, payload)
+               payload,
+             }, { call, put }) {
+      const data = yield call(getGrainHistory, payload)
       if (data.success) {
         yield put({
           type: 'querySuccess',

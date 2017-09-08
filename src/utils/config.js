@@ -2,7 +2,7 @@ const APIV1 = '/api/v1'
 const APIV2 = '/api/v2'
 
 module.exports = {
-  name: 'AntD Admin',
+  name: 'Smart Admin',
   prefix: 'antdAdmin',
   footerText: 'SmartLink Admin  © 2017 smartlinkcloud',
   logo: '/logo.png',
@@ -39,7 +39,7 @@ module.exports = {
     grainFireAlarm: `${APIV2}/grain_fire_alarm`,
     grainDynamicLinkage: `${APIV2}/grain_dynamic_linkage`,
     grainSecurity: `${APIV2}/grain_security`,
-
+    grainHistory: `${APIV2}/grain_history`,
 
 
     concTemp: `${APIV2}/concrete_temperature`,

@@ -3,7 +3,7 @@ import { request, config } from 'utils'
 const { api } = config
 const { loraTemperature, loraTemperatures, loraTemperatureRecord, loraBat, barns, grainQuote,
   airConTemp, airConTemps, airConTempRecord, airConDashboard, grainSmartTempCtrl, grainRealtimeTemp, grainFireAlarm,
-  grainDynamicLinkage, grainSecurity  } = api
+  grainDynamicLinkage, grainSecurity, grainHistory  } = api
 
 export async function loraTemp (params) {
   return request({
@@ -148,6 +148,16 @@ export async function getSecurity (params) {
   return request({
     // url: 'http://101.200.158.2:8888/api/v2/loranode_battery/<gateway_addr>/<node_addr>',
     url: grainSecurity.concat('/1/1'),
+    method: 'get',
+    data: params,
+  })
+}
+
+
+export async function getGrainHistory (params) {
+  return request({
+    // url: 'http://101.200.158.2:8888/api/v2/loranode_battery/<gateway_addr>/<node_addr>',
+    url: grainHistory,
     method: 'get',
     data: params,
   })

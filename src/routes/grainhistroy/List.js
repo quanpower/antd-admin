@@ -5,35 +5,32 @@ import styles from './List.less'
 const List = ({ ...tableProps }) => {
   const columns = [
     {
-      title: 'Image',
-      dataIndex: 'image',
+      title: '仓号',
+      dataIndex: 'grain_barn_id',
       className: styles.image,
       width: 64,
       render: text => <img alt="Feture" width={26} src={text} />,
     }, {
-      title: 'Title',
-      dataIndex: 'title',
+      title: '网关',
+      dataIndex: 'lora_gateway_id',
     }, {
-      title: 'Author',
-      dataIndex: 'author',
+      title: '节点',
+      dataIndex: 'lora_node_id',
     }, {
-      title: 'Categories',
-      dataIndex: 'categories',
+      title: '温度1',
+      dataIndex: 'temp1',
     }, {
-      title: 'Tags',
-      dataIndex: 'tags',
+      title: '温度2',
+      dataIndex: 'temp2',
     }, {
-      title: 'Visibility',
-      dataIndex: 'visibility',
+      title: '温度3',
+      dataIndex: 'temp3',
     }, {
-      title: 'AirConDashboard',
-      dataIndex: 'comments',
+      title: '电池',
+      dataIndex: 'battery_vol',
     }, {
-      title: 'Views',
-      dataIndex: 'views',
-    }, {
-      title: 'Date',
-      dataIndex: 'date',
+      title: '日期时间',
+      dataIndex: 'datetime',
     },
   ]
 
@@ -42,7 +39,7 @@ const List = ({ ...tableProps }) => {
       <Table
         {...tableProps}
         bordered
-        scroll={{ x: 1200 }}
+        scroll={{ x: 850 }}
         columns={columns}
         simple
         className={styles.table}

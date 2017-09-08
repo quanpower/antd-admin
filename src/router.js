@@ -125,11 +125,11 @@ const Routers = function ({ history, app }) {
             }, 'chart-areaChart')
           },
         }, {
-          path: 'post',
+          path: 'grain_history',
           getComponent (nextState, cb) {
             require.ensure([], (require) => {
-              registerModel(app, require('models/post'))
-              cb(null, require('routes/post/'))
+              registerModel(app, require('models/grainhistory'))
+              cb(null, require('routes/grainhistroy/'))
             }, 'post')
           },
         }, {

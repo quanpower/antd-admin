@@ -34,7 +34,7 @@ let database = [
     bpid: '1',
     name: '历史记录',
     icon: 'shopping-cart',
-    route: '/post',
+    route: '/grainhistroy',
   },
   {
     id: '21',

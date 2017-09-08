@@ -38,6 +38,7 @@ const App = ({ children, dispatch, app, loading, location }) => {
   const headerProps = {
     menu,
     user,
+    location,
     siderFold,
     isNavbar,
     menuPopoverVisible,

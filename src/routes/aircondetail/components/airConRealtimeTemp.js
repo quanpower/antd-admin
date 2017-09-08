@@ -10,7 +10,7 @@ function AirConRealtimeTemp ({ icon, color, title, number }) {
       <div className={styles.content}>
         <p className={styles.title}>{title || 'No Title'}</p>
         <p className={styles.number}>
-          {number}℃
+          {number}
         </p>
       </div>
     </Card>

@@ -59,10 +59,6 @@ const Routers = function ({ history, app }) {
       path: '/chart/areaChart',
       component: () => import('./routes/chart/areaChart/'),
     }, {
-      path: '/post',
-      models: () => [import('./models/post')],
-      component: () => import('./routes/post/'),
-    }, {
       path: '/grain',
       models: () => [import('./models/grain')],
       component: () => import('./routes/grain/'),
@@ -72,8 +68,8 @@ const Routers = function ({ history, app }) {
       component: () => import('./routes/graindash/'),
     }, {
       path: '/grain_history',
-      models: () => [import('./models/grain_history')],
-      component: () => import('./routes/grain_history/'),
+      models: () => [import('./models/grainhistory')],
+      component: () => import('./routes/grainhistory/'),
     },  {
       path: '/aircondetail',
       models: () => [import('./models/aircondetail')],
@@ -86,11 +82,12 @@ const Routers = function ({ history, app }) {
       path: '/concdetail',
       models: () => [import('./models/concdetail')],
       component: () => import('./routes/concdetail/'),
-    }, {
-      path: '/aircon_control',
-      models: () => [import('./models/airconcontrol')],
-      component: () => import('./routes/airconcontrol/'),
     },
+    // }, {
+    //   path: '/aircon_control',
+    //   models: () => [import('./models/airconcontrol')],
+    //   component: () => import('./routes/airconcontrol/'),
+    // },
 
   ]
 

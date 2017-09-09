@@ -4,7 +4,6 @@ import { query } from 'services/dashboard'
 import { model } from 'models/common'
 import * as weatherService from 'services/weather'
 import { getBarns } from "../services/grain"
-import key from 'keymaster';
 
 export default modelExtend(model, {
   namespace: 'grain',
@@ -27,13 +26,6 @@ export default modelExtend(model, {
       })
     },
 
-    // keyboardWatcher({ dispatch }) {
-    //   key('⌘+up, ctrl+up', () => {
-    //     console.log('key down!');
-    //     dispatch({type:'query'});
-    //     dispatch({ type: 'queryWeather' })
-    //   });
-    // },
   },
 
 

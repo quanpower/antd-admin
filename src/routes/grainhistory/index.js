@@ -13,14 +13,14 @@ const EnumPostStatus = {
 }
 
 
-const Index = ({ post, dispatch, loading, location }) => {
+const GrainHistory = ({ post, dispatch, loading, location }) => {
   const { list, pagination } = post
   const { query = {}, pathname } = location
 
   const listProps = {
     pagination,
     dataSource: list,
-    loading: loading.effects['grainhistroy/query'],
+    loading: loading.effects['grainhistory/query'],
     onChange (page) {
       dispatch(routerRedux.push({
         pathname,
@@ -55,11 +55,11 @@ const Index = ({ post, dispatch, loading, location }) => {
   </div>)
 }
 
-Index.propTypes = {
+GrainHistory.propTypes = {
   post: PropTypes.object,
   loading: PropTypes.object,
   location: PropTypes.object,
   dispatch: PropTypes.func,
 }
 
-export default connect(({ post, loading }) => ({ post, loading }))(Index)
+export default connect(({ post, loading }) => ({ post, loading }))(GrainHistory)

@@ -4,7 +4,6 @@ import { query } from 'services/dashboard'
 import { model } from 'models/common'
 import * as weatherService from 'services/weather'
 import { loraTemp, loraTemps, loraBattery } from "../services/grain"
-import key from 'keymaster';
 
 export default modelExtend(model, {
   namespace: 'dashboard',
@@ -48,13 +47,6 @@ export default modelExtend(model, {
       })
     },
 
-    // keyboardWatcher({ dispatch }) {
-    //   key('⌘+up, ctrl+up', () => {
-    //     console.log('key down!');
-    //     dispatch({type:'query'});
-    //     dispatch({ type: 'queryWeather' })
-    //   });
-    // },
   },
 
 

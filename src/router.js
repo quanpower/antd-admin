@@ -43,7 +43,7 @@ const Routers = function ({ history, app }) {
           getComponent (nextState, cb) {
             require.ensure([], (require) => {
               registerModel(app, require('models/user/detail'))
-              cb(null, require('routes/user/detail/'))
+              cb(null, require('routes/airconcontrl/detail/'))
             }, 'user-detail')
           },
         }, {

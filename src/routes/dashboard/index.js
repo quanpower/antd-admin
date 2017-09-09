@@ -3,10 +3,9 @@ import PropTypes from 'prop-types'
 import { connect } from 'dva'
 import { Row, Col, Card } from 'antd'
 import { color } from 'utils'
-import { Loader } from 'components'
+import { Page } from 'components'
 import { NumberCard, Quote, Temps, Weather, RecentSales, Comments, Completed, Browser, Cpu, User, TempRecord } from './components'
 import styles from './index.less'
-// import TempRecordList from "./components/temprecord";
 
 const bodyStyle = {
   bodyStyle: {
@@ -22,8 +21,7 @@ function Dashboard ({ dashboard, loading }) {
   </Col>))
 
   return (
-    <div>
-      <Loader spinning={loading.models.dashboard && sales.length === 0} />
+    <Page loading={loading.models.dashboard && sales.length === 0}>
       <Row gutter={24}>
         {numberCards}
         <Col lg={18} md={24}>
@@ -109,7 +107,7 @@ function Dashboard ({ dashboard, loading }) {
           </Card>
         </Col>
       </Row>
-    </div>
+    </Page>
   )
 }
 

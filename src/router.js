@@ -82,12 +82,11 @@ const Routers = function ({ history, app }) {
       path: '/concdetail',
       models: () => [import('./models/concdetail')],
       component: () => import('./routes/concdetail/'),
+    }, {
+      path: '/aircon_control',
+      models: () => [import('./models/airconcontrol')],
+      component: () => import('./routes/airconcontrol/'),
     },
-    // }, {
-    //   path: '/aircon_control',
-    //   models: () => [import('./models/airconcontrol')],
-    //   component: () => import('./routes/airconcontrol/'),
-    // },
 
   ]
 

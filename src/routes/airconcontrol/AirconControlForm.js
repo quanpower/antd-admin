@@ -15,15 +15,15 @@ const formItemLayout = {
 }
 
 const modal = ({
-  item = {},
-  onOk,
-  form: {
-    getFieldDecorator,
-    validateFields,
-    getFieldsValue,
-  },
-  ...modalProps
-}) => {
+                 item = {},
+                 onOk,
+                 form: {
+                   getFieldDecorator,
+                   validateFields,
+                   getFieldsValue,
+                 },
+                 ...modalProps
+               }) => {
   const handleOk = () => {
     validateFields((errors) => {
       if (errors) {

@@ -16,7 +16,7 @@ const User = ({ location, dispatch, user, loading }) => {
     visible: modalVisible,
     maskClosable: false,
     confirmLoading: loading.effects['user/update'],
-    title: `${modalType === 'create' ? 'Create User' : 'Update User'}`,
+    title: `${modalType === 'create' ? '空调远程控制' : 'Update User'}`,
     wrapClassName: 'vertical-center-modal',
     onOk (data) {
       dispatch({
@@ -31,50 +31,7 @@ const User = ({ location, dispatch, user, loading }) => {
     },
   }
 
-  const listProps = {
-    dataSource: list,
-    loading: loading.effects['user/query'],
-    pagination,
-    location,
-    isMotion,
-    onChange (page) {
-      const { query, pathname } = location
-      dispatch(routerRedux.push({
-        pathname,
-        query: {
-          ...query,
-          page: page.current,
-          pageSize: page.pageSize,
-        },
-      }))
-    },
-    onDeleteItem (id) {
-      dispatch({
-        type: 'user/delete',
-        payload: id,
-      })
-    },
-    onEditItem (item) {
-      dispatch({
-        type: 'user/showModal',
-        payload: {
-          modalType: 'update',
-          currentItem: item,
-        },
-      })
-    },
-    rowSelection: {
-      selectedRowKeys,
-      onChange: (keys) => {
-        dispatch({
-          type: 'user/updateState',
-          payload: {
-            selectedRowKeys: keys,
-          },
-        })
-      },
-    },
-  }
+
 
   const filterProps = {
     isMotion,
@@ -104,7 +61,7 @@ const User = ({ location, dispatch, user, loading }) => {
     },
     onAdd () {
       dispatch({
-        type: 'user/showModal',
+        type: 'airconcontrol/showModal',
         payload: {
           modalType: 'create',
         },
@@ -115,31 +72,12 @@ const User = ({ location, dispatch, user, loading }) => {
     },
   }
 
-  const handleDeleteItems = () => {
-    dispatch({
-      type: 'user/multiDelete',
-      payload: {
-        ids: selectedRowKeys,
-      },
-    })
-  }
 
   return (
     <div className="content-inner">
       <Filter {...filterProps} />
-      {
-        selectedRowKeys.length > 0 &&
-        <Row style={{ marginBottom: 24, textAlign: 'right', fontSize: 13 }}>
-          <Col>
-            {`Selected ${selectedRowKeys.length} items `}
-            <Popconfirm title={'Are you sure delete these items?'} placement="left" onConfirm={handleDeleteItems}>
-              <Button type="primary" size="large" style={{ marginLeft: 8 }}>Remove</Button>
-            </Popconfirm>
-          </Col>
-        </Row>
-      }
-      <List {...listProps} />
-      {modalVisible && <Modal {...modalProps} />}
+
+      <Modal {...modalProps} />
     </div>
   )
 }

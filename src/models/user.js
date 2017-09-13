@@ -78,6 +78,7 @@ export default modelExtend(pageModel, {
       if (data.success) {
         yield put({ type: 'hideModal' })
         yield put({ type: 'query' })
+        console.log('hha')
       } else {
         throw data
       }

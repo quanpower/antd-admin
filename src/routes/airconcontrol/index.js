@@ -7,8 +7,8 @@ import List from './List'
 import Filter from './Filter'
 import Modal from './Modal'
 
-const User = ({ location, dispatch, user, loading }) => {
-  const { list, pagination, currentItem, modalVisible, modalType, isMotion, selectedRowKeys } = user
+const AirConControl = ({ location, dispatch, airconcontrol, loading }) => {
+  const { list, pagination, currentItem, modalVisible, modalType, isMotion, selectedRowKeys } = airconcontrol
   const { pageSize } = pagination
 
   const modalProps = {
@@ -20,9 +20,12 @@ const User = ({ location, dispatch, user, loading }) => {
     wrapClassName: 'vertical-center-modal',
     onOk (data) {
       dispatch({
-        type: `user/${modalType}`,
+        // type: `airconcontrol/${modalType}`,
+        type: `airconcontrol/create`,
+
         payload: data,
       })
+      console.log('gaga')
     },
     onCancel () {
       dispatch({
@@ -82,11 +85,11 @@ const User = ({ location, dispatch, user, loading }) => {
   )
 }
 
-User.propTypes = {
-  user: PropTypes.object,
+AirConControl.propTypes = {
+  airconcontrol: PropTypes.object,
   location: PropTypes.object,
   dispatch: PropTypes.func,
   loading: PropTypes.object,
 }
 
-export default connect(({ user, loading }) => ({ user, loading }))(User)
+export default connect(({ airconcontrol, loading }) => ({ airconcontrol, loading }))(AirConControl)

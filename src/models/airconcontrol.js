@@ -1,16 +1,16 @@
 /* global window */
 import modelExtend from 'dva-model-extend'
 import { config } from 'utils'
-import { create, remove, update } from 'services/user'
-import * as usersService from 'services/users'
+import { create, remove, update } from 'services/airconcontrol'
+import * as airConControlService from 'services/airconcontrols'
 import queryString from 'query-string'
 import { pageModel } from './common'
 
-const { query } = usersService
+const { query } = airConControlService
 const { prefix } = config
 
 export default modelExtend(pageModel, {
-  namespace: 'user',
+  namespace: 'airconcontrol',
 
   state: {
     currentItem: {},
@@ -74,8 +74,11 @@ export default modelExtend(pageModel, {
     },
 
     * create ({ payload }, { call, put }) {
+      console.log('payload', payload)
       const data = yield call(create, payload)
       if (data.success) {
+        console.log('i am in!')
+        console.log(data)
         yield put({ type: 'hideModal' })
         yield put({ type: 'query' })
       } else {

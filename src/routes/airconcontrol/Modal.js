@@ -38,7 +38,7 @@ const modal = ({
         ...getFieldsValue(),
         key: item.key,
       }
-      data.address = data.address.join(' ')
+      console.log('data', data)
       onOk(data)
     })
   }
@@ -56,7 +56,7 @@ const modal = ({
           {...formItemLayout}
           label="空调型号"
         >
-          <span className="ant-form-text">658</span>
+          <span className="ant-form-text">569</span>
         </FormItem>
 
         <FormItem
@@ -71,7 +71,7 @@ const modal = ({
           label="节点地址"
           hasFeedback
         >
-          {getFieldDecorator('select', {
+          {getFieldDecorator('node_select', {
             rules: [
               { required: true, message: '请选择节点地址!' },
             ],
@@ -89,10 +89,10 @@ const modal = ({
           {...formItemLayout}
           label="风向"
         >
-          {getFieldDecorator('radio-button')(
+          {getFieldDecorator('wind_directtion')(
             <RadioGroup>
+              <RadioButton value="0">自动</RadioButton>
               <RadioButton value="1">手动</RadioButton>
-              <RadioButton value="2">自动</RadioButton>
             </RadioGroup>
           )}
         </FormItem>
@@ -102,12 +102,11 @@ const modal = ({
           {...formItemLayout}
           label="风速"
         >
-          {getFieldDecorator('radio-button')(
+          {getFieldDecorator('wind_speed')(
             <RadioGroup>
-              <RadioButton value="1">1</RadioButton>
-              <RadioButton value="2">2</RadioButton>
-              <RadioButton value="3">3</RadioButton>
-              <RadioButton value="4">4</RadioButton>
+              <RadioButton value="0">1档</RadioButton>
+              <RadioButton value="1">2档</RadioButton>
+              <RadioButton value="2">3档</RadioButton>
             </RadioGroup>
           )}
         </FormItem>
@@ -116,12 +115,12 @@ const modal = ({
           {...formItemLayout}
           label="工作模式"
         >
-          {getFieldDecorator('radio-button')(
+          {getFieldDecorator('working_model')(
             <RadioGroup>
               <RadioButton value="1">制冷</RadioButton>
-              <RadioButton value="2">制热</RadioButton>
-              <RadioButton value="3">干燥</RadioButton>
-              <RadioButton value="4">加湿</RadioButton>
+              <RadioButton value="2">除湿</RadioButton>
+              <RadioButton value="3">送风</RadioButton>
+              <RadioButton value="4">制暖</RadioButton>
             </RadioGroup>
           )}
         </FormItem>
@@ -130,7 +129,7 @@ const modal = ({
           {...formItemLayout}
           label="温度"
         >
-          {getFieldDecorator('input-number', { initialValue: 28 })(
+          {getFieldDecorator('temp_setting', { initialValue: 28 })(
             <InputNumber min={18} max={32} />
           )}
         </FormItem>

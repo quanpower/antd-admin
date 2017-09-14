@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styles from './dynamiclinkage.less'
+import styles from './dynamicLinkage.less'
 
 function DynamicLinkage ({ name, content, title, avatar }) {
   return (

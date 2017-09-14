@@ -1,11 +1,11 @@
 
-import AirConDashboard from './aircondashboard'
+import AirConDashboard from './airConDashboard'
 import Weather from './weather'
-import DynamicLinkage from './dynamiclinkage'
-import FireAlarm from './firealarm'
-import RealtimeTemp from './realtimetemp'
+import DynamicLinkage from './dynamicLinkage'
+import FireAlarm from './fireAlarm'
+import RealtimeTemp from './realtimeTemp'
 import Security from './security'
-import SmartTempCtrl from './smarttempctrl'
+import SmartTempCtrl from './smartTempCtrl'
 import Quote from './quote'
 
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styles from './smarttempctrl.less'
+import styles from './smartTempCtrl.less'
 
 function SmartTempCtrl ({ name, content, title, avatar }) {
   return (

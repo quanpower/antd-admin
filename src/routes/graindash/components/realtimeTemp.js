@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styles from './firealarm.less'
+import styles from './realtimeTemp.less'
 
-function FireAlarm ({ name, content, title, avatar }) {
+function RealtimeTemp ({ name, content, title, avatar }) {
   return (
     <div className={styles.quote}>
       <div className={styles.inner}>
@@ -19,11 +19,11 @@ function FireAlarm ({ name, content, title, avatar }) {
   )
 }
 
-FireAlarm.propTypes = {
+RealtimeTemp.propTypes = {
   name: PropTypes.string,
   content: PropTypes.string,
   title: PropTypes.string,
   avatar: PropTypes.string,
 }
 
-export default FireAlarm
+export default RealtimeTemp

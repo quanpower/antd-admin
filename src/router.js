@@ -71,9 +71,13 @@ const Routers = function ({ history, app }) {
       models: () => [import('./models/grainhistory')],
       component: () => import('./routes/grainhistory/'),
     },  {
-      path: '/aircondetail',
+      path: '/aircondetail/:node_No',
       models: () => [import('./models/aircondetail')],
       component: () => import('./routes/aircondetail/'),
+    }, {
+      path: '/aircon_control',
+      models: () => [import('./models/airconcontrol')],
+      component: () => import('./routes/airconcontrol/'),
     }, {
       path: '/concrete',
       models: () => [import('./models/concrete')],
@@ -82,10 +86,6 @@ const Routers = function ({ history, app }) {
       path: '/concdetail',
       models: () => [import('./models/concdetail')],
       component: () => import('./routes/concdetail/'),
-    }, {
-      path: '/aircon_control',
-      models: () => [import('./models/airconcontrol')],
-      component: () => import('./routes/airconcontrol/'),
     },
 
   ]

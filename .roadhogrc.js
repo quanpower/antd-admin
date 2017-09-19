@@ -20,7 +20,7 @@ export default {
       "pathRewrite": { "^/api/v1/weather": "/v3/weather" }
     },
     "/api/v2": {
-      "target": "http://127.0.0.1:8888",
+      "target": "http://101.200.158.2:8888",
       "secure": false,
       "changeOrigin": true,
       "pathRewrite": { "^/api/v2" : "/api/v1" }

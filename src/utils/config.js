@@ -53,5 +53,8 @@ module.exports = {
     airConControls: `${APIV2}/air-conditioner_controls`,
     airConControl: `${APIV2}/air-conditioner_control`,
 
+    electricPowerControl: `${APIV2}/electric_power_control`,
+
+
   },
 }

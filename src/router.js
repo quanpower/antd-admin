@@ -86,6 +86,10 @@ const Routers = function ({ history, app }) {
       path: '/concdetail',
       models: () => [import('./models/concdetail')],
       component: () => import('./routes/concdetail/'),
+    },{
+      path: '/fire_alarm',
+      models: () => [import('./models/fireAlarm')],
+      component: () => import('./routes/fireAlarm/'),
     },
 
   ]

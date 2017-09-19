@@ -22,10 +22,9 @@ const AirConControl = ({ location, dispatch, airconcontrol, loading }) => {
       dispatch({
         // type: `airconcontrol/${modalType}`,
         type: `airconcontrol/create`,
-
         payload: data,
       })
-      console.log('gaga')
+      console.log('airconcontrol')
     },
     onCancel () {
       dispatch({

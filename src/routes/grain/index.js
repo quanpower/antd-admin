@@ -18,11 +18,10 @@ const bodyStyle = {
 function Grain ({ grain }) {
   const { barns } = grain
 
-  console.log('aaaaa are :', barns)
+  console.log('barns are :', barns)
   const barnCards = barns.map((item, key) => (<Col key={key} lg={6} md={12}>
     <StoreHouse {...item} />
   </Col>))
-  console.log('cards are :', barnCards)
   return (
     <div>
       {/*<Loader spinning={loading.models.dashboard} />*/}

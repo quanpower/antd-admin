@@ -2,6 +2,7 @@ import { parse } from 'qs'
 import modelExtend from 'dva-model-extend'
 import { query } from 'services/dashboard'
 import { model } from 'models/common'
+import pathToRegexp from 'path-to-regexp'
 import * as weatherService from 'services/weather'
 import { getAirConDashboard, getGrainQuote, getSmartTempCtrl, getRealtimeTemp, getFireAlarm, getDynamicLinkage, getSecurity } from '../services/grain'
 
@@ -37,8 +38,15 @@ export default modelExtend(model, {
   subscriptions: {
     setup ({ dispatch, history }) {
       history.listen(({pathname}) => {
-        if (pathname === '/graindashboard') {
-          console.log('update graindashboard begin---')
+        console.log('update graindashboard begin---')
+
+        const match = pathToRegexp('/grain_dashboard/:barnNo').exec(pathname)
+        console.log('---in graindash models---')
+        console.log('match', match)
+
+        let barnNo = match[1]
+
+        if (match) {
           dispatch({ type: 'fetchGrainQuote' })
           dispatch({ type: 'fetchSmartTempCtrl' })
           dispatch({ type: 'fetchRealtimeTemp' })

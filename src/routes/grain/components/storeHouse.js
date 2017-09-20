@@ -2,13 +2,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Icon, Card } from 'antd'
 import styles from './storeHouse.less'
+import { routerRedux, Link} from 'dva/router'
 
-function StoreHouse ({ icon, color, title, number }) {
+function StoreHouse ({ icon, color, title, number, barnNo }) {
   return (
     <Card className={styles.storeHouse} bordered={false} bodyStyle={{ padding: 0 }}>
       <Icon className={styles.iconWarp} style={{ color }} type={icon} />
       <div className={styles.content}>
-        <p className={styles.title}>{title || 'No Title'}</p>
+        <p className={styles.title}><Link to={`grain_dashboard/${barnNo}`}>{title || 'No Title'}</Link></p>
         <p className={styles.number}>
           {number}℃
         </p>

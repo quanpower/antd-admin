@@ -7,6 +7,8 @@ import { Loader } from 'components'
 import { AirConDashboard, Weather, DynamicLinkage, FireAlarm, RealtimeTemp, Security, SmartTempCtrl, Quote } from './components'
 import styles from './index.less'
 import dashboard from "../../models/dashboard";
+import pathToRegexp from 'path-to-regexp'
+
 
 const bodyStyle = {
   bodyStyle: {
@@ -15,11 +17,17 @@ const bodyStyle = {
   },
 }
 
-function GrainDash ({ graindash }) {
+function GrainDash ({ graindash, location }) {
   const { airConDash, weather, dynamiclinkage, firealarm, realtimetemp, security, smarttempctrl, quote } = graindash
   console.log('airConDash is: ', airConDash)
   console.log('weather is: ', weather)
   console.log('quote is: ', quote)
+  const match = pathToRegexp('/grain_dashboard/:barnNo').exec(location.pathname)
+
+  console.log('---in graindash router---')
+  console.log('match', match)
+
+  let barnNo = match[1]
 
   return (
     <div>
@@ -48,7 +56,7 @@ function GrainDash ({ graindash }) {
                       background: color.purple,
                     }}
               >
-                <SmartTempCtrl {...smarttempctrl} />
+                <SmartTempCtrl {...smarttempctrl} barnNo={barnNo} />
               </Card>
             </Col>
 
@@ -61,7 +69,7 @@ function GrainDash ({ graindash }) {
                       background: color.green,
                     }}
               >
-                <RealtimeTemp {...realtimetemp} />
+                <RealtimeTemp {...realtimetemp} barnNo={barnNo} />
               </Card>
             </Col>
 
@@ -74,7 +82,7 @@ function GrainDash ({ graindash }) {
                       background: color.red,
                     }}
               >
-                <FireAlarm {...firealarm} />
+                <FireAlarm {...firealarm} barnNo={barnNo} />
               </Card>
             </Col>
 

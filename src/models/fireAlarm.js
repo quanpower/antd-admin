@@ -2,7 +2,7 @@ import { parse } from 'qs'
 import modelExtend from 'dva-model-extend'
 // import { query } from 'services/dashboard'
 import { model } from 'models/common'
-import { powerControl } from "../services/fireAlarm"
+import { powerControl } from 'services/fireAlarm'
 
 export default modelExtend(model, {
   namespace: 'fireAlarm',
@@ -14,7 +14,7 @@ export default modelExtend(model, {
       history.listen(({ pathname }) => {
         if (pathname === '/fire_alarm') {
           console.log('update fire alarm begin---')
-          // dispatch({ type: 'switchElectricPower' })
+          dispatch({ type: 'switchElectricPower' })
         }
         else {
           console.log('we are at:', pathname)
@@ -26,9 +26,9 @@ export default modelExtend(model, {
 
   effects: {
     * switchElectricPower ({ payload }, { call, put }) {
+      console.log('payload', payload)
       const data = yield call(powerControl, payload)
       if (data.success) {
-        console.log('i am in effects!')
         console.log(data)
       } else {
         throw data

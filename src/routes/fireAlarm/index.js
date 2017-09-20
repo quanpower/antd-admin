@@ -17,9 +17,12 @@ function FireAlarm ({ fireAlarm, dispatch, loading }) {
     // checked: true,
 
     onChange (data) {
+      console.log('data in router:', data)
       dispatch({
         type: 'fireAlarm/switchElectricPower',
-        payload: data,
+        payload: {
+          powerswitch: data,
+        },
       })
       console.log('switchElectricPower')
     },
@@ -27,7 +30,7 @@ function FireAlarm ({ fireAlarm, dispatch, loading }) {
 
   return (
     <div>
-      <Switch {...switchProps} checkedChildren="开" unCheckedChildren="关"  />
+      <Switch {...switchProps} checkedChildren="开" unCheckedChildren="关" />
     </div>
   )
 }

@@ -87,7 +87,7 @@ const Routers = function ({ history, app }) {
       models: () => [import('./models/concdetail')],
       component: () => import('./routes/concdetail/'),
     },{
-      path: '/fire_alarm',
+      path: '/fire_alarm/:powerNo',
       models: () => [import('./models/fireAlarm')],
       component: () => import('./routes/fireAlarm/'),
     },

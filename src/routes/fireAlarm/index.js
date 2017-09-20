@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'dva'
 import { Switch, Icon } from 'antd'
 import styles from './index.less'
+import pathToRegexp from 'path-to-regexp'
 
 const bodyStyle = {
   bodyStyle: {
@@ -11,22 +12,40 @@ const bodyStyle = {
   },
 }
 
-function FireAlarm ({ fireAlarm, dispatch, loading }) {
+function FireAlarm ({ fireAlarm, dispatch, loading, location }) {
   const switchProps = {
-    defaultChecked: false,
+    defaultChecked: true,
     // checked: true,
 
     onChange (data) {
       console.log('data in router:', data)
-      dispatch({
-        type: 'fireAlarm/switchElectricPower',
-        payload: {
-          powerswitch: data,
-        },
-      })
-      console.log('switchElectricPower')
+
+      const match = pathToRegexp('/fire_alarm/:powerNo').exec(location.pathname)
+
+      if (match) {
+        console.log('---in router---')
+        console.log('match', match)
+
+        let powerNo = match[1]
+
+        dispatch({
+          type: 'fireAlarm/switchElectricPower',
+          payload: {
+            powerSwitch: data,
+            powerNo: powerNo,
+          },
+        })
+
+      }
+      else {
+        console.log('we are at:', location.pathname)
+      }
+
+
     },
   }
+
+
 
   return (
     <div>

@@ -3,6 +3,7 @@ import modelExtend from 'dva-model-extend'
 // import { query } from 'services/dashboard'
 import { model } from 'models/common'
 import { powerControl } from 'services/fireAlarm'
+import pathToRegexp from 'path-to-regexp'
 
 export default modelExtend(model, {
   namespace: 'fireAlarm',
@@ -12,9 +13,9 @@ export default modelExtend(model, {
   subscriptions: {
     setup ({ dispatch, history }) {
       history.listen(({ pathname }) => {
-        if (pathname === '/fire_alarm') {
+        const match = pathToRegexp('/fire_alarm/:powerNo').exec(pathname)
+        if (match) {
           console.log('update fire alarm begin---')
-          dispatch({ type: 'switchElectricPower' })
         }
         else {
           console.log('we are at:', pathname)

@@ -14,7 +14,7 @@ export default modelExtend(pageModel, {
 
   state: {
     currentItem: {},
-    modalVisible: true,
+    modalVisible: false,
     modalType: 'create',
     selectedRowKeys: [],
     isMotion: window.localStorage.getItem(`${prefix}userIsMotion`) === 'true',

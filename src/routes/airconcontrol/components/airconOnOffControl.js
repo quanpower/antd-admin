@@ -1,16 +1,19 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Icon, Card, Switch } from 'antd'
-import styles from './electricControl.less'
+import styles from './airconOnOffControl.less'
 import { routerRedux, Link} from 'dva/router'
+import pathToRegexp from 'path-to-regexp'
 
-function ElectricControl ({ dispatch, powerNo, content, name, title, avatar }) {
+function AirconOnOffControl ({ dispatch, nodeAddr, content, name, title, avatar }) {
+
+
   const switchProps = {
     defaultChecked: true,
     // checked: true,
     checkedChildren: '开',
     unCheckedChildren: '关',
-
+    size: 'large',
     onChange (checked) {
       console.log('data in router:', checked)
       console.log(`switch to ${checked}`)
@@ -18,15 +21,15 @@ function ElectricControl ({ dispatch, powerNo, content, name, title, avatar }) {
       dispatch({
         type: 'fireAlarm/switchElectricPower',
         payload: {
-          powerSwitch: checked,
-          powerNo: powerNo,
+          airconSwitch: checked,
+          nodeAddr: nodeAddr,
         },
       })
     },
   }
 
   return (
-    <div className={styles.electricControl}>
+    <div className={styles.airconOnOffControl}>
       <div className={styles.inner}>
         {content}
       </div>
@@ -37,16 +40,16 @@ function ElectricControl ({ dispatch, powerNo, content, name, title, avatar }) {
         </div>
         <div className={styles.avatar} style={{ backgroundImage: `url(${avatar})` }} />
       </div>
-      <div className={styles.switch}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap' }}>
         <Switch {...switchProps} />
       </div>
     </div>
   )
 }
 
-ElectricControl.propTypes = {
+AirconOnOffControl.propTypes = {
   dispatch: PropTypes.func,
 
 }
 
-export default ElectricControl
+export default AirconOnOffControl

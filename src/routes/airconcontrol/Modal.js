@@ -76,6 +76,7 @@ const modal = ({
               { required: true, message: '请选择节点地址!' },
             ],
           })(
+            // # todo: 根据仓号联动
             <Select placeholder="请选择节点地址">
               <Option value="1">1</Option>
               <Option value="2">2</Option>
@@ -90,9 +91,9 @@ const modal = ({
           label="风向"
         >
           {getFieldDecorator('wind_directtion')(
-            <RadioGroup>
+            <RadioGroup name="wind_directtion_group" >
               <RadioButton value="0">自动</RadioButton>
-              <RadioButton value="1">手动</RadioButton>
+              <RadioButton value="1">定向</RadioButton>
             </RadioGroup>
           )}
         </FormItem>
@@ -103,7 +104,7 @@ const modal = ({
           label="风速"
         >
           {getFieldDecorator('wind_speed')(
-            <RadioGroup>
+            <RadioGroup name="wind_speed_group" >
               <RadioButton value="0">1档</RadioButton>
               <RadioButton value="1">2档</RadioButton>
               <RadioButton value="2">3档</RadioButton>
@@ -116,7 +117,7 @@ const modal = ({
           label="工作模式"
         >
           {getFieldDecorator('working_model')(
-            <RadioGroup>
+            <RadioGroup name="working_model_group" >
               <RadioButton value="1">制冷</RadioButton>
               <RadioButton value="2">除湿</RadioButton>
               <RadioButton value="3">送风</RadioButton>
@@ -129,7 +130,7 @@ const modal = ({
           {...formItemLayout}
           label="温度"
         >
-          {getFieldDecorator('temp_setting', { initialValue: 28 })(
+          {getFieldDecorator('temp_setting', { initialValue: 20 })(
             <InputNumber min={18} max={32} />
           )}
         </FormItem>

@@ -6,6 +6,7 @@ import { Row, Col, Button, Popconfirm } from 'antd'
 import List from './List'
 import Filter from './Filter'
 import Modal from './Modal'
+import { AirconControlAutomatic, AirconControlManual } from './components'
 
 const AirConControl = ({ location, dispatch, airconcontrol, loading }) => {
   const { list, pagination, currentItem, modalVisible, modalType, isMotion, selectedRowKeys } = airconcontrol
@@ -28,8 +29,10 @@ const AirConControl = ({ location, dispatch, airconcontrol, loading }) => {
     },
     onCancel () {
       dispatch({
-        type: 'user/hideModal',
+        type: 'airconcontrol/hideModal',
       })
+      console.log('airconcontrol Cancel')
+
     },
   }
 
@@ -70,7 +73,7 @@ const AirConControl = ({ location, dispatch, airconcontrol, loading }) => {
       })
     },
     switchIsMotion () {
-      dispatch({ type: 'user/switchIsMotion' })
+      dispatch({ type: 'airconcontrol/switchIsMotion' })
     },
   }
 
@@ -80,6 +83,10 @@ const AirConControl = ({ location, dispatch, airconcontrol, loading }) => {
       <Filter {...filterProps} />
 
       <Modal {...modalProps} />
+
+      <AirconControlManual />
+      {/*<AirconControlAutomatic />*/}
+
     </div>
   )
 }

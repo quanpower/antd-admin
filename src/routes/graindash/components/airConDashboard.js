@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Table, Tag } from 'antd'
+import { Table, Tag, Link } from 'antd'
 import { color } from 'utils'
 import styles from './airConDashboard.less'
 
@@ -31,7 +31,7 @@ function AirConDashboard ({ data }) {
       title: 'content',
       dataIndex: 'content',
       render: (text, it) => (<div>
-        <h1 className={styles.name}>{it.name}</h1>
+        <h1 className={styles.name}><Link to={`grain_dashboard/${it.nodeNo}`}>{it.name}</Link></h1>
         <p className={styles.content}>{it.content}</p>
         <div className={styles.daterow}>
           <Tag color={status[it.status].color}>{status[it.status].text}</Tag>

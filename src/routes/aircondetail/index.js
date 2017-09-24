@@ -17,9 +17,6 @@ const bodyStyle = {
 
 function AirConDetail ({ aircondetail }) {
   const { airConRealtimeTemp, airConTemps, airConTempRecord } = aircondetail
-  console.log('airConRealtimeTemp', airConRealtimeTemp)
-  console.log('airConTemps', airConTemps)
-  console.log('airConTempRecord', airConTempRecord)
 
   const concCards = airConRealtimeTemp.map((item, key) => (<Col key={key} lg={6} md={12}>
     <AirConRealtimeTemp {...item} />

@@ -9,7 +9,7 @@ function StoreHouse ({ icon, color, title, number, barnNo }) {
     <Card className={styles.storeHouse} bordered={false} bodyStyle={{ padding: 0 }}>
       <Icon className={styles.iconWarp} style={{ color }} type={icon} />
       <div className={styles.content}>
-        <p className={styles.title}><Link to={`grain_dashboard/${barnNo}`}>{title || 'No Title'}</Link></p>
+        <h1 className={styles.title}><Link to={`grain_dashboard/${barnNo}`}>{title || 'No Title'}</Link></h1>
         <p className={styles.number}>
           {number}℃
         </p>
@@ -23,6 +23,8 @@ StoreHouse.propTypes = {
   color: PropTypes.string,
   title: PropTypes.string,
   number: PropTypes.number,
+  barnNo: PropTypes.string,
+
 }
 
 export default StoreHouse

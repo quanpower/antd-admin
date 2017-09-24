@@ -61,7 +61,7 @@ export async function getBarns (params) {
 export async function getAirConTemp (params) {
   return request({
     // url: 'http://101.200.158.2:8888/api/v2/loranode_battery/<gateway_addr>/<node_addr>',
-    url: airConTemp.concat('/1/1'),
+    url: airConTemp,
     method: 'get',
     data: params,
   })
@@ -71,17 +71,18 @@ export async function getAirConTemp (params) {
 export async function getAirConTemps (params) {
   return request({
     // url: 'http://101.200.158.2:8888/api/v2/loranode_battery/<gateway_addr>/<node_addr>',
-    url: airConTemps.concat('/1/1'),
+    url: airConTemps,
     method: 'get',
     data: params,
   })
 }
 
 
+
 export async function getAirConTempRecord (params) {
   return request({
     // url: 'http://101.200.158.2:8888/api/v2/loranode_battery/<gateway_addr>/<node_addr>',
-    url: airConTempRecord.concat('/1/1/2017-9-7 00:00:00/2017-9-8 23:00:00'),
+    url: airConTempRecord,
     method: 'get',
     data: params,
   })

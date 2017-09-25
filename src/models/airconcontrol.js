@@ -1,7 +1,7 @@
 /* global window */
 import modelExtend from 'dva-model-extend'
 import { config } from 'utils'
-import { create, remove, update } from 'services/airconcontrol'
+import { create, remove, update, switchAirconOnOff } from 'services/airconcontrol'
 import * as airConControlService from 'services/airconcontrols'
 import queryString from 'query-string'
 import { pageModel } from './common'
@@ -81,6 +81,18 @@ export default modelExtend(pageModel, {
         console.log(data)
         yield put({ type: 'hideModal' })
         yield put({ type: 'query' })
+      } else {
+        throw data
+      }
+    },
+
+
+    * airconOnOff ({ payload }, { call, put }) {
+      console.log('payload', payload)
+      const data = yield call(switchAirconOnOff, payload)
+      if (data.success) {
+        console.log('switch aircon on/off!')
+        console.log(data)
       } else {
         throw data
       }

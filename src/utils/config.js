@@ -52,7 +52,7 @@ module.exports = {
     airConDashboard: `${APIV2}/air-conditioner_dashboard`,
     airConControls: `${APIV2}/air-conditioner_controls`,
     airConControl: `${APIV2}/air-conditioner_control`,
-
+    airConControlOnOff: `${APIV2}/air-conditioner_control_on_off`,
     electricPowerControl: `${APIV2}/electric_power_control`,
 
 

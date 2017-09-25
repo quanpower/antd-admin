@@ -1,7 +1,7 @@
 import { request, config } from 'utils'
 
 const { api } = config
-const { airConControl } = api
+const { airConControl, airConControlOnOff } = api
 
 export async function query (params) {
   return request({
@@ -14,6 +14,15 @@ export async function query (params) {
 export async function create (params) {
   return request({
     url: airConControl,
+    method: 'post',
+    data: params,
+  })
+}
+
+
+export async function switchAirconOnOff (params) {
+  return request({
+    url: airConControlOnOff,
     method: 'post',
     data: params,
   })

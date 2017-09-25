@@ -15,11 +15,10 @@ function AirconOnOffControl ({ dispatch, nodeAddr, content, name, title, avatar 
     unCheckedChildren: '关',
     size: 'large',
     onChange (checked) {
-      console.log('data in router:', checked)
       console.log(`switch to ${checked}`)
 
       dispatch({
-        type: 'fireAlarm/switchElectricPower',
+        type: 'airconcontrol/airconOnOff',
         payload: {
           airconSwitch: checked,
           nodeAddr: nodeAddr,

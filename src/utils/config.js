@@ -54,6 +54,7 @@ module.exports = {
     airConControl: `${APIV2}/air-conditioner_control`,
     airConControlOnOff: `${APIV2}/air-conditioner_control_on_off`,
     electricPowerControl: `${APIV2}/electric_power_control`,
+    tianshuoOnOffControl: `${APIV2}/tianshuo_on_off_control`,
 
 
   },

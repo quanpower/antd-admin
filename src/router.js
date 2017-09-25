@@ -82,6 +82,10 @@ const Routers = function ({ history, app }) {
       path: '/fire_alarm/:powerNo',
       models: () => [import('./models/fireAlarm')],
       component: () => import('./routes/fireAlarm/'),
+    }, {
+      path: '/tianshuo_on_off',
+      models: () => [import('./models/tianshuoOnOff')],
+      component: () => import('./routes/tianshuoOnOff/'),
     },{
       path: '/concrete',
       models: () => [import('./models/concrete')],
@@ -124,3 +128,5 @@ Routers.propTypes = {
 }
 
 export default Routers
+
+

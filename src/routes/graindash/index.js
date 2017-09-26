@@ -4,7 +4,7 @@ import { connect } from 'dva'
 import { Row, Col, Card } from 'antd'
 import { color } from 'utils'
 import { Loader } from 'components'
-import { AirConDashboard, Weather, DynamicLinkage, FireAlarm, RealtimeTemp, Security, SmartTempCtrl, Quote } from './components'
+import { AirConDashboard, Unmanned, DynamicLinkage, FireAlarm, RealtimeTemp, Security, SmartTempCtrl } from './components'
 import styles from './index.less'
 import dashboard from "../../models/dashboard";
 import pathToRegexp from 'path-to-regexp'
@@ -18,10 +18,8 @@ const bodyStyle = {
 }
 
 function GrainDash ({ graindash, location }) {
-  const { airConDash, weather, dynamiclinkage, firealarm, realtimetemp, security, smarttempctrl, quote } = graindash
+  const { airConDash, unmanned, dynamiclinkage, firealarm, realtimetemp, security, smarttempctrl } = graindash
   console.log('airConDash is: ', airConDash)
-  console.log('weather is: ', weather)
-  console.log('quote is: ', quote)
   const match = pathToRegexp('/grain_dashboard/:barnNo').exec(location.pathname)
 
   console.log('---in graindash router---')
@@ -100,9 +98,8 @@ function GrainDash ({ graindash, location }) {
                       background: color.blue,
                     }}
               >
-                <Weather {...weather} />
+                <Unmanned {...anmanned} />
 
-                {/*<Weather {...weather} loading={loading.effects['dashboard/queryWeather']} />*/}
               </Card>
             </Col>
 

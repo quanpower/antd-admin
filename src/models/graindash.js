@@ -4,7 +4,7 @@ import { query } from 'services/dashboard'
 import { model } from 'models/common'
 import pathToRegexp from 'path-to-regexp'
 import * as weatherService from 'services/weather'
-import { getAirConDashboard, getGrainQuote, getSmartTempCtrl, getRealtimeTemp, getFireAlarm, getDynamicLinkage, getSecurity } from '../services/grain'
+import { getAirConDashboard, getGrainUnmanned, getSmartTempCtrl, getRealtimeTemp, getFireAlarm, getDynamicLinkage, getSecurity } from '../services/grain'
 
 export default modelExtend(model, {
   namespace: 'graindash',
@@ -16,7 +16,7 @@ export default modelExtend(model, {
       icon: '//s5.sencdn.com/web/icons/3d_50/2.png',
     },
     airConDash: [],
-    quote: {
+    unmanned: {
       avatar: 'http://img.hb.aicdn.com/bc442cf0cc6f7940dcc567e465048d1a8d634493198c4-sPx5BR_fw236',
     },
     dynamiclinkage: {
@@ -47,10 +47,10 @@ export default modelExtend(model, {
         let barnNo = match[1]
 
         if (match) {
-          dispatch({ type: 'fetchGrainQuote' })
           dispatch({ type: 'fetchSmartTempCtrl' })
           dispatch({ type: 'fetchRealtimeTemp' })
           dispatch({ type: 'fetchFireAlarm' })
+          dispatch({ type: 'fetchGrainUnmanned' })
           dispatch({ type: 'fetchDynamicLinkage' })
           dispatch({ type: 'fetchSecurity' })
 
@@ -77,16 +77,7 @@ export default modelExtend(model, {
       })
     },
 
-    * fetchGrainQuote ({ payload }, { call, put }) {
-      const quote = yield call(getGrainQuote)
-      console.log('quote is :', quote)
-      yield put({
-        type: 'updateGrainQuote',
-        payload: {
-          quote: quote.quote,
-        }
-      })
-    },
+
 
     * fetchSmartTempCtrl ({ payload }, { call, put }) {
       const smarttempctrl = yield call(getSmartTempCtrl)
@@ -121,6 +112,19 @@ export default modelExtend(model, {
       })
     },
 
+
+    * fetchGrainUnmanned ({ payload }, { call, put }) {
+      const unmanned = yield call(getGrainUnmanned)
+      console.log('unmanned is :', unmanned)
+      yield put({
+        type: 'updateGrainUnmanned',
+        payload: {
+          unmanned: unmanned.unmanned,
+        }
+      })
+    },
+
+
     * fetchDynamicLinkage ({ payload }, { call, put }) {
       const dynamiclinkage = yield call(getDynamicLinkage)
       console.log('dynamiclinkage is :', dynamiclinkage)
@@ -152,11 +156,6 @@ export default modelExtend(model, {
       return { ...state, airConDash: airConDash }
     },
 
-    updateGrainQuote (state, { payload: { quote } }) {
-      console.log('reducers quote are :', quote)
-
-      return { ...state, quote: quote }
-    },
 
     updateSmartTempCtrl (state, { payload: { smarttempctrl } }) {
       console.log('reducers smarttempctrl are :', smarttempctrl)
@@ -174,6 +173,13 @@ export default modelExtend(model, {
       console.log('reducers firealarm are :', firealarm)
 
       return { ...state, firealarm: firealarm }
+    },
+
+
+    updateGrainUnmanned (state, { payload: { unmanned } }) {
+      console.log('reducers unmanned are :', unmanned)
+
+      return { ...state, unmanned: unmanned }
     },
 
     updateDynamicLinkage (state, { payload: { dynamiclinkage } }) {

@@ -6,7 +6,7 @@ import FireAlarm from './fireAlarm'
 import RealtimeTemp from './realtimeTemp'
 import Security from './security'
 import SmartTempCtrl from './smartTempCtrl'
-import Quote from './quote'
+import Unmanned from './unmanned'
 
 
-export { AirConDashboard, Weather, DynamicLinkage, FireAlarm, RealtimeTemp, Security, SmartTempCtrl, Quote }
+export { AirConDashboard, Weather, DynamicLinkage, FireAlarm, RealtimeTemp, Security, SmartTempCtrl, Unmanned }

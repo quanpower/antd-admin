@@ -102,7 +102,7 @@ const Routers = function ({ history, app }) {
     <ConnectedRouter history={history}>
       <App>
         <Switch>
-          <Route exact path="/" render={() => (<Redirect to="/dashboard" />)} />
+          <Route exact path="/" render={() => (<Redirect to="/grain" />)} />
           {
             routes.map(({ path, ...dynamics }, key) => (
               <Route key={key}

@@ -1,7 +1,7 @@
 import { request, config } from 'utils'
 
 const { api } = config
-const { loraTemperature, loraTemperatures, loraTemperatureRecord, loraBat, barns, grainQuote,
+const { loraTemperature, loraTemperatures, loraTemperatureRecord, loraBat, barns, grainUnmanned,
   airConTemp, airConTemps, airConTempRecord, airConDashboard, grainSmartTempCtrl, grainRealtimeTemp, grainFireAlarm,
   grainDynamicLinkage, grainSecurity, grainHistory  } = api
 
@@ -99,10 +99,10 @@ export async function getAirConDashboard (params) {
 }
 
 
-export async function getGrainQuote (params) {
+export async function getGrainUnmanned (params) {
   return request({
     // url: 'http://101.200.158.2:8888/api/v2/loranode_battery/<gateway_addr>/<node_addr>',
-    url: grainQuote.concat('/1/1'),
+    url: grainUnmanned.concat('/1/1'),
     method: 'get',
     data: params,
   })

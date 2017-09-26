@@ -98,7 +98,7 @@ function GrainDash ({ graindash, location }) {
                       background: color.blue,
                     }}
               >
-                <Unmanned {...anmanned} />
+                <Unmanned {...unmanned} />
 
               </Card>
             </Col>

@@ -1,23 +1,25 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Icon, Card, Switch } from 'antd'
+import { Icon, Card, Radio } from 'antd'
 import styles from './tianshuoOnOffControl.less'
 import { routerRedux, Link} from 'dva/router'
 
+
+const RadioButton = Radio.Button
+const RadioGroup = Radio.Group
+
 function OnOffControl ({ dispatch, tianshuoNo, content, name, title, avatar }) {
   const switchProps = {
-    defaultChecked: true,
-    // checked: true,
-    checkedChildren: '开',
-    unCheckedChildren: '关',
+    size: 'large',
 
-    onChange (checked) {
-      console.log(`switch to ${checked}`)
+    onChange (e) {
+
+      console.log(`switch to ${e.target.value}`)
 
       dispatch({
         type: 'tianshuoOnOff/updateTianshuoOnOff',
         payload: {
-          tianshuoSwitch: checked,
+          tianshuoSwitch: e.target.value,
           tianshuoNo: tianshuoNo,
         },
       })
@@ -36,8 +38,11 @@ function OnOffControl ({ dispatch, tianshuoNo, content, name, title, avatar }) {
         </div>
         <div className={styles.avatar} style={{ backgroundImage: `url(${avatar})` }} />
       </div>
-      <div className={styles.switch}>
-        <Switch {...switchProps} />
+      <div>
+        <RadioGroup {...switchProps} >
+          <RadioButton value="1">开</RadioButton>
+          <RadioButton value="0">关</RadioButton>
+        </RadioGroup>
       </div>
     </div>
   )

@@ -1,26 +1,26 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Icon, Card, Switch } from 'antd'
+import { Icon, Card, Radio } from 'antd'
 import styles from './airconOnOffControl.less'
 import { routerRedux, Link} from 'dva/router'
 import pathToRegexp from 'path-to-regexp'
 
+const RadioButton = Radio.Button
+const RadioGroup = Radio.Group
+
+
 function AirconOnOffControl ({ dispatch, nodeAddr, content, name, title, avatar }) {
 
-
   const switchProps = {
-    defaultChecked: true,
-    // checked: true,
-    checkedChildren: '开',
-    unCheckedChildren: '关',
+
     size: 'large',
-    onChange (checked) {
-      console.log(`switch to ${checked}`)
+    onChange (e) {
+      console.log(`switch to ${e.target.value}`)
 
       dispatch({
         type: 'airconcontrol/airconOnOff',
         payload: {
-          airconSwitch: checked,
+          airconSwitch: e.target.value,
           nodeAddr: nodeAddr,
         },
       })
@@ -39,8 +39,11 @@ function AirconOnOffControl ({ dispatch, nodeAddr, content, name, title, avatar 
         </div>
         <div className={styles.avatar} style={{ backgroundImage: `url(${avatar})` }} />
       </div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap' }}>
-        <Switch {...switchProps} />
+      <div>
+        <RadioGroup {...switchProps} >
+          <RadioButton value="1">开</RadioButton>
+          <RadioButton value="0">关</RadioButton>
+        </RadioGroup>
       </div>
     </div>
   )

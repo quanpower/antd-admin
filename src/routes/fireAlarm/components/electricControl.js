@@ -1,24 +1,25 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Icon, Card, Switch } from 'antd'
+import { Icon, Card, Radio } from 'antd'
 import styles from './electricControl.less'
 import { routerRedux, Link} from 'dva/router'
 
+const RadioButton = Radio.Button
+const RadioGroup = Radio.Group
+
+
 function ElectricControl ({ dispatch, powerNo, content, name, title, avatar }) {
   const switchProps = {
-    defaultChecked: true,
-    // checked: true,
-    checkedChildren: '开',
-    unCheckedChildren: '关',
 
-    onChange (checked) {
-      console.log('data in router:', checked)
-      console.log(`switch to ${checked}`)
+    size: 'large',
+
+    onChange (e) {
+      console.log(`switch to ${e.target.value}`)
 
       dispatch({
         type: 'fireAlarm/switchElectricPower',
         payload: {
-          powerSwitch: checked,
+          powerSwitch: e.target.value,
           powerNo: powerNo,
         },
       })
@@ -37,8 +38,11 @@ function ElectricControl ({ dispatch, powerNo, content, name, title, avatar }) {
         </div>
         <div className={styles.avatar} style={{ backgroundImage: `url(${avatar})` }} />
       </div>
-      <div className={styles.switch}>
-        <Switch {...switchProps} />
+      <div>
+        <RadioGroup {...switchProps} >
+          <RadioButton value="1">开</RadioButton>
+          <RadioButton value="0">关</RadioButton>
+        </RadioGroup>
       </div>
     </div>
   )

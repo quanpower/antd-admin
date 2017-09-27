@@ -1,7 +1,7 @@
 import { request, config } from 'utils'
 
 const { api } = config
-const { airConControl, airConControlOnOff } = api
+const { airConControl, airConControlOnOff, loranodeDatetimeUpdate } = api
 
 export async function query (params) {
   return request({
@@ -27,6 +27,17 @@ export async function switchAirconOnOff (params) {
     data: params,
   })
 }
+
+
+export async function updateLoraNodeDatetime (params) {
+  return request({
+    url: loranodeDatetimeUpdate,
+    method: 'post',
+    data: params,
+  })
+}
+
+
 
 export async function remove (params) {
   return request({

@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Button, Popconfirm, message } from 'antd'
+import { Button, Popconfirm, message, InputNumber } from 'antd'
 import styles from './airconOnOffControl.less'
 import { routerRedux, Link} from 'dva/router'
 import pathToRegexp from 'path-to-regexp'
@@ -61,6 +61,7 @@ function AirconOnOffControl ({ dispatch, nodeAddr, content, name, title, avatar 
           nodeAddr: nodeAddr,
         },
       })
+
     },
 
     onCancel () {
@@ -68,6 +69,7 @@ function AirconOnOffControl ({ dispatch, nodeAddr, content, name, title, avatar 
       message.error('取消启动！')
     },
   }
+
 
 
   const offConfirmProps = {
@@ -95,6 +97,24 @@ function AirconOnOffControl ({ dispatch, nodeAddr, content, name, title, avatar 
 
   }
 
+  const inputNumberProps = {
+    min: 0,
+    max: 24,
+    step: 0.1,
+    size: 'large',
+    onChange (value) {
+      console.log(`delay ${value} hours to poweroff`)
+
+      dispatch({
+        type: 'airconcontrol/updateLoraNode',
+        payload: {
+          timeDelta: value,
+          nodeAddr: nodeAddr,
+        },
+      })
+    },
+  }
+
 
   return (
     <div className={styles.airconOnOffControl}>
@@ -112,7 +132,7 @@ function AirconOnOffControl ({ dispatch, nodeAddr, content, name, title, avatar 
         <Popconfirm {...onConfirmProps}>
           <Button {...onButtonProps}>启动</Button>
         </Popconfirm>
-
+        <InputNumber {...inputNumberProps} />
         <Popconfirm {...offConfirmProps}>
           <Button {...offButtonProps}>关闭</Button>
         </Popconfirm>

@@ -4,7 +4,7 @@ const APIV2 = '/api/v2'
 module.exports = {
   name: 'Smart Admin',
   prefix: 'antdAdmin',
-  footerText: 'SmartLink Admin  © 2017 smartlinkcloud',
+  footerText: '',
   logo: '/logo.png',
   iconFontCSS: '/iconfont.css',
   iconFontJS: '/iconfont.js',

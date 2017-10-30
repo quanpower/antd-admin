@@ -6,7 +6,7 @@ import { routerRedux, Link} from 'dva/router'
 import pathToRegexp from 'path-to-regexp'
 
 
-function AirconOnOffControl ({ dispatch, nodeAddr, content, name, title, avatar }) {
+function AirconOnOffAllOneKey ({ dispatch, barnNo }) {
 
   const onButtonProps = {
     type: 'primary',
@@ -37,12 +37,13 @@ function AirconOnOffControl ({ dispatch, nodeAddr, content, name, title, avatar 
     onConfirm () {
       console.log('确定启动!')
       message.success('启动成功！')
+      console.log('barnno is :', barnNo)
 
       dispatch({
-        type: 'airconcontrol/airconOnOff',
+        type: 'airconcontrol/airconOnOffAllOneKey',
         payload: {
           airconSwitch: '1',
-          nodeAddr: nodeAddr,
+          barnNo: barnNo,
         },
       })
 
@@ -66,10 +67,10 @@ function AirconOnOffControl ({ dispatch, nodeAddr, content, name, title, avatar 
       message.success('关闭成功！')
 
       dispatch({
-        type: 'airconcontrol/airconOnOff',
+        type: 'airconcontrol/airconOnOffAllOneKey',
         payload: {
           airconSwitch: '0',
-          nodeAddr: nodeAddr,
+          barnNo: barnNo,
         },
       })
     },
@@ -90,10 +91,10 @@ function AirconOnOffControl ({ dispatch, nodeAddr, content, name, title, avatar 
       console.log(`delay ${value} hours to poweroff`)
 
       dispatch({
-        type: 'airconcontrol/updateLoraNode',
+        type: 'airconcontrol/updateAllLoraNode',
         payload: {
           timeDelta: value,
-          nodeAddr: nodeAddr,
+          barnNo: barnNo,
         },
       })
     },
@@ -102,32 +103,23 @@ function AirconOnOffControl ({ dispatch, nodeAddr, content, name, title, avatar 
 
   return (
     <div className={styles.airconOnOffControl}>
-      <div className={styles.inner}>
-        {content}
-      </div>
-      <div className={styles.footer}>
-        <div className={styles.description}>
-          <p>{name}</p>
-          <h3>{title}</h3>
-        </div>
-        <div className={styles.avatar} style={{ backgroundImage: `url(${avatar})` }} />
-      </div>
+
       <div>
         <Popconfirm {...onConfirmProps}>
-          <Button {...onButtonProps}>启动</Button>
+          <Button {...onButtonProps}>一键启动</Button>
         </Popconfirm>
         <InputNumber {...inputNumberProps} />
         <Popconfirm {...offConfirmProps}>
-          <Button {...offButtonProps}>关闭</Button>
+          <Button {...offButtonProps}>一键停止</Button>
         </Popconfirm>
       </div>
     </div>
   )
 }
 
-AirconOnOffControl.propTypes = {
+AirconOnOffAllOneKey.propTypes = {
   dispatch: PropTypes.func,
 
 }
 
-export default AirconOnOffControl
+export default AirconOnOffAllOneKey

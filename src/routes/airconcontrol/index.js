@@ -84,7 +84,7 @@ const AirConControl = ({ location, dispatch, airconcontrol, loading }) => {
 
       <Modal {...modalProps} />
 
-      <AirconControlManual dispatch={dispatch} />
+      <AirconControlManual dispatch={dispatch} location={location} />
       {/*<AirconControlAutomatic />*/}
 
     </div>

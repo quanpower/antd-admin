@@ -4,6 +4,7 @@ import { Row, Col, Card } from 'antd'
 import { color } from 'utils'
 import styles from './airconControlManual.less'
 import AirconOnOffControl from './airconOnOffControl'
+import AirconOnOffAllOneKey from './airconOnOffAllOneKey'
 
 
 
@@ -11,6 +12,12 @@ function AirconControlManual ({ data, location, dispatch }) {
 
   return (
     <div>
+      <Row gutter={24}>
+
+        <AirconOnOffAllOneKey dispatch={dispatch} barnNo={1} />
+
+      </Row>
+
       <Row gutter={24}>
 
         <Col lg={12} md={24}>
@@ -94,7 +101,7 @@ function AirconControlManual ({ data, location, dispatch }) {
 }
 
 AirconControlManual.propTypes = {
-
+  dispatch: PropTypes.func,
 }
 
 export default AirconControlManual

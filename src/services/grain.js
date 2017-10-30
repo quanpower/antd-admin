@@ -3,11 +3,10 @@ import { request, config } from 'utils'
 const { api } = config
 const { loraTemperature, loraTemperatures, loraTemperatureRecord, loraBat, barns, grainUnmanned,
   airConTemp, airConTemps, airConTempRecord, airConDashboard, grainSmartTempCtrl, grainRealtimeTemp, grainFireAlarm,
-  grainDynamicLinkage, grainSecurity, grainHistory  } = api
+  grainDynamicLinkage, grainSecurity, grainHistory, nodeAddrByBarnNo  } = api
 
 export async function loraTemp (params) {
   return request({
-    // url: 'http://101.200.158.2:8888/api/v2/loranode_temperature/1/1',
     // # todo
     url: loraTemperature.concat('/1/1'),
     method: 'get',
@@ -18,7 +17,6 @@ export async function loraTemp (params) {
 
 export async function loraTemps (params) {
   return request({
-    // url: 'http://101.200.158.2:8888/api/v2/loranode_temperatures/1/1',
     // # todo
     url: loraTemperatures.concat('/1/1'),
     method: 'get',
@@ -29,7 +27,6 @@ export async function loraTemps (params) {
 
 export async function loraTempRecord (params) {
   return request({
-    // url: 'http://101.200.158.2:8888/api/v2/loranode_temperature_record/1/1/?/?',
     // # todo
     url: loraTemperatureRecord,
     method: 'post',
@@ -40,7 +37,6 @@ export async function loraTempRecord (params) {
 
 export async function loraBattery (params) {
   return request({
-    // url: 'http://101.200.158.2:8888/api/v2/loranode_battery/<gateway_addr>/<node_addr>',
     url: loraBat.concat('/1/1'),
     method: 'get',
     data: params,
@@ -50,7 +46,6 @@ export async function loraBattery (params) {
 
 export async function getBarns (params) {
   return request({
-    // url: 'http://101.200.158.2:8888/api/v2/loranode_battery/<gateway_addr>/<node_addr>',
     url: barns,
     method: 'get',
     data: params,
@@ -60,7 +55,6 @@ export async function getBarns (params) {
 
 export async function getAirConTemp (params) {
   return request({
-    // url: 'http://101.200.158.2:8888/api/v2/loranode_battery/<gateway_addr>/<node_addr>',
     url: airConTemp,
     method: 'get',
     data: params,
@@ -70,7 +64,6 @@ export async function getAirConTemp (params) {
 
 export async function getAirConTemps (params) {
   return request({
-    // url: 'http://101.200.158.2:8888/api/v2/loranode_battery/<gateway_addr>/<node_addr>',
     url: airConTemps,
     method: 'get',
     data: params,
@@ -78,10 +71,8 @@ export async function getAirConTemps (params) {
 }
 
 
-
 export async function getAirConTempRecord (params) {
   return request({
-    // url: 'http://101.200.158.2:8888/api/v2/loranode_battery/<gateway_addr>/<node_addr>',
     url: airConTempRecord,
     method: 'get',
     data: params,
@@ -91,7 +82,6 @@ export async function getAirConTempRecord (params) {
 
 export async function getAirConDashboard (params) {
   return request({
-    // url: 'http://101.200.158.2:8888/api/v2/loranode_battery/<gateway_addr>/<node_addr>',
     url: airConDashboard.concat('/1/1'),
     method: 'get',
     data: params,
@@ -101,7 +91,6 @@ export async function getAirConDashboard (params) {
 
 export async function getGrainUnmanned (params) {
   return request({
-    // url: 'http://101.200.158.2:8888/api/v2/loranode_battery/<gateway_addr>/<node_addr>',
     url: grainUnmanned.concat('/1/1'),
     method: 'get',
     data: params,
@@ -111,7 +100,6 @@ export async function getGrainUnmanned (params) {
 
 export async function getSmartTempCtrl (params) {
   return request({
-    // url: 'http://101.200.158.2:8888/api/v2/loranode_battery/<gateway_addr>/<node_addr>',
     url: grainSmartTempCtrl.concat('/1/1'),
     method: 'get',
     data: params,
@@ -120,7 +108,6 @@ export async function getSmartTempCtrl (params) {
 
 export async function getRealtimeTemp (params) {
   return request({
-    // url: 'http://101.200.158.2:8888/api/v2/loranode_battery/<gateway_addr>/<node_addr>',
     url: grainRealtimeTemp.concat('/1/1'),
     method: 'get',
     data: params,
@@ -129,7 +116,6 @@ export async function getRealtimeTemp (params) {
 
 export async function getFireAlarm (params) {
   return request({
-    // url: 'http://101.200.158.2:8888/api/v2/loranode_battery/<gateway_addr>/<node_addr>',
     url: grainFireAlarm.concat('/1/1'),
     method: 'get',
     data: params,
@@ -138,7 +124,6 @@ export async function getFireAlarm (params) {
 
 export async function getDynamicLinkage (params) {
   return request({
-    // url: 'http://101.200.158.2:8888/api/v2/loranode_battery/<gateway_addr>/<node_addr>',
     url: grainDynamicLinkage.concat('/1/1'),
     method: 'get',
     data: params,
@@ -147,7 +132,6 @@ export async function getDynamicLinkage (params) {
 
 export async function getSecurity (params) {
   return request({
-    // url: 'http://101.200.158.2:8888/api/v2/loranode_battery/<gateway_addr>/<node_addr>',
     url: grainSecurity.concat('/1/1'),
     method: 'get',
     data: params,
@@ -157,8 +141,16 @@ export async function getSecurity (params) {
 
 export async function getGrainHistory (params) {
   return request({
-    // url: 'http://101.200.158.2:8888/api/v2/loranode_battery/<gateway_addr>/<node_addr>',
     url: grainHistory,
+    method: 'get',
+    data: params,
+  })
+}
+
+
+export async function getNodeAddrByBarnNo (params) {
+  return request({
+    url: nodeAddrByBarnNo,
     method: 'get',
     data: params,
   })

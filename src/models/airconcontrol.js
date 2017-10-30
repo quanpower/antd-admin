@@ -1,7 +1,7 @@
 /* global window */
 import modelExtend from 'dva-model-extend'
 import { config } from 'utils'
-import { create, remove, update, switchAirconOnOff, updateLoraNodeDatetime } from 'services/airconcontrol'
+import { create, remove, update, switchAirconOnOff, switchAirconOnOffAllOneKey, updateBarnLoraNodeDatetime, updateLoraNodeDatetime } from 'services/airconcontrol'
 import { getNodeAddrByBarnNo } from 'services/grain'
 import * as airConControlService from 'services/airconcontrols'
 import queryString from 'query-string'
@@ -102,10 +102,7 @@ export default modelExtend(pageModel, {
 
     * airconOnOffAllOneKey ({ payload }, { call, put }) {
       console.log('payload:', payload)
-      // const { barnNo } = payload
-      // console.log('barnNo:', barnNo)
-      // const nodeAddrDic = yield call(getNodeAddrByBarnNo, payload)
-      const data = yield call(getNodeAddrByBarnNo, payload)
+      const data = yield call(switchAirconOnOffAllOneKey, payload)
       if (data.success) {
         console.log('switch aircon on/off!')
         console.log(data)
@@ -126,12 +123,12 @@ export default modelExtend(pageModel, {
       }
     },
 
-    * updateAllLoraNode ({ payload }, { call, put }) {
+
+    * updateBarnLoraNode ({ payload }, { call, put }) {
       console.log('payload', payload)
 
-      const nodeAddrDic = yield call(getNodeAddrByBarnNo, payload)
 
-      const data = yield call(updateLoraNodeDatetime, payload)
+      const data = yield call(updateBarnLoraNodeDatetime, payload)
       if (data.success) {
         console.log('update lora node datetime!')
         console.log(data)

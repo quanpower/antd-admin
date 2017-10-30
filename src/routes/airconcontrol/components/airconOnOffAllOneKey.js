@@ -91,7 +91,7 @@ function AirconOnOffAllOneKey ({ dispatch, barnNo }) {
       console.log(`delay ${value} hours to poweroff`)
 
       dispatch({
-        type: 'airconcontrol/updateAllLoraNode',
+        type: 'airconcontrol/updateBarnLoraNode',
         payload: {
           timeDelta: value,
           barnNo: barnNo,
@@ -107,8 +107,8 @@ function AirconOnOffAllOneKey ({ dispatch, barnNo }) {
       <div>
         <Popconfirm {...onConfirmProps}>
           <Button {...onButtonProps}>一键启动</Button>
+          <InputNumber {...inputNumberProps} />
         </Popconfirm>
-        <InputNumber {...inputNumberProps} />
         <Popconfirm {...offConfirmProps}>
           <Button {...offButtonProps}>一键停止</Button>
         </Popconfirm>

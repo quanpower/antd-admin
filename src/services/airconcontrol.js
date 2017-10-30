@@ -1,7 +1,7 @@
 import { request, config } from 'utils'
 
 const { api } = config
-const { airConControl, airConControlOnOff, loranodeDatetimeUpdate } = api
+const { airConControl, airConControlOnOff, loranodeDatetimeUpdate, airconOnOffAllOneKey, barnLoranodeDatetimeUpdate } = api
 
 export async function query (params) {
   return request({
@@ -29,6 +29,15 @@ export async function switchAirconOnOff (params) {
 }
 
 
+export async function switchAirconOnOffAllOneKey (params) {
+  return request({
+    url: airconOnOffAllOneKey,
+    method: 'post',
+    data: params,
+  })
+}
+
+
 export async function updateLoraNodeDatetime (params) {
   return request({
     url: loranodeDatetimeUpdate,
@@ -38,6 +47,13 @@ export async function updateLoraNodeDatetime (params) {
 }
 
 
+export async function updateBarnLoraNodeDatetime (params) {
+  return request({
+    url: barnLoranodeDatetimeUpdate,
+    method: 'post',
+    data: params,
+  })
+}
 
 export async function remove (params) {
   return request({

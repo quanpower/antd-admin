@@ -41,8 +41,15 @@ function AirConDashboard ({ data }) {
       </div>),
     },
   ]
+
   return (
     <div className={styles.dashboard}>
+
+      <audio controls={false} autoPlay={true} >
+        <source src="http://www.w3school.com.cn/i/song.mp3" />
+        您的浏览器不支持 audio 标签。
+      </audio>
+
       <Table pagination={false} showHeader={false} columns={columns} rowKey={(record, key) => key} dataSource={data.filter((item, key) => key < 4)} />
     </div>
   )

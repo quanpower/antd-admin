@@ -86,16 +86,11 @@ const Routers = function ({ history, app }) {
       path: '/tianshuo_on_off',
       models: () => [import('./models/tianshuoOnOff')],
       component: () => import('./routes/tianshuoOnOff/'),
-    },{
-      path: '/concrete',
-      models: () => [import('./models/concrete')],
-      component: () => import('./routes/concrete/'),
     }, {
-      path: '/concdetail',
-      models: () => [import('./models/concdetail')],
-      component: () => import('./routes/concdetail/'),
+      path: '/setting/airconditoner_setting/start_end_time',
+      models: () => [import('./models/tianshuoOnOff')],
+      component: () => import('./routes/tianshuoOnOff/'),
     },
-
   ]
 
   return (

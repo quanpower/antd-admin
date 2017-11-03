@@ -6,6 +6,10 @@ import styles from './airConDashboard.less'
 import { routerRedux, Link} from 'dva/router'
 
 const status = {
+  0: {
+    color: color.green,
+    text: '停止运行',
+  },
   1: {
     color: color.green,
     text: '正常运行',

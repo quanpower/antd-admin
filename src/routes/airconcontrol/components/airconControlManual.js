@@ -7,16 +7,22 @@ import AirconOnOffControl from './airconOnOffControl'
 import AirconOnOffAllOneKey from './airconOnOffAllOneKey'
 
 
-
 function AirconControlManual ({ data, location, dispatch }) {
 
   return (
     <div>
-      <Row gutter={24}>
 
-        <AirconOnOffAllOneKey dispatch={dispatch} barnNo={1} />
+          <Card bordered={false}
+                className={styles.power1}
+                bodyStyle={{
+                  padding: 0,
+                  height: 50,
+                  background: color.pink,
+                }}
+          >
+            <AirconOnOffAllOneKey dispatch={dispatch} barnNo={1} />
+          </Card>
 
-      </Row>
 
       <Row gutter={24}>
 

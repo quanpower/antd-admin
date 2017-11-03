@@ -1,12 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Button, Popconfirm, message, InputNumber } from 'antd'
+import { Button, Popconfirm, message, InputNumber, Tag } from 'antd'
 import styles from './airconOnOffControl.less'
 import { routerRedux, Link} from 'dva/router'
 import pathToRegexp from 'path-to-regexp'
 
 
-function AirconOnOffControl ({ dispatch, nodeAddr, content, name, title, avatar }) {
+function AirconOnOffControl ({ dispatch, nodeAddr, content, name, title, avatar, status }) {
 
   const onButtonProps = {
     type: 'primary',
@@ -105,6 +105,7 @@ function AirconOnOffControl ({ dispatch, nodeAddr, content, name, title, avatar 
       <div className={styles.inner}>
         {content}
       </div>
+
       <div className={styles.footer}>
         <div className={styles.description}>
           <p>{name}</p>
@@ -112,6 +113,7 @@ function AirconOnOffControl ({ dispatch, nodeAddr, content, name, title, avatar 
         </div>
         <div className={styles.avatar} style={{ backgroundImage: `url(${avatar})` }} />
       </div>
+
       <div>
         <Popconfirm {...onConfirmProps}>
           <Button {...onButtonProps}>启动</Button>
@@ -120,6 +122,11 @@ function AirconOnOffControl ({ dispatch, nodeAddr, content, name, title, avatar 
         <Popconfirm {...offConfirmProps}>
           <Button {...offButtonProps}>关闭</Button>
         </Popconfirm>
+      </div>
+
+      <div className={styles.anttag}>
+        {/*<Tag color={status[it.status].color}>{status[it.status].text}</Tag>*/}
+        <Tag color='green'>运行中</Tag>
       </div>
     </div>
   )

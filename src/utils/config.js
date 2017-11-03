@@ -56,6 +56,7 @@ module.exports = {
     electricPowerControl: `${APIV2}/electric_power_control`,
     tianshuoOnOffControl: `${APIV2}/tianshuo_on_off_control`,
     loranodeDatetimeUpdate: `${APIV2}/lora_node_datetime_update`,
+    oneAirConStartEndTimeUpdate: `${APIV2}/one_air-conditioner_start_end_time_update`,
     barnLoranodeDatetimeUpdate: `${APIV2}/barn_lora_node_datetime_update`,
     nodeAddrByBarnNo: `${APIV2}/node_address_by_barn_no`,
     airconOnOffAllOneKey: `${APIV2}/air-conditioner_on_off_all_one_key`,

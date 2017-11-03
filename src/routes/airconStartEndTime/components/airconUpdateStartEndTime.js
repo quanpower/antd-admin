@@ -7,16 +7,15 @@ import AirconUpdateOneStartEndTime from './airconUpdateOneStartEndTime'
 // import AirconOnOffAllOneKey from './airconOnOffAllOneKey'
 
 
-
-function AirconUpdateStartEndTime ({ data, location, dispatch }) {
+function AirconUpdateStartEndTime ({ data, location, dispatch, airconStartEndTime }) {
 
   return (
     <div>
-      <Row gutter={24}>
+      {/*<Row gutter={24}>*/}
 
-        <AirconUpdateOneStartEndTime dispatch={dispatch} barnNo={1} />
+        {/*<AirconUpdateOneStartEndTime dispatch={dispatch} barnNo={1} />*/}
 
-      </Row>
+      {/*</Row>*/}
 
       <Row gutter={24}>
 
@@ -32,7 +31,7 @@ function AirconUpdateStartEndTime ({ data, location, dispatch }) {
                       background: color.green,
                     }}
               >
-                <AirconUpdateOneStartEndTime dispatch={dispatch} barnNo={1} />
+                <AirconUpdateOneStartEndTime dispatch={dispatch} nodeAddr={1} airconStartEndTime={airconStartEndTime} />
               </Card>
             </Col>
           </Row>
@@ -50,7 +49,7 @@ function AirconUpdateStartEndTime ({ data, location, dispatch }) {
                       background: color.blue,
                     }}
               >
-                <AirconUpdateOneStartEndTime dispatch={dispatch} barnNo={1} />
+                <AirconUpdateOneStartEndTime dispatch={dispatch} nodeAddr={2} airconStartEndTime={airconStartEndTime} />
               </Card>
             </Col>
           </Row>
@@ -72,7 +71,7 @@ function AirconUpdateStartEndTime ({ data, location, dispatch }) {
                       background: color.purple,
                     }}
               >
-                <AirconUpdateOneStartEndTime dispatch={dispatch} barnNo={1} />
+                <AirconUpdateOneStartEndTime dispatch={dispatch} nodeAddr={3} airconStartEndTime={airconStartEndTime} />
               </Card>
             </Col>
           </Row>
@@ -90,7 +89,7 @@ function AirconUpdateStartEndTime ({ data, location, dispatch }) {
                       background: color.red,
                     }}
               >
-                <AirconUpdateOneStartEndTime dispatch={dispatch} barnNo={1} />
+                <AirconUpdateOneStartEndTime dispatch={dispatch} nodeAddr={4} airconStartEndTime={airconStartEndTime} />
               </Card>
             </Col>
           </Row>

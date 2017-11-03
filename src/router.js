@@ -87,9 +87,9 @@ const Routers = function ({ history, app }) {
       models: () => [import('./models/tianshuoOnOff')],
       component: () => import('./routes/tianshuoOnOff/'),
     }, {
-      path: '/setting/airconditoner_setting/start_end_time',
-      models: () => [import('./models/tianshuoOnOff')],
-      component: () => import('./routes/tianshuoOnOff/'),
+      path: '/setting/airconditoner_setting/start_end_time/:barnNo',
+      models: () => [import('./models/airconStartEndTime')],
+      component: () => import('./routes/airconStartEndTime/'),
     },
   ]
 

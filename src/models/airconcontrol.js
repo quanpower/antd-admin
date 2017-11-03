@@ -1,7 +1,7 @@
 /* global window */
 import modelExtend from 'dva-model-extend'
 import { config } from 'utils'
-import { create, remove, update, switchAirconOnOff, switchAirconOnOffAllOneKey, updateBarnLoraNodeDatetime, updateLoraNodeDatetime } from 'services/airconcontrol'
+import { create, remove, update, switchAirconOnOff, switchAirconOnOffAllOneKey, updateBarnLoraNodeDatetime, updateLoraNodeDatetime, oneAirConStartEndTimeUpdate } from 'services/airconcontrol'
 import { getNodeAddrByBarnNo } from 'services/grain'
 import * as airConControlService from 'services/airconcontrols'
 import queryString from 'query-string'

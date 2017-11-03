@@ -8,43 +8,97 @@ import { routerRedux, Link} from 'dva/router'
 import pathToRegexp from 'path-to-regexp'
 
 
-function AirconUpdateOneStartEndTime ({ dispatch, nodeAddr }) {
+function AirconUpdateOneStartEndTime ({ dispatch, nodeAddr, airconStartEndTime }) {
+
+  //
+  // class TimePickerAddonDemo extends React.Component {
+  //   state = { open: false };
+  //
+  //   handleOpenChange = (open) => {
+  //     this.setState({ open });
+  //   }
+  //
+  //   handleClose = () => this.setState({ open: false })
+  //
+  //   render() {
+  //     return (
+  //       <TimePicker
+  //         open={this.state.open}
+  //         onOpenChange={this.handleOpenChange}
+  //         addon={() => (
+  //           <Button size="small" type="primary" onClick={this.handleClose}>
+  //             Ok
+  //           </Button>
+  //         )}
+  //       />
+  //     );
+  //   }
+  // }
+  const { startTime, endTime } = airconStartEndTime
+
+  console.log('start time is:', startTime)
+  console.log('end time is:', endTime)
+
+  console.log('airconStartEndTime is:', airconStartEndTime)
 
 
-  class TimePickerAddonDemo extends React.Component {
-    state = { open: false };
+  const format = 'HH:mm'
 
-    handleOpenChange = (open) => {
-      this.setState({ open });
-    }
-
-    handleClose = () => this.setState({ open: false })
-
-    render() {
-      return (
-        <TimePicker
-          open={this.state.open}
-          onOpenChange={this.handleOpenChange}
-          addon={() => (
-            <Button size="small" type="primary" onClick={this.handleClose}>
-              Ok
-            </Button>
-          )}
-        />
-      );
-    }
-  }
-
-
-  const timePickerProps = {
-
-    format: 'HH:mm',
+  const startTimePickerProps = {
+    format: format,
     defaultValue: moment('08:00', format),
+    // open: false,
 
-    onClick () {
-      console.log('clicked ON!')
+    onChange (time, timeString) {
+      console.log(time, timeString)
+      dispatch({
+        type: 'airconStartEndTime/getStartTime',
+        payload: {
+          startTime: timeString,
+        },
+      })
     },
+
+    onOpenChange (open) {
+      console.log('open is :', open)
+    },
+
+    addon() {() => (
+      <Button size="small" type="primary" >
+        Ok
+      </Button>
+    )},
+
   }
+
+
+  const endTimePickerProps = {
+    format: format,
+    defaultValue: moment('18:00', format),
+    // open: false,
+
+    onChange (time, timeString) {
+      console.log(time, timeString)
+      dispatch({
+        type: 'airconStartEndTime/getEndTime',
+        payload: {
+          endTime: timeString,
+        },
+      })
+    },
+
+    onOpenChange (open) {
+      console.log('open is :', open)
+    },
+
+    addon() {() => (
+      <Button size="small" type="primary" >
+        Ok
+      </Button>
+    )},
+
+  }
+
 
   const onButtonProps = {
     type: 'primary',
@@ -64,15 +118,17 @@ function AirconUpdateOneStartEndTime ({ dispatch, nodeAddr }) {
 
     onConfirm () {
       console.log('确定启动!')
-      message.success('启动成功！')
 
       dispatch({
-        type: 'airconcontrol/airconOnOff',
+        type: 'airconStartEndTime/updateOneStartEndTime',
         payload: {
-          airconSwitch: '1',
+          startTime: startTime,
+          endTime: endTime,
           nodeAddr: nodeAddr,
         },
       })
+      message.success('启动成功！')
+
 
     },
 
@@ -97,10 +153,11 @@ function AirconUpdateOneStartEndTime ({ dispatch, nodeAddr }) {
         {/*<div className={styles.avatar} style={{ backgroundImage: `url(${avatar})` }} />*/}
       </div>
       <div>
-        <Popconfirm {...onConfirmProps}>
-          <TimePicker {...timePickerProps} />
+        <TimePicker {...startTimePickerProps } />
+        <TimePicker {...endTimePickerProps} />
 
-          <Button {...onButtonProps}>启动</Button>
+        <Popconfirm {...onConfirmProps}>
+          <Button {...onButtonProps}>设置</Button>
         </Popconfirm>
       </div>
     </div>

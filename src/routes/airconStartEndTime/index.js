@@ -2,19 +2,18 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { routerRedux } from 'dva/router'
 import { connect } from 'dva'
-import { Row, Col, Button, Popconfirm } from 'antd'
 
 import { AirconUpdateStartEndTime } from './components'
 
 const AirConStartEndTime = ({ location, dispatch, airconStartEndTime, loading }) => {
-  const { list, pagination, currentItem, modalVisible, modalType, isMotion, selectedRowKeys } = airconStartEndTime
+  const { startTime, endTime } = airconStartEndTime
 
+  console.log('---start time is---:',startTime)
 
   return (
     <div className="content-inner">
 
-      <AirconUpdateStartEndTime dispatch={dispatch} location={location} />
-      {/*<AirconControlAutomatic />*/}
+      <AirconUpdateStartEndTime dispatch={dispatch} location={location} airconStartEndTime={airconStartEndTime} />
 
     </div>
   )

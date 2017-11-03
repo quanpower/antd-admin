@@ -90,6 +90,10 @@ const Routers = function ({ history, app }) {
       path: '/setting/airconditoner_setting/start_end_time/:barnNo',
       models: () => [import('./models/airconStartEndTime')],
       component: () => import('./routes/airconStartEndTime/'),
+    }, {
+      path: '/setting/airconditoner_setting/tianshuo_setting/:barnNo',
+      models: () => [import('./models/tianshuoSetting')],
+      component: () => import('./routes/tianshuoSetting/'),
     },
   ]
 

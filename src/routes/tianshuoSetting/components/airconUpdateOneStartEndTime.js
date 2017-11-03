@@ -138,15 +138,7 @@ function AirconUpdateOneStartEndTime ({ dispatch, nodeAddr, airconStartEndTime }
         </Popconfirm>
       </div>
 
-      <div>
-        <InputNumber defaultValue={18} />
-        <InputNumber defaultValue={28} />
 
-        <Popconfirm {...onConfirmProps}>
-          <Button {...onButtonProps}>上下限设置</Button>
-        </Popconfirm>
-
-      </div>
     </div>
   )
 }

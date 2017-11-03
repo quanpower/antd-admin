@@ -1,15 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Button, Popconfirm, message, InputNumber, Tag } from 'antd'
-import styles from './airconOnOffControl.less'
+import { Button, Popconfirm, message, InputNumber } from 'antd'
+import styles from './airconUpdateOneStartEndTime.less'
 import { routerRedux, Link} from 'dva/router'
 import pathToRegexp from 'path-to-regexp'
 
 
-function AirconOnOffControl ({ dispatch, nodeAddr, content, name, title, avatar, onoff_status }) {
+function AirconOnOffAllOneKey ({ dispatch, barnNo }) {
 
   const onButtonProps = {
     type: 'primary',
+    size: 'large',
     icon: 'poweroff',
 
     onClick () {
@@ -19,6 +20,7 @@ function AirconOnOffControl ({ dispatch, nodeAddr, content, name, title, avatar,
 
   const offButtonProps = {
     type: 'danger',
+    size: 'large',
     icon: 'poweroff',
 
     onClick () {
@@ -35,12 +37,13 @@ function AirconOnOffControl ({ dispatch, nodeAddr, content, name, title, avatar,
     onConfirm () {
       console.log('确定启动!')
       message.success('启动成功！')
+      console.log('barnno is :', barnNo)
 
       dispatch({
-        type: 'airconcontrol/airconOnOff',
+        type: 'airconcontrol/airconOnOffAllOneKey',
         payload: {
           airconSwitch: '1',
-          nodeAddr: nodeAddr,
+          barnNo: barnNo,
         },
       })
 
@@ -64,10 +67,10 @@ function AirconOnOffControl ({ dispatch, nodeAddr, content, name, title, avatar,
       message.success('关闭成功！')
 
       dispatch({
-        type: 'airconcontrol/airconOnOff',
+        type: 'airconcontrol/airconOnOffAllOneKey',
         payload: {
           airconSwitch: '0',
-          nodeAddr: nodeAddr,
+          barnNo: barnNo,
         },
       })
     },
@@ -83,14 +86,15 @@ function AirconOnOffControl ({ dispatch, nodeAddr, content, name, title, avatar,
     min: 0,
     max: 24,
     step: 0.1,
+    size: 'large',
     onChange (value) {
       console.log(`delay ${value} hours to poweroff`)
 
       dispatch({
-        type: 'airconcontrol/updateLoraNode',
+        type: 'airconcontrol/updateBarnLoraNode',
         payload: {
           timeDelta: value,
-          nodeAddr: nodeAddr,
+          barnNo: barnNo,
         },
       })
     },
@@ -99,45 +103,23 @@ function AirconOnOffControl ({ dispatch, nodeAddr, content, name, title, avatar,
 
   return (
     <div className={styles.airconOnOffControl}>
-      <div className={styles.inner}>
-        {content}
-      </div>
-
-      <div className={styles.footer}>
-        <div className={styles.description}>
-          <p>{name}</p>
-          <h3>{title}</h3>
-
-          <div className={styles.anttag}>
-            <Tag color={onoff_status.color}>{onoff_status.text}</Tag>
-            <InputNumber size={'small'} value={onoff_status.current_value} />
-          </div>
-
-        </div>
-        <div className={styles.avatar} style={{ backgroundImage: `url(${avatar})` }} />
-      </div>
 
       <div>
         <Popconfirm {...onConfirmProps}>
-          <Button {...onButtonProps}>启动</Button>
+          <Button {...onButtonProps}>一键启动</Button>
+          <InputNumber {...inputNumberProps} />
         </Popconfirm>
-        <InputNumber {...inputNumberProps} />
-
-      </div>
-      <div>
         <Popconfirm {...offConfirmProps}>
-          <Button {...offButtonProps}>关闭</Button>
+          <Button {...offButtonProps}>一键停止</Button>
         </Popconfirm>
       </div>
-
-
     </div>
   )
 }
 
-AirconOnOffControl.propTypes = {
+AirconOnOffAllOneKey.propTypes = {
   dispatch: PropTypes.func,
 
 }
 
-export default AirconOnOffControl
+export default AirconOnOffAllOneKey

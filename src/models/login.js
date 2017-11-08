@@ -10,6 +10,7 @@ export default {
     * login ({
       payload,
     }, { put, call, select }) {
+      console.log('login payload is:', payload)
       const data = yield call(login, payload)
       const { locationQuery } = yield select(_ => _.app)
       if (data.success) {

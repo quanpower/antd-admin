@@ -19,7 +19,7 @@ export default modelExtend(model, {
           console.log('update storehouses begin---')
           setInterval(() => {
             dispatch({ type: 'fetchBarns' })
-          }, 5000)
+          }, 60000)
         } else {
           console.log('we are at:', pathname)
         }

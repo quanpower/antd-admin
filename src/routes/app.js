@@ -23,6 +23,9 @@ const App = ({ children, dispatch, app, loading, location }) => {
   pathname = pathname.startsWith('/') ? pathname : `/${pathname}`
   const { iconFontJS, iconFontCSS, logo } = config
   const current = menu.filter(item => pathToRegexp(item.route || '').exec(pathname))
+  console.log('----current-----')
+  console.log(current)
+
   const hasPermission = current.length ? permissions.visit.includes(current[0].id) : true
   // const hasPermission = current.length ? permissions.visit.includes(current[0].id) : false
 
@@ -87,7 +90,7 @@ const App = ({ children, dispatch, app, loading, location }) => {
     <div>
       <Loader fullScreen spinning={loading.effects['app/query']} />
       <Helmet>
-        <title>SmartLink ADMIN</title>
+        <title>AIWCY ADMIN</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="icon" href={logo} type="image/x-icon" />
         {iconFontJS && <script src={iconFontJS} />}

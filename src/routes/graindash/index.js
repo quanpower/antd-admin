@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { routerRedux } from 'dva/router'
 import { connect } from 'dva'
 import { Row, Col, Card } from 'antd'
 import { color } from 'utils'
@@ -26,6 +27,12 @@ function GrainDash ({ graindash, location }) {
   console.log('match', match)
 
   let barnNo = match[1]
+
+  // if (location.pathname === '/login') {
+  //   yield put(routerRedux.push({
+  //     pathname: '/dashboard',
+  //   }))
+  // }
 
   return (
     <div>
@@ -142,7 +149,6 @@ function GrainDash ({ graindash, location }) {
 
 GrainDash.propTypes = {
   graindash: PropTypes.object,
-
 }
 
 export default connect(({ graindash}) => ({ graindash }))(GrainDash)

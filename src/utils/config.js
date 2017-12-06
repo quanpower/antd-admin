@@ -15,15 +15,13 @@ module.exports = {
   APIV2,
   api: {
     userLogin: `${APIV2}/user/login`,
-    userLogout: `${APIV1}/user/logout`,
+    userLogout: `${APIV2}/user/logout`,
     userInfo: `${APIV1}/userInfo`,
     users: `${APIV1}/users`,
     posts: `${APIV1}/posts`,
-    user: `${APIV1}/user/:id`,
+    user: `${APIV2}/user/:id`,
     dashboard: `${APIV1}/dashboard`,
-    weather: `${APIV1}/weather`,
-    v1test: `${APIV1}/test`,
-    v2test: `${APIV2}/test`,
+
 
     menus: `${APIV2}/menus`,
 

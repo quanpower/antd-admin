@@ -63,7 +63,7 @@ const Routers = function ({ history, app }) {
       models: () => [import('./models/grain')],
       component: () => import('./routes/grain/'),
     }, {
-      path: '/grain_dashboard/:barnNo',
+      path: '/grain_dashboard',
       models: () => [import('./models/graindash')],
       component: () => import('./routes/graindash/'),
     }, {
@@ -71,7 +71,7 @@ const Routers = function ({ history, app }) {
       models: () => [import('./models/grainhistory')],
       component: () => import('./routes/grainhistory/'),
     },  {
-      path: '/aircondetail/:nodeNo',
+      path: '/aircondetail',
       models: () => [import('./models/aircondetail')],
       component: () => import('./routes/aircondetail/'),
     }, {
@@ -79,7 +79,7 @@ const Routers = function ({ history, app }) {
       models: () => [import('./models/airconcontrol')],
       component: () => import('./routes/airconcontrol/'),
     }, {
-      path: '/fire_alarm/:powerNo',
+      path: '/fire_alarm',
       models: () => [import('./models/fireAlarm')],
       component: () => import('./routes/fireAlarm/'),
     }, {

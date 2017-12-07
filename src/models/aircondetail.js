@@ -25,7 +25,6 @@ Date.prototype.Format = function(format){
     }
   }
   return format;
-
 }
 
 export default modelExtend(model, {
@@ -45,42 +44,21 @@ export default modelExtend(model, {
     setup ({ dispatch, history })
     {
       history.listen(({ pathname }) => {
-          console.log('update airConRealtimeTemp begin---')
-          const match = pathToRegexp('/aircondetail/:nodeAddr').exec(pathname)
-          console.log('match:', match)
+        console.log('update airConRealtimeTemp begin---')
+        const match = pathToRegexp('/aircondetail/:nodeAddr').exec(pathname)
+        console.log('match:', match)
 
-          dispatch({ type: 'fetchBarnsNodesOptions',
+        dispatch({ type: 'fetchBarnsNodesOptions',
+        })
+
+        setInterval(() => {
+          dispatch({ type: 'fetchAirConRealtimeTemp',
           })
-
-          setInterval(() => {
-            dispatch({ type: 'fetchAirConRealtimeTemp',
-            // payload: {
-            //   gateway_addr: '1',
-            //   node_addr: match[1],
-            // }
-            })
-            dispatch({ type: 'fetchAirConTemps',
-              payload: {
-                gateway_addr: '1',
-                node_addr: match[1],
-            }
-            })
-
-            const end_time = new Date().Format("yyyy-MM-dd hh:mm:ss")
-            const start_time = new Date(new Date().getTime() - 60*60*1000).Format("yyyy-MM-dd hh:mm:ss")
-
-            console.log('end-time:', end_time)
-            console.log('start-time:', start_time)
-
-            dispatch({ type: 'fetchAirConTempRecord',
-              payload: {
-                gateway_addr: '1',
-                node_addr: match[1],
-                start_time: start_time,
-                end_time: end_time,
-              }
-            })
-          }, 600000)
+          dispatch({ type: 'fetchAirConTemps',
+          })
+          dispatch({ type: 'fetchAirConTempRecord',
+          })
+        }, 10000)
 
       })
     },
@@ -89,11 +67,19 @@ export default modelExtend(model, {
 
   effects: {
 
+    * fetchGatewayAddr ({ payload }, { put }) {
+      const { gatewayAddr } = payload
+      yield put({
+        type: 'updateState',
+        payload: {
+          gatewayAddr: gatewayAddr,
+        }
+      })
+    },
+
+
     * fetchBarnNo ({ payload }, { put }) {
       const { barnNo } = payload
-
-      console.log('-----payload is------ :', payload)
-      console.log('-----barnNo is------ :', barnNo)
       yield put({
         type: 'updateState',
         payload: {
@@ -105,9 +91,6 @@ export default modelExtend(model, {
 
     * fetchNodeAddr ({ payload }, { put }) {
       const { nodeAddr } = payload
-
-      console.log('-----payload is------ :', payload)
-      console.log('-----nodeAddr is------ :', nodeAddr)
       yield put({
         type: 'updateState',
         payload: {
@@ -117,27 +100,9 @@ export default modelExtend(model, {
     },
 
 
-    * fetchBarnsNodesOptions ({  }, { call,put }) {
+    * fetchBarnsNodesOptions ({ }, { call, put }) {
       const { list } = yield call(getAllNodes)
       const barnsNodesOptions = list
-      console.log('-----barnsNodesOptions is------ :', barnsNodesOptions)
-      yield put({
-        type: 'updateState',
-        payload: {
-          barnsNodesOptions: barnsNodesOptions,
-        }
-      })
-    },
-
-
-    * fetchStateBarnsNodesOptions ({  }, { call,put }) {
-
-
-      const gatewayAddr = yield select(state => state.aircondetail.barnsNodesOptions)
-      console.log('-----barnsNodesOptions-------:', barnsNodesOptions)
-
-      const barnsNodesOptions = yield call(getAllNodes)
-
       console.log('-----barnsNodesOptions is------ :', barnsNodesOptions)
       yield put({
         type: 'updateState',
@@ -151,20 +116,21 @@ export default modelExtend(model, {
     * fetchAirConRealtimeTemp ({ }, { select, call, put }) {
 
       const gatewayAddr = yield select(state => state.aircondetail.gatewayAddr)
-      console.log('-----gatewayAddr-------:', gatewayAddr)
+      console.log('-----fetchAirConRealtimeTemp gatewayAddr-------:', gatewayAddr)
 
       const barnNo = yield select(state => state.aircondetail.barnNo)
-      console.log('-----barnNo-------:', barnNo)
+      console.log('-----fetchAirConRealtimeTemp barnNo-------:', barnNo)
 
       const nodeAddr = yield select(state => state.aircondetail.nodeAddr)
-      console.log('-----nodeAddr-------:', nodeAddr)
+      console.log('-----fetchAirConRealtimeTemp nodeAddr-------:', nodeAddr)
 
-      let payload = {
+      const payload = {
         gateway_addr: gatewayAddr,
         node_addr: nodeAddr,
       }
 
       const airConRealtimeTemp = yield call(getAirConTemp, payload)
+
       console.log('airConRealtimeTemp', airConRealtimeTemp)
       yield put({
         type: 'updateAirConRealtimeTemp',
@@ -174,7 +140,20 @@ export default modelExtend(model, {
       })
     },
 
-    * fetchAirConTemps ({payload }, { call, put }) {
+
+    * fetchAirConTemps ({ }, { call, select, put }) {
+
+      const gatewayAddr = yield select(state => state.aircondetail.gatewayAddr)
+      console.log('-----fetchAirConTemps gatewayAddr-------:', gatewayAddr)
+
+      const nodeAddr = yield select(state => state.aircondetail.nodeAddr)
+      console.log('-----fetchAirConTemps nodeAddr-------:', nodeAddr)
+
+      const payload = {
+        gateway_addr: gatewayAddr,
+        node_addr: nodeAddr,
+      }
+
       const airConTemps = yield call(getAirConTemps, payload)
       console.log('airConTemps', airConTemps)
 
@@ -186,7 +165,28 @@ export default modelExtend(model, {
       })
     },
 
-    * fetchAirConTempRecord ({payload }, { call, put }) {
+
+    * fetchAirConTempRecord ({ }, { call, select, put }) {
+
+      const gatewayAddr = yield select(state => state.aircondetail.gatewayAddr)
+      console.log('----- fetchAirConTempRecordgatewayAddr-------:', gatewayAddr)
+
+      const nodeAddr = yield select(state => state.aircondetail.nodeAddr)
+      console.log('-----fetchAirConTempRecord nodeAddr-------:', nodeAddr)
+
+      const end_time = new Date().Format('yyyy-MM-dd hh:mm:ss')
+      const start_time = new Date(new Date().getTime() - 24 * 60 * 60 * 1000).Format('yyyy-MM-dd hh:mm:ss')
+
+      console.log('end-time:', end_time)
+      console.log('start-time:', start_time)
+
+      const payload = {
+        gateway_addr: gatewayAddr,
+        node_addr: nodeAddr,
+        start_time: start_time,
+        end_time: end_time,
+      }
+
       const airConTempRecord = yield call(getAirConTempRecord, payload)
       console.log('airConTempRecord', airConTempRecord)
       yield put({
@@ -197,6 +197,7 @@ export default modelExtend(model, {
       })
     },
   },
+
 
   reducers: {
     updateAirConRealtimeTemp (state, { payload: {airConRealtimeTemp} }) {

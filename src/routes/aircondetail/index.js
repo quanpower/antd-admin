@@ -17,7 +17,7 @@ const bodyStyle = {
 }
 
 
-function AirConDetail ({ aircondetail }) {
+function AirConDetail ({ aircondetail, dispatch }) {
   const { barnsNodesOptions, airConRealtimeTemp, airConTemps, airConTempRecord } = aircondetail
 
   const options = barnsNodesOptions
@@ -27,6 +27,27 @@ function AirConDetail ({ aircondetail }) {
   function onChange(value) {
     console.log('------select value is:--------')
     console.log(value)
+
+    dispatch({
+      type: 'aircondetail/fetchGatewayAddr',
+      payload: {
+        gatewayAddr: value[0],
+      },
+    })
+
+    dispatch({
+      type: 'aircondetail/fetchBarnNo',
+      payload: {
+        barnNo: value[1],
+      },
+    })
+
+    dispatch({
+      type: 'aircondetail/fetchNodeAddr',
+      payload: {
+        nodeAddr: value[2],
+      },
+    })
   }
 
 
@@ -41,11 +62,11 @@ function AirConDetail ({ aircondetail }) {
 
         <Col lg={24} md={24}>
           <Card bordered={false}
-                bodyStyle={{
-                  padding: '24px 36px 24px 0',
-                }}
+            bodyStyle={{
+              padding: '24px 36px 24px 0',
+            }}
           >
-            <Cascader size="large" defaultValue={['1', '1', '10']} options={options} onChange={onChange} />
+            <Cascader size="large" defaultValue={['1', '1', '1']} options={options} onChange={onChange} />
           </Card>
         </Col>
 
@@ -60,12 +81,12 @@ function AirConDetail ({ aircondetail }) {
           </Card>
         </Col>
 
-      <Col lg={24} md={24}>
-        <Card bordered={false}
-          bodyStyle={{
-            padding: '24px 36px 24px 0',
-          }}
-        >
+        <Col lg={24} md={24}>
+          <Card bordered={false}
+            bodyStyle={{
+              padding: '24px 36px 24px 0',
+            }}
+          >
           <AirConTempRecord airConTempRecord={airConTempRecord} />
         </Card>
       </Col>
@@ -77,6 +98,7 @@ function AirConDetail ({ aircondetail }) {
 
 AirConDetail.propTypes = {
   aircondetail: PropTypes.object,
+  dispatch: PropTypes.func,
 }
 
 export default connect(({ aircondetail }) => ({ aircondetail }))(AirConDetail)

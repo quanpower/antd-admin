@@ -85,7 +85,7 @@ export default modelExtend(model, {
       const barnNo = yield select(state => state.graindash.barnNo)
       console.log('-----barnNo-------:', barnNo)
 
-      let payload = {
+      const payload = {
         gatewayAddr: gatewayAddr,
         barnNo: barnNo,
       }

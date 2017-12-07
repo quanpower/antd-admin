@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styles from './realtimeTemp.less'
 import { routerRedux, Link} from 'dva/router'
 
-function RealtimeTemp ({ name, content, title, avatar }) {
+function RealtimeTemp ({ name, content, title, avatar, barnNo }) {
   return (
     <div className={styles.quote}>
       <div className={styles.inner}>

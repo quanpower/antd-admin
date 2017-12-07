@@ -31,6 +31,8 @@ module.exports = {
 
     loraBat: `${APIV2}/loranode_battery`,
     barns: `${APIV2}/barns`,
+    allBarns: `${APIV2}/all_barns`,
+    allNodes: `${APIV2}/all_nodes`,
     grainSmartTempCtrl: `${APIV2}/grain_smart_temperature_control`,
     grainRealtimeTemp: `${APIV2}/grain_realtime_temperature`,
     grainFireAlarm: `${APIV2}/grain_fire_alarm`,

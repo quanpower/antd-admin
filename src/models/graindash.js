@@ -15,6 +15,8 @@ export default modelExtend(model, {
       name: '晴',
       icon: '//s5.sencdn.com/web/icons/3d_50/2.png',
     },
+    gatewayAddr: 1,
+    barnNo: 1,
     airConDash: [],
     unmanned: {
       avatar: 'http://img.hb.aicdn.com/bc442cf0cc6f7940dcc567e465048d1a8d634493198c4-sPx5BR_fw236',
@@ -44,9 +46,8 @@ export default modelExtend(model, {
         console.log('---in graindash models---')
         console.log('match', match)
 
-        let barnNo = match[1]
+        // let barnNo = match[1]
 
-        if (match) {
           dispatch({ type: 'fetchSmartTempCtrl' })
           dispatch({ type: 'fetchRealtimeTemp' })
           dispatch({ type: 'fetchFireAlarm' })
@@ -55,24 +56,61 @@ export default modelExtend(model, {
           dispatch({ type: 'fetchSecurity' })
 
           setInterval(() => {
-            dispatch({ type: 'fetchAirConDashboard' })
+            dispatch({ type: 'fetchAirConDashboard',
+            })
           }, 5000)
-        } else {
-          console.log('we are at:', pathname)
-        }
+
       })
     }
   },
 
   effects: {
 
-    * fetchAirConDashboard ({ payload }, { call, put }) {
-      const airConDash = yield call(getAirConDashboard)
+    * query ({
+               payload,
+             }, { call, put }) {
+      const data = yield call(query, parse(payload))
+      yield put({
+        type: 'updateState',
+        payload: data,
+      })
+    },
+
+
+    * fetchAirConDashboard ({}, { call, put, select }) {
+
+      const gatewayAddr = yield select(state => state.graindash.gatewayAddr)
+      console.log('-----gatewayAddr-------:', gatewayAddr)
+
+      const barnNo = yield select(state => state.graindash.barnNo)
+      console.log('-----barnNo-------:', barnNo)
+
+      let payload = {
+        gatewayAddr: gatewayAddr,
+        barnNo: barnNo,
+      }
+
+      const airConDash = yield call(getAirConDashboard, payload)
+
       console.log('airConDash is :', airConDash)
       yield put({
         type: 'updateAirConDashboard',
         payload: {
           airConDash: airConDash.airConDash,
+        }
+      })
+    },
+
+
+    * fetchBarnNo ({ payload }, { put }) {
+      const { barnNo } = payload
+
+      console.log('-----payload is------ :', payload)
+      console.log('-----barnNo is------ :', barnNo)
+      yield put({
+        type: 'updateState',
+        payload: {
+          barnNo: barnNo,
         }
       })
     },
@@ -150,6 +188,8 @@ export default modelExtend(model, {
   },
 
   reducers: {
+
+
     updateAirConDashboard (state, { payload: { airConDash } }) {
       console.log('reducers airConDash is :', airConDash)
 

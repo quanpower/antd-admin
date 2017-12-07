@@ -1,7 +1,7 @@
 import { request, config } from 'utils'
 
 const { api } = config
-const { loraTemperature, loraTemperatures, loraTemperatureRecord, loraBat, barns, grainUnmanned,
+const { loraTemperature, loraTemperatures, loraTemperatureRecord, loraBat, barns, allBarns, allNodes, grainUnmanned,
   airConTemp, airConTemps, airConTempRecord, airConDashboard, grainSmartTempCtrl, grainRealtimeTemp, grainFireAlarm,
   grainDynamicLinkage, grainSecurity, grainHistory, nodeAddrByBarnNo  } = api
 
@@ -53,6 +53,24 @@ export async function getBarns (params) {
 }
 
 
+export async function getAllBarns (params) {
+  return request({
+    url: allBarns,
+    method: 'get',
+    data: params,
+  })
+}
+
+
+export async function getAllNodes (params) {
+  return request({
+    url: allNodes,
+    method: 'get',
+    data: params,
+  })
+}
+
+
 export async function getAirConTemp (params) {
   return request({
     url: airConTemp,
@@ -82,7 +100,7 @@ export async function getAirConTempRecord (params) {
 
 export async function getAirConDashboard (params) {
   return request({
-    url: airConDashboard.concat('/1/1'),
+    url: airConDashboard,
     method: 'get',
     data: params,
   })

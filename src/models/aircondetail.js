@@ -2,7 +2,7 @@ import { parse } from 'qs'
 import modelExtend from 'dva-model-extend'
 // import { query } from 'services/dashboard'
 import { model } from 'models/common'
-import { getAirConTemp, getAirConTemps, getAirConTempRecord, getAirConDashboard } from "../services/grain"
+import { getAirConTemp, getAirConTemps, getAirConTempRecord, getAirConDashboard, getAllBarns, getAllNodes } from "../services/grain"
 import pathToRegexp from 'path-to-regexp'
 
 
@@ -30,11 +30,17 @@ Date.prototype.Format = function(format){
 
 export default modelExtend(model, {
   namespace: 'aircondetail',
+
   state: {
+    gatewayAddr: 1,
+    barnNo: 1,
+    nodeAddr: 1,
+    barnsNodesOptions: [],
     airConRealtimeTemp: [],
     airConTemps: [],
     airConTempRecord: [],
   },
+
   subscriptions: {
     setup ({ dispatch, history })
     {
@@ -42,13 +48,16 @@ export default modelExtend(model, {
           console.log('update airConRealtimeTemp begin---')
           const match = pathToRegexp('/aircondetail/:nodeAddr').exec(pathname)
           console.log('match:', match)
-          if (match) {
+
+          dispatch({ type: 'fetchBarnsNodesOptions',
+          })
+
           setInterval(() => {
             dispatch({ type: 'fetchAirConRealtimeTemp',
-            payload: {
-              gateway_addr: '1',
-              node_addr: match[1],
-            }
+            // payload: {
+            //   gateway_addr: '1',
+            //   node_addr: match[1],
+            // }
             })
             dispatch({ type: 'fetchAirConTemps',
               payload: {
@@ -71,17 +80,90 @@ export default modelExtend(model, {
                 end_time: end_time,
               }
             })
-          }, 5000)
-        } else {
-          console.log('we are at:', pathname)
-        }
+          }, 600000)
+
       })
     },
   },
 
 
   effects: {
-    * fetchAirConRealtimeTemp ({ payload }, { call, put }) {
+
+    * fetchBarnNo ({ payload }, { put }) {
+      const { barnNo } = payload
+
+      console.log('-----payload is------ :', payload)
+      console.log('-----barnNo is------ :', barnNo)
+      yield put({
+        type: 'updateState',
+        payload: {
+          barnNo: barnNo,
+        }
+      })
+    },
+
+
+    * fetchNodeAddr ({ payload }, { put }) {
+      const { nodeAddr } = payload
+
+      console.log('-----payload is------ :', payload)
+      console.log('-----nodeAddr is------ :', nodeAddr)
+      yield put({
+        type: 'updateState',
+        payload: {
+          nodeAddr: nodeAddr,
+        }
+      })
+    },
+
+
+    * fetchBarnsNodesOptions ({  }, { call,put }) {
+      const { list } = yield call(getAllNodes)
+      const barnsNodesOptions = list
+      console.log('-----barnsNodesOptions is------ :', barnsNodesOptions)
+      yield put({
+        type: 'updateState',
+        payload: {
+          barnsNodesOptions: barnsNodesOptions,
+        }
+      })
+    },
+
+
+    * fetchStateBarnsNodesOptions ({  }, { call,put }) {
+
+
+      const gatewayAddr = yield select(state => state.aircondetail.barnsNodesOptions)
+      console.log('-----barnsNodesOptions-------:', barnsNodesOptions)
+
+      const barnsNodesOptions = yield call(getAllNodes)
+
+      console.log('-----barnsNodesOptions is------ :', barnsNodesOptions)
+      yield put({
+        type: 'updateState',
+        payload: {
+          barnsNodesOptions: barnsNodesOptions,
+        }
+      })
+    },
+
+
+    * fetchAirConRealtimeTemp ({ }, { select, call, put }) {
+
+      const gatewayAddr = yield select(state => state.aircondetail.gatewayAddr)
+      console.log('-----gatewayAddr-------:', gatewayAddr)
+
+      const barnNo = yield select(state => state.aircondetail.barnNo)
+      console.log('-----barnNo-------:', barnNo)
+
+      const nodeAddr = yield select(state => state.aircondetail.nodeAddr)
+      console.log('-----nodeAddr-------:', nodeAddr)
+
+      let payload = {
+        gateway_addr: gatewayAddr,
+        node_addr: nodeAddr,
+      }
+
       const airConRealtimeTemp = yield call(getAirConTemp, payload)
       console.log('airConRealtimeTemp', airConRealtimeTemp)
       yield put({

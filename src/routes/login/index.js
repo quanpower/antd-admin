@@ -1,9 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'dva'
+import { routerRedux, Link} from 'dva/router'
 import { Button, Row, Form, Input } from 'antd'
 import { config } from 'utils'
 import styles from './index.less'
+
 
 const FormItem = Form.Item
 
@@ -53,6 +55,7 @@ const Login = ({
           <Button type="primary" size="large" onClick={handleOk} loading={loading.effects.login}>
             Sign in
           </Button>
+          <p><Link to="/auth/register">注册</Link></p>
           <p>
             <span>Username：guest</span>
             <span>Password：guest</span>

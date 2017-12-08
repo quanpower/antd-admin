@@ -58,7 +58,7 @@ export default modelExtend(model, {
           })
           dispatch({ type: 'fetchAirConTempRecord',
           })
-        }, 10000)
+        }, 60000)
 
       })
     },

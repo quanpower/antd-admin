@@ -13,8 +13,8 @@ const EnumPostStatus = {
 }
 
 
-const GrainHistory = ({ post, dispatch, loading, location }) => {
-  const { list, pagination } = post
+const GrainHistory = ({ grainHistory, dispatch, loading, location }) => {
+  const { list, pagination } = grainHistory
   const { query = {}, pathname } = location
 
   const listProps = {
@@ -56,10 +56,10 @@ const GrainHistory = ({ post, dispatch, loading, location }) => {
 }
 
 GrainHistory.propTypes = {
-  post: PropTypes.object,
+  grainHistory: PropTypes.object,
   loading: PropTypes.object,
   location: PropTypes.object,
   dispatch: PropTypes.func,
 }
 
-export default connect(({ post, loading }) => ({ post, loading }))(GrainHistory)
+export default connect(({ grainHistory, loading }) => ({ grainHistory, loading }))(GrainHistory)

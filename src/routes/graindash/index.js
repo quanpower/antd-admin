@@ -57,8 +57,6 @@ function GrainDash ({ graindash, location, dispatch }) {
     <div>
       {/*<Loader spinning={loading.models.dashboard} />*/}
 
-
-
       <Row gutter={24}>
 
         <Col lg={12} md={24}>

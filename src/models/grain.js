@@ -25,43 +25,10 @@ export default modelExtend(model, {
         }
       })
     },
-
   },
 
 
   effects: {
-    // * query ({
-    //            payload,
-    //          }, { call, put }) {
-    //   const data = yield call(query, parse(payload))
-    //   yield put({
-    //     type: 'updateState',
-    //     payload: data,
-    //   })
-    // },
-    //
-    // * queryWeather ({
-    //                   payload = {},
-    //                 }, { call, put }) {
-    //   payload.location = 'shenzhen'
-    //   const result = yield call(weatherService.query, payload)
-    //   const { success } = result
-    //   if (success) {
-    //     const data = result.results[0]
-    //     const weather = {
-    //       city: data.location.name,
-    //       temperature: data.now.temperature,
-    //       name: data.now.text,
-    //       icon: `//s5.sencdn.com/web/icons/3d_50/${data.now.code}.png`,
-    //     }
-    //     yield put({
-    //       type: 'updateState',
-    //       payload: {
-    //         weather,
-    //       },
-    //     })
-    //   }
-    // },
 
     * fetchBarns ( { payload }, { call, put }) {
       const barns = yield call(getBarns)
@@ -73,29 +40,6 @@ export default modelExtend(model, {
         }
       })
     },
-
-    // * fetchTemps ( {payload }, { call, put }) {
-    //   const temps = yield call(loraTemps, {})
-    //   yield put({
-    //     type: 'updateTemps',
-    //     payload: {
-    //       temps: temps.temps,
-    //     }
-    //   });
-    // },
-    //
-    // * fetchTempRecord ( {payload }, { call, put }) {
-    //   const temps = yield call(loraTemps, {})
-    //   console.log(temps)
-    //   yield put({
-    //     type: 'updateTempRecord',
-    //     payload: {
-    //       tempRecord: temps.temps,
-    //     }
-    //   });
-    // },
-
-
   },
 
   reducers: {
@@ -104,17 +48,5 @@ export default modelExtend(model, {
 
       return { ...state, barns: barns }
     },
-
-    // updateTemps (state, { payload: {temps} }) {
-    //   return {
-    //     ...state, temps: temps,
-    //   }
-    // },
-    //
-    // updateTempRecord (state, { payload: {tempRecord} }) {
-    //   return {
-    //     ...state, tempRecord: tempRecord,
-    //   }
-    // },
   },
 })

@@ -5,7 +5,7 @@ import queryString from 'query-string'
 
 export default modelExtend(pageModel, {
 
-  namespace: 'post',
+  namespace: 'grainHistory',
 
   subscriptions: {
     setup ({ dispatch, history }) {

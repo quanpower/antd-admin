@@ -35,6 +35,9 @@ const AirConControl = ({ location, dispatch, airconcontrol, loading }) => {
     },
   }
 
+  console.log('----airConControlItems-----')
+  console.log(airConControlItems)
+
   const cascaderProps = {
 
     size: 'large',

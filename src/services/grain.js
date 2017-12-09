@@ -3,7 +3,7 @@ import { request, config } from 'utils'
 const { api } = config
 const { loraTemperature, loraTemperatures, loraTemperatureRecord, loraBat, barns, allBarns, allNodes, grainUnmanned,
   airConTemp, airConTemps, airConTempRecord, airConDashboard, grainSmartTempCtrl, grainRealtimeTemp, grainFireAlarm,
-  grainDynamicLinkage, grainSecurity, grainHistory, nodeAddrByBarnNo, airConControlItems  } = api
+  grainDynamicLinkage, grainSecurity, grainHistory, nodeAddrByBarnNo } = api
 
 export async function loraTemp (params) {
   return request({
@@ -169,15 +169,6 @@ export async function getGrainHistory (params) {
 export async function getNodeAddrByBarnNo (params) {
   return request({
     url: nodeAddrByBarnNo,
-    method: 'get',
-    data: params,
-  })
-}
-
-
-export async function getAirConControlItems (params) {
-  return request({
-    url: airConControlItems,
     method: 'get',
     data: params,
   })

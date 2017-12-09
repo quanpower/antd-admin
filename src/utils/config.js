@@ -60,7 +60,7 @@ module.exports = {
     barnLoranodeDatetimeUpdate: `${APIV2}/barn_lora_node_datetime_update`,
     nodeAddrByBarnNo: `${APIV2}/node_address_by_barn_no`,
     airconOnOffAllOneKey: `${APIV2}/air-conditioner_on_off_all_one_key`,
-    airConControlItems: `${APIV2}/air-conditioner_controls_items`,
+    airConControlItems: `${APIV2}/air-conditioner_control_items`,
 
   },
 }

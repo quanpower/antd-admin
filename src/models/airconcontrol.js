@@ -1,11 +1,12 @@
 /* global window */
 import modelExtend from 'dva-model-extend'
 import { config } from 'utils'
-import { create, remove, update, switchAirconOnOff, switchAirconOnOffAllOneKey, updateBarnLoraNodeDatetime, updateLoraNodeDatetime, oneAirConStartEndTimeUpdate } from 'services/airconcontrol'
-import { getNodeAddrByBarnNo, getAirConControlItems } from 'services/grain'
+import { create, remove, update, switchAirconOnOff, switchAirconOnOffAllOneKey, updateBarnLoraNodeDatetime, updateLoraNodeDatetime, oneAirConStartEndTimeUpdate, getAirConControlItems } from 'services/airconcontrol'
+import { getNodeAddrByBarnNo, getAllBarns } from 'services/grain'
 import * as airConControlService from 'services/airconcontrols'
 import queryString from 'query-string'
 import { pageModel } from './common'
+import {getAllNodes} from "../services/grain";
 
 const { query } = airConControlService
 const { prefix } = config
@@ -34,6 +35,10 @@ export default modelExtend(pageModel, {
             payload: queryString.parse(location.search),
           })
         }
+
+        dispatch({ type: 'fetchBarnsOptions',
+        })
+
       })
     },
   },
@@ -63,6 +68,18 @@ export default modelExtend(pageModel, {
       })
     },
 
+    * fetchBarnsOptions ({ }, { call, put }) {
+      const { list } = yield call(getAllBarns)
+      const barnsOptions = list
+      console.log('-----barnsOptions is------ :', barnsOptions)
+      yield put({
+        type: 'updateState',
+        payload: {
+          barnsOptions: barnsOptions,
+        }
+      })
+    },
+
 
     * fetchAirConControlItems ({ payload }, { call, put }) {
       const { barnNo } = payload
@@ -73,17 +90,10 @@ export default modelExtend(pageModel, {
       console.log(data)
 
       if (data.success) {
-        yield put({ type: 'updateState', payload: { airConControlItems: data.data } })
+        yield put({ type: 'updateState', payload: { airConControlItems: data.list } })
       } else {
         throw data
       }
-
-      yield put({
-        type: 'updateState',
-        payload: {
-          airConControlItems: airConControlItems,
-        }
-      })
     },
 
 

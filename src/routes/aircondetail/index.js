@@ -22,9 +22,9 @@ function AirConDetail ({ aircondetail, dispatch }) {
 
   const options = barnsNodesOptions
 
-  console.log('----barnsNodesOptions options is:------', options)
+  console.log('----barnsNodesOptions is:------', options)
 
-  function onChange(value) {
+  function onChange (value) {
     console.log('------select value is:--------')
     console.log(value)
 
@@ -66,11 +66,12 @@ function AirConDetail ({ aircondetail, dispatch }) {
               padding: '24px 36px 24px 0',
             }}
           >
-            <Cascader size="large" defaultValue={['1', '1', '1']} options={options} onChange={onChange} />
+            <Cascader size="large" defaultValue={['1', '1', '10']} options={options} onChange={onChange} />
           </Card>
         </Col>
 
         {concCards}
+
         <Col lg={24} md={24}>
           <Card bordered={false}
             bodyStyle={{
@@ -87,9 +88,9 @@ function AirConDetail ({ aircondetail, dispatch }) {
               padding: '24px 36px 24px 0',
             }}
           >
-          <AirConTempRecord airConTempRecord={airConTempRecord} />
-        </Card>
-      </Col>
+            <AirConTempRecord airConTempRecord={airConTempRecord} />
+          </Card>
+        </Col>
 
       </Row>
     </div>

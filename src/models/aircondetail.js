@@ -33,7 +33,7 @@ export default modelExtend(model, {
   state: {
     gatewayAddr: 1,
     barnNo: 1,
-    nodeAddr: 1,
+    nodeAddr: 10,
     barnsNodesOptions: [],
     airConRealtimeTemp: [],
     airConTemps: [],
@@ -50,6 +50,12 @@ export default modelExtend(model, {
 
         dispatch({ type: 'fetchBarnsNodesOptions',
         })
+        dispatch({ type: 'fetchAirConRealtimeTemp',
+        })
+        dispatch({ type: 'fetchAirConTemps',
+        })
+        dispatch({ type: 'fetchAirConTempRecord',
+        })
 
         setInterval(() => {
           dispatch({ type: 'fetchAirConRealtimeTemp',
@@ -59,6 +65,7 @@ export default modelExtend(model, {
           dispatch({ type: 'fetchAirConTempRecord',
           })
         }, 60000)
+
 
       })
     },
@@ -80,6 +87,8 @@ export default modelExtend(model, {
 
     * fetchBarnNo ({ payload }, { put }) {
       const { barnNo } = payload
+      console.log('-----barnNo-----!!')
+      console.log(barnNo)
       yield put({
         type: 'updateState',
         payload: {
@@ -91,6 +100,9 @@ export default modelExtend(model, {
 
     * fetchNodeAddr ({ payload }, { put }) {
       const { nodeAddr } = payload
+      console.log('-----nodeAddr-----!!')
+      console.log(nodeAddr)
+
       yield put({
         type: 'updateState',
         payload: {

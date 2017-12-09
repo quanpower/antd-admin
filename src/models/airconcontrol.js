@@ -2,7 +2,7 @@
 import modelExtend from 'dva-model-extend'
 import { config } from 'utils'
 import { create, remove, update, switchAirconOnOff, switchAirconOnOffAllOneKey, updateBarnLoraNodeDatetime, updateLoraNodeDatetime, oneAirConStartEndTimeUpdate } from 'services/airconcontrol'
-import { getNodeAddrByBarnNo } from 'services/grain'
+import { getNodeAddrByBarnNo, getAirConControlItems } from 'services/grain'
 import * as airConControlService from 'services/airconcontrols'
 import queryString from 'query-string'
 import { pageModel } from './common'
@@ -14,6 +14,10 @@ export default modelExtend(pageModel, {
   namespace: 'airconcontrol',
 
   state: {
+    gatewayAddr: 1,
+    barnNo: 1,
+    barnsOptions: [],
+    airConControlItems: [],
     currentItem: {},
     modalVisible: false,
     modalType: 'create',
@@ -35,6 +39,53 @@ export default modelExtend(pageModel, {
   },
 
   effects: {
+
+    * fetchGatewayAddr ({ payload }, { put }) {
+      const { gatewayAddr } = payload
+      yield put({
+        type: 'updateState',
+        payload: {
+          gatewayAddr: gatewayAddr,
+        }
+      })
+    },
+
+
+    * fetchBarnNo ({ payload }, { put }) {
+      const { barnNo } = payload
+      console.log('-----barnNo-----!!')
+      console.log(barnNo)
+      yield put({
+        type: 'updateState',
+        payload: {
+          barnNo: barnNo,
+        }
+      })
+    },
+
+
+    * fetchAirConControlItems ({ payload }, { call, put }) {
+      const { barnNo } = payload
+      console.log('-----barnNo-----!!')
+      console.log(barnNo)
+      const data = yield call(getAirConControlItems, payload)
+      console.log('-----fetchAirConControlItems-------')
+      console.log(data)
+
+      if (data.success) {
+        yield put({ type: 'updateState', payload: { airConControlItems: data.data } })
+      } else {
+        throw data
+      }
+
+      yield put({
+        type: 'updateState',
+        payload: {
+          airConControlItems: airConControlItems,
+        }
+      })
+    },
+
 
     * query ({ payload = {} }, { call, put }) {
       const data = yield call(query, payload)

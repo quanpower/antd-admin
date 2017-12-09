@@ -2,14 +2,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { routerRedux } from 'dva/router'
 import { connect } from 'dva'
-import { Row, Col, Button, Popconfirm } from 'antd'
+import { Row, Col, Button, Popconfirm, Cascader, Card } from 'antd'
 import List from './List'
 import Filter from './Filter'
 import Modal from './Modal'
 import { AirconControlAutomatic, AirconControlManual } from './components'
 
 const AirConControl = ({ location, dispatch, airconcontrol, loading }) => {
-  const { list, pagination, currentItem, modalVisible, modalType, isMotion, selectedRowKeys } = airconcontrol
+  const { airConControlItems, barnsOptions, barnNo, list, pagination, currentItem, modalVisible, modalType, isMotion, selectedRowKeys } = airconcontrol
   const { pageSize } = pagination
 
   const modalProps = {
@@ -22,7 +22,7 @@ const AirConControl = ({ location, dispatch, airconcontrol, loading }) => {
     onOk (data) {
       dispatch({
         // type: `airconcontrol/${modalType}`,
-        type: `airconcontrol/create`,
+        type: 'airconcontrol/create',
         payload: data,
       })
       console.log('airconcontrol')
@@ -32,10 +32,42 @@ const AirConControl = ({ location, dispatch, airconcontrol, loading }) => {
         type: 'airconcontrol/hideModal',
       })
       console.log('airconcontrol Cancel')
-
     },
   }
 
+  const cascaderProps = {
+
+    size: 'large',
+    defaultValue: ['1', '1', '10'],
+    options: barnsOptions,
+
+    onChange (value) {
+      console.log('------select value is:--------')
+      console.log(value)
+
+      dispatch({
+        type: 'airconcontrol/fetchGatewayAddr',
+        payload: {
+          gatewayAddr: value[0],
+        },
+      })
+
+      dispatch({
+        type: 'airconcontrol/fetchBarnNo',
+        payload: {
+          barnNo: value[1],
+        },
+      })
+
+      dispatch({
+        type: 'airconcontrol/fetchAirConControlItems',
+        payload: {
+          barnNo: value[1],
+        },
+      })
+    }
+
+  }
 
 
   const filterProps = {
@@ -43,6 +75,7 @@ const AirConControl = ({ location, dispatch, airconcontrol, loading }) => {
     filter: {
       ...location.query,
     },
+
     onFilterChange (value) {
       dispatch(routerRedux.push({
         pathname: location.pathname,
@@ -53,6 +86,7 @@ const AirConControl = ({ location, dispatch, airconcontrol, loading }) => {
         },
       }))
     },
+
     onSearch (fieldsValue) {
       fieldsValue.keyword.length ? dispatch(routerRedux.push({
         pathname: '/user',
@@ -64,6 +98,7 @@ const AirConControl = ({ location, dispatch, airconcontrol, loading }) => {
         pathname: '/user',
       }))
     },
+
     onAdd () {
       dispatch({
         type: 'airconcontrol/showModal',
@@ -72,6 +107,7 @@ const AirConControl = ({ location, dispatch, airconcontrol, loading }) => {
         },
       })
     },
+
     switchIsMotion () {
       dispatch({ type: 'airconcontrol/switchIsMotion' })
     },
@@ -80,11 +116,17 @@ const AirConControl = ({ location, dispatch, airconcontrol, loading }) => {
 
   return (
     <div className="content-inner">
+
+      <Card bordered={false} bodyStyle={{ padding: '24px 36px 24px 0', }}>
+        <Cascader {...cascaderProps} />
+
+      </Card>
+
       <Filter {...filterProps} />
 
       <Modal {...modalProps} />
 
-      <AirconControlManual dispatch={dispatch} location={location} />
+      <AirconControlManual dispatch={dispatch} location={location} barnNo={barnNo} airConControlItems={airConControlItems} />
       {/*<AirconControlAutomatic />*/}
 
     </div>

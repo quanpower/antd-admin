@@ -9,7 +9,7 @@ import Modal from './Modal'
 import { AirconControlAutomatic, AirconControlManual } from './components'
 
 const AirConControl = ({ location, dispatch, airconcontrol, loading }) => {
-  const { airConControlItems, barnsOptions, barnNo, list, pagination, currentItem, modalVisible, modalType, isMotion, selectedRowKeys } = airconcontrol
+  const { airConControlItems, barnsOptions, barnNo, pagination, currentItem, modalVisible, modalType, isMotion, selectedRowKeys } = airconcontrol
   const { pageSize } = pagination
 
   const modalProps = {
@@ -41,7 +41,7 @@ const AirConControl = ({ location, dispatch, airconcontrol, loading }) => {
   const cascaderProps = {
 
     size: 'large',
-    defaultValue: ['1', '1', '10'],
+    defaultValue: ['1', '1'],
     options: barnsOptions,
 
     onChange (value) {

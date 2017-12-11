@@ -2,7 +2,7 @@ import { parse } from 'qs'
 import modelExtend from 'dva-model-extend'
 // import { query } from 'services/dashboard'
 import { model } from 'models/common'
-import { powerControl, getFireAlarmItems } from 'services/fireAlarm'
+import { powerControl, getElectricPowerItems } from 'services/fireAlarm'
 import { getNodeAddrByBarnNo, getAllBarns } from 'services/grain'
 import pathToRegexp from 'path-to-regexp'
 
@@ -12,6 +12,8 @@ export default modelExtend(model, {
     gatewayAddr: 1,
     barnNo: 1,
     barnsOptions: [],
+    electricPowerItems: [],
+
     switch: [],
   },
   subscriptions: {
@@ -24,6 +26,9 @@ export default modelExtend(model, {
         else {
           console.log('we are at:', pathname)
         }
+
+        dispatch({ type: 'fetchBarnsOptions',
+        })
       })
     },
   },
@@ -67,16 +72,16 @@ export default modelExtend(model, {
     },
 
 
-    * fetchFireAlarmItems ({ payload }, { call, put }) {
+    * fetchElectricPowerItems ({ payload }, { call, put }) {
       const { barnNo } = payload
       console.log('-----barnNo-----!!')
       console.log(barnNo)
-      const data = yield call(getFireAlarmItems, payload)
+      const data = yield call(getElectricPowerItems, payload)
       console.log('-----fetchAirConControlItems-------')
       console.log(data)
 
       if (data.success) {
-        yield put({ type: 'updateState', payload: { airConControlItems: data.list } })
+        yield put({ type: 'updateState', payload: { electricPowerItems: data.list } })
       } else {
         throw data
       }

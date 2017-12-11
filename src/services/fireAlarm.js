@@ -1,7 +1,7 @@
 import { request, config } from 'utils'
 
 const { api } = config
-const { electricPowerControl, fireAlarmItems } = api
+const { electricPowerControl, electricPowerItems } = api
 
 export async function powerControl (params) {
   return request({
@@ -13,9 +13,9 @@ export async function powerControl (params) {
 
 
 
-export async function getFireAlarmItems (params) {
+export async function getElectricPowerItems (params) {
   return request({
-    url: fireAlarmItems,
+    url: electricPowerItems,
     method: 'post',
     data: params,
   })

@@ -61,7 +61,7 @@ module.exports = {
     nodeAddrByBarnNo: `${APIV2}/node_address_by_barn_no`,
     airconOnOffAllOneKey: `${APIV2}/air-conditioner_on_off_all_one_key`,
     airConControlItems: `${APIV2}/air-conditioner_control_items`,
-    fireAlarmItems: `${APIV2}/firealarm_items`,
+    electricPowerItems: `${APIV2}/electric_power_control_items`,
 
   },
 }

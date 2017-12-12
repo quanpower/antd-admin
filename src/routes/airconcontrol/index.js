@@ -7,6 +7,7 @@ import List from './List'
 import Filter from './Filter'
 import Modal from './Modal'
 import { AirconControlAutomatic, AirconControlManual } from './components'
+import queryString from "query-string";
 
 const AirConControl = ({ location, dispatch, airconcontrol, loading }) => {
   const { airConControlItems, barnsOptions, barnNo, pagination, currentItem, modalVisible, modalType, isMotion, selectedRowKeys } = airconcontrol
@@ -82,21 +83,21 @@ const AirConControl = ({ location, dispatch, airconcontrol, loading }) => {
     onFilterChange (value) {
       dispatch(routerRedux.push({
         pathname: location.pathname,
-        query: {
+        search: queryString.stringify({
           ...value,
           page: 1,
           pageSize,
-        },
+        }),
       }))
     },
 
     onSearch (fieldsValue) {
       fieldsValue.keyword.length ? dispatch(routerRedux.push({
         pathname: '/user',
-        query: {
+        search: queryString.stringify({
           field: fieldsValue.field,
           keyword: fieldsValue.keyword,
-        },
+        }),
       })) : dispatch(routerRedux.push({
         pathname: '/user',
       }))

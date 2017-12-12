@@ -11,9 +11,11 @@ export default modelExtend(pageModel, {
     setup ({ dispatch, history }) {
       history.listen((location) => {
         if (location.pathname === '/grain_history') {
+          console.log('----queryString.parse----')
+          console.log(...queryString)
           dispatch({ type: 'query',
             payload: {
-              status: 2,
+              status: 1,
               ...queryString.parse(location.search),
             } })
         }
@@ -22,9 +24,7 @@ export default modelExtend(pageModel, {
   },
 
   effects: {
-    * query ({
-               payload,
-             }, { call, put }) {
+    * query ({ payload }, { call, put }) {
       const data = yield call(getGrainHistory, payload)
       if (data.success) {
         yield put({

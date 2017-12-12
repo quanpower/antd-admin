@@ -13,24 +13,31 @@ const List = ({ ...tableProps }) => {
     }, {
       title: '网关',
       dataIndex: 'lora_gateway_id',
+      key: 'lora_gateway_id',
     }, {
       title: '节点',
-      dataIndex: 'lora_node_id',
+      dataIndex: 'lora_node_addr',
+      key: 'lora_node_addr',
     }, {
       title: '温度1',
       dataIndex: 'temp1',
+      key: 'temp1',
     }, {
       title: '温度2',
       dataIndex: 'temp2',
+      key: 'temp2',
     }, {
       title: '温度3',
       dataIndex: 'temp3',
+      key: 'temp3',
     }, {
       title: '电池',
       dataIndex: 'battery_vol',
+      key: 'battery_vol',
     }, {
       title: '日期时间',
       dataIndex: 'datetime',
+      key: 'datetime',
     },
   ]
 

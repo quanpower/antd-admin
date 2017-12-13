@@ -56,7 +56,7 @@ export async function getBarns (params) {
 export async function getAllBarns (params) {
   return request({
     url: allBarns,
-    method: 'get',
+    method: 'post',
     data: params,
   })
 }

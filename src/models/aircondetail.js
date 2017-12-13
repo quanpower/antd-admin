@@ -136,6 +136,10 @@ export default modelExtend(model, {
       const nodeAddr = yield select(state => state.aircondetail.nodeAddr)
       console.log('-----fetchAirConRealtimeTemp nodeAddr-------:', nodeAddr)
 
+
+      const user = yield select(state => state.app.user)
+      console.log('************fetchAirConRealtimeTemp user*************:', user)
+
       const payload = {
         gateway_addr: gatewayAddr,
         node_addr: nodeAddr,

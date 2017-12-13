@@ -59,8 +59,14 @@ export default modelExtend(model, {
       })
     },
 
-    * fetchBarnsOptions ({ }, { call, put }) {
-      const { list } = yield call(getAllBarns)
+    * fetchBarnsOptions ({}, { select, call, put }) {
+      const user = yield select(state => state.app.user)
+      console.log('************fireAlarm user*************:', user)
+      const payload = {
+        userID: user.id,
+        username: user.username,
+      }
+      const { list } = yield call(getAllBarns, payload)
       const barnsOptions = list
       console.log('-----barnsOptions is------ :', barnsOptions)
       yield put({

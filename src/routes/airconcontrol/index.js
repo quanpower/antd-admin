@@ -9,9 +9,12 @@ import Modal from './Modal'
 import { AirconControlAutomatic, AirconControlManual } from './components'
 import queryString from "query-string";
 
+
+
 const AirConControl = ({ location, dispatch, airconcontrol, loading }) => {
-  const { airConControlItems, barnsOptions, barnNo, pagination, currentItem, modalVisible, modalType, isMotion, selectedRowKeys } = airconcontrol
+  const { barnsOptions, airConControlItems, barnNo, pagination, currentItem, modalVisible, modalType, isMotion, selectedRowKeys } = airconcontrol
   const { pageSize } = pagination
+
 
   const modalProps = {
     item: modalType === 'create' ? {} : currentItem,

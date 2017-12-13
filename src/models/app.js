@@ -66,6 +66,8 @@ export default {
       payload,
     }, { call, put, select }) {
       const { success, user } = yield call(query, payload)
+      console.log('user is:')
+      console.log(user)
       const { locationPathname } = yield select(_ => _.app)
       if (success && user) {
         const { list } = yield call(menusService.query)

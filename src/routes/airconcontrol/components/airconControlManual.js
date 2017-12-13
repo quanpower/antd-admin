@@ -11,18 +11,21 @@ function AirconControlManual ({ airConControlItems, barnNo, location, dispatch }
 
 
   const airconOnOffControlItems = airConControlItems.map((item, key) => (
-
-    <Col key={key} lg={24} md={12}>
-      <Card bordered={false}
-        className={styles.power1}
-        bodyStyle={{
-          padding: 0,
-          height: 240,
-          background: color.green,
-        }}
-      >
-        <AirconOnOffControl {...item} location={location} dispatch={dispatch} />
-      </Card>
+    <Col lg={12} md={24}>
+      <Row gutter={24}>
+        <Col key={key} lg={24} md={12}>
+          <Card bordered={false}
+            className={styles.power1}
+            bodyStyle={{
+              padding: 0,
+              height: 240,
+              background: color.blue,
+            }}
+          >
+            <AirconOnOffControl {...item} location={location} dispatch={dispatch} />
+          </Card>
+        </Col>
+      </Row>
     </Col>
   ))
 

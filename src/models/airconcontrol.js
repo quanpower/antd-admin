@@ -68,8 +68,14 @@ export default modelExtend(pageModel, {
       })
     },
 
-    * fetchBarnsOptions ({ }, { call, put }) {
-      const { list } = yield call(getAllBarns)
+    * fetchBarnsOptions ({}, { select, call, put }) {
+      const user = yield select(state => state.app.user)
+      console.log('************airconcontrol user*************:', user)
+      const payload = {
+        userID: user.id,
+        username: user.username,
+      }
+      const { list } = yield call(getAllBarns, payload)
       const barnsOptions = list
       console.log('-----barnsOptions is------ :', barnsOptions)
       yield put({
@@ -187,7 +193,6 @@ export default modelExtend(pageModel, {
 
     * updateBarnLoraNode ({ payload }, { call, put }) {
       console.log('payload', payload)
-
 
       const data = yield call(updateBarnLoraNodeDatetime, payload)
       if (data.success) {

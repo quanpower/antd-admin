@@ -19,11 +19,11 @@ export default {
       "changeOrigin": true,
       "pathRewrite": { "^/api/v1/weather": "/v3/weather" }
     },
-    "/api/v2": {
+    "/api/v1": {
       "target": "http://127.0.0.1:5000",
       "secure": false,
       "changeOrigin": true,
-      "pathRewrite": { "^/api/v2" : "/api/v1" }
+      "pathRewrite": { "^/api/v1" : "/api/v1" }
     },
     // "/api/v1/loranode_temperature": {
     //   "target": "http://101.200.158.2:8888",

@@ -1,29 +1,33 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styles from './dynamicLinkage.less'
+import { routerRedux, Link } from 'dva/router'
 
-function DynamicLinkage ({ name, content, title, avatar }) {
+import styles from './airconBlockItem.less'
+
+function AirconBlockItem ({ name, content, link, title, avatar }) {
+
   return (
-    <div className={styles.quote}>
+    <div className={styles.airconBlockItem}>
       <div className={styles.inner}>
         {content}
       </div>
       <div className={styles.footer}>
         <div className={styles.description}>
           <p>{name}</p>
-          <h1>{title}</h1>
+          <h1><Link to={`${link}`}> {title} </Link></h1>
         </div>
         <div className={styles.avatar} style={{ backgroundImage: `url(${avatar})` }} />
       </div>
     </div>
   )
+
 }
 
-DynamicLinkage.propTypes = {
+AirconBlockItem.propTypes = {
   name: PropTypes.string,
   content: PropTypes.string,
   title: PropTypes.string,
   avatar: PropTypes.string,
 }
 
-export default DynamicLinkage
+export default AirconBlockItem

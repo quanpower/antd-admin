@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'dva'
+import { routerRedux } from 'dva/router'
 import { Card, Row, Col, Cascader } from 'antd'
 import { color } from 'utils'
 import styles from './index.less'
@@ -17,6 +18,7 @@ const bodyStyle = {
 function FireAlarm ({ fireAlarm, dispatch }) {
   const { electricPowerItems, barnsOptions, barnNo } = fireAlarm
 
+
   const cascaderProps = {
 
     size: 'large',
@@ -26,30 +28,10 @@ function FireAlarm ({ fireAlarm, dispatch }) {
     onChange (value) {
       console.log('------select value is:--------')
       console.log(value)
-
-      dispatch({
-        type: 'fireAlarm/fetchGatewayAddr',
-        payload: {
-          gatewayAddr: value[0],
-        },
-      })
-
-      dispatch({
-        type: 'fireAlarm/fetchBarnNo',
-        payload: {
-          barnNo: value[1],
-        },
-      })
-
-      dispatch({
-        type: 'fireAlarm/fetchElectricPowerItems',
-        payload: {
-          barnNo: value[1],
-        },
-      })
+      const barn_no = value[1]
+      dispatch(routerRedux.push(`/fire_alarm/${barn_no}`))
     }
   }
-
 
 
   const electricPowerOnOffItems = electricPowerItems.map((item, key) => (
@@ -70,7 +52,6 @@ function FireAlarm ({ fireAlarm, dispatch }) {
         </Col>
       </Row>
     </Col>
-
   ))
 
   return (

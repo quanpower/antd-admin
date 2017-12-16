@@ -19,16 +19,38 @@ export default modelExtend(model, {
   subscriptions: {
     setup ({ dispatch, history }) {
       history.listen(({ pathname }) => {
-        const match = pathToRegexp('/fire_alarm/:powerNo').exec(pathname)
-        if (match) {
-          console.log('update fire alarm begin---')
-        }
-        else {
-          console.log('we are at:', pathname)
-        }
+        const match = pathToRegexp('/fire_alarm/:barnNo').exec(pathname)
+        console.log('---in fire_alarm models---')
+        console.log('match', match)
+
+        const barnNo = match[1]
+        console.log('match barnNo', barnNo)
+
+
+        dispatch({
+          type: 'fetchBarnNo',
+          payload: {
+            barnNo: barnNo,
+          },
+        })
 
         dispatch({ type: 'fetchBarnsOptions',
         })
+
+      // dispatch({
+      //   type: 'airconcontrol/fetchGatewayAddr',
+      //   payload: {
+      //     gatewayAddr: value[0],
+      //   },
+      // })
+
+        dispatch({
+          type: 'fetchElectricPowerItems',
+          payload: {
+            barnNo: barnNo,
+          },
+        })
+
       })
     },
   },
@@ -49,8 +71,6 @@ export default modelExtend(model, {
 
     * fetchBarnNo ({ payload }, { put }) {
       const { barnNo } = payload
-      console.log('-----barnNo-----!!')
-      console.log(barnNo)
       yield put({
         type: 'updateState',
         payload: {
@@ -79,9 +99,6 @@ export default modelExtend(model, {
 
 
     * fetchElectricPowerItems ({ payload }, { call, put }) {
-      const { barnNo } = payload
-      console.log('-----barnNo-----!!')
-      console.log(barnNo)
       const data = yield call(getElectricPowerItems, payload)
       console.log('-----fetchAirConControlItems-------')
       console.log(data)

@@ -2,12 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { routerRedux } from 'dva/router'
 import { connect } from 'dva'
-import { Row, Col, Card, Select, message } from 'antd'
+import { Row, Col, Card, Select, message, Cascader} from 'antd'
 import { color } from 'utils'
 import { Loader } from 'components'
-import { AirConDashboard, Unmanned, DynamicLinkage, FireAlarm, RealtimeTemp, Security, SmartTempCtrl } from './components'
+import { AirConDashboard, AirconBlockItem } from './components'
 import styles from './index.less'
-import dashboard from "../../models/dashboard";
 import pathToRegexp from 'path-to-regexp'
 
 
@@ -19,83 +18,37 @@ const bodyStyle = {
 }
 
 function GrainDash ({ graindash, location, dispatch }) {
-  const { barnNo, airConDash, unmanned, dynamiclinkage, firealarm, realtimetemp, security, smarttempctrl } = graindash
+  const {  barnNo, barnsOptions, airConDash, airconBlockItems } = graindash
   console.log('airConDash is: ', airConDash)
   console.log('--****-barnNo is: ---****--', barnNo)
-  // const match = pathToRegexp('/grain_dashboard/:barnNo').exec(location.pathname)
-  //
-  // console.log('---in graindash router---')
-  // console.log('match', match)
-  //
-  // if (location.pathname === '/login') {
-  //   yield put(routerRedux.push({
-  //     pathname: '/dashboard',
-  //   }))
-  // }
+
+  console.log('--****-airconBlockItems is: ---****--', airconBlockItems)
 
 
-  const { Option, OptGroup } = Select
+  const cascaderProps = {
 
-  const onSelectProps = {
+    size: 'large',
+    defaultValue: ['1', '1'],
+    options: barnsOptions,
 
     onChange (value) {
-      console.log('选中仓号是：', value)
-      message.success('筛选成功！')
+      console.log('------select value is:--------')
+      console.log(value)
+      const barn_no = value[1]
+      dispatch(routerRedux.push(`/grain_dashboard/${barn_no}`))
 
-      dispatch({
-        type: 'graindash/fetchBarnNo',
-        payload: {
-          gatewayAddr: '1',
-          barnNo: value,
-        },
-      })
-    },
+    }
   }
 
 
-  return (
-    <div>
-      {/*<Loader spinning={loading.models.dashboard} />*/}
-
-      <Row gutter={24}>
-
-        <Col lg={12} md={24}>
-
-          <Card bordered={false}
-                bodyStyle={{
-                  padding: '24px 36px 24px 0',
-                }}
-          >
-            <Select {...onSelectProps} defaultValue='1' style={{ width: 120 }} >
-              <OptGroup label="平房仓">
-                <Option value="1">1</Option>
-                <Option value="2">2</Option>
-
-                <Option value="3">3</Option>
-                <Option value="4">4</Option>
-
-                <Option value="5">5</Option>
-                <Option value="6">6</Option>
-
-                <Option value="7">7</Option>
-                <Option value="8">8</Option>
-              </OptGroup>
-
-            </Select>
-
-          </Card>
-
-          <Card bordered={false}
-                bodyStyle={{
-            padding: '24px 36px 24px 0',
-          }}
-          >
-            <AirConDashboard data={airConDash} />
-          </Card>
-        </Col>
-
+  const itemsCards = airconBlockItems.map((item, key) => (
         <Col lg={6} md={24}>
           <Row gutter={24}>
+
+          
+            {console.log('---in itemsCards----')}
+            {console.log('---item----', item)}
+
 
             <Col lg={24} md={12}>
               <Card bordered={false}
@@ -106,83 +59,33 @@ function GrainDash ({ graindash, location, dispatch }) {
                       background: color.purple,
                     }}
               >
-                <SmartTempCtrl {...smarttempctrl} barnNo={barnNo} />
+                <AirconBlockItem {...item} />
+
               </Card>
             </Col>
-
-            <Col lg={24} md={12}>
-              <Card bordered={false}
-                    className={styles.quote}
-                    bodyStyle={{
-                      padding: 0,
-                      height: 204,
-                      background: color.green,
-                    }}
-              >
-                <RealtimeTemp {...realtimetemp} barnNo={barnNo} />
-              </Card>
-            </Col>
-
-            <Col lg={24} md={12}>
-              <Card bordered={false}
-                    className={styles.quote}
-                    bodyStyle={{
-                      padding: 0,
-                      height: 204,
-                      background: color.red,
-                    }}
-              >
-                <FireAlarm {...firealarm} barnNo={barnNo} />
-              </Card>
-            </Col>
-
           </Row>
         </Col>
 
-        <Col lg={6} md={24}>
-          <Row gutter={24}>
-            <Col lg={24} md={12}>
-              <Card bordered={false}
-                    className={styles.weather}
-                    bodyStyle={{
-                      padding: 0,
-                      height: 204,
-                      background: color.blue,
-                    }}
-              >
-                <Unmanned {...unmanned} barnNo={barnNo} />
+  ))
 
-              </Card>
-            </Col>
-
-            <Col lg={24} md={12}>
-              <Card bordered={false}
-                    className={styles.quote}
-                    bodyStyle={{
-                      padding: 0,
-                      height: 204,
-                      background: color.peach,
-                    }}
-              >
-                <DynamicLinkage {...dynamiclinkage} barnNo={barnNo} />
-              </Card>
-            </Col>
-
-            <Col lg={24} md={12}>
-              <Card bordered={false}
-                    className={styles.quote}
-                    bodyStyle={{
-                      padding: 0,
-                      height: 204,
-                      background: color.yellow,
-                    }}
-              >
-                <Security {...security} barnNo={barnNo} />
-              </Card>
-            </Col>
-
-          </Row>
+  return (
+    <div>
+      {/*<Loader spinning={loading.models.dashboard} /> purple,green, red,blue,peach,yellow */}
+      <Row gutter={24}>
+        <Col lg={12} md={24}>
+          <Card bordered={false} bodyStyle={{ padding: '24px 36px 24px 0', }}>
+            <Cascader {...cascaderProps} />
+          </Card>
+          <Card bordered={false}
+                bodyStyle={{
+            padding: '24px 36px 24px 0',
+          }}
+          >
+            <AirConDashboard data={airConDash} />
+          </Card>
         </Col>
+
+        {itemsCards}
 
       </Row>
     </div>
@@ -193,4 +96,4 @@ GrainDash.propTypes = {
   graindash: PropTypes.object,
 }
 
-export default connect(({ graindash}) => ({ graindash }))(GrainDash)
+export default connect(({ graindash }) => ({ graindash }))(GrainDash)

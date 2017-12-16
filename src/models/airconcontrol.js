@@ -7,6 +7,7 @@ import * as airConControlService from 'services/airconcontrols'
 import queryString from 'query-string'
 import { pageModel } from './common'
 import {getAllNodes} from "../services/grain";
+import pathToRegexp from 'path-to-regexp'
 
 const { query } = airConControlService
 const { prefix } = config
@@ -28,15 +29,44 @@ export default modelExtend(pageModel, {
 
   subscriptions: {
     setup ({ dispatch, history }) {
-      history.listen((location) => {
-        if (location.pathname === '/aircon_control') {
-          dispatch({
-            type: 'query',
-            payload: queryString.parse(location.search),
-          })
-        }
+      history.listen(({pathname}) => {
+        const match = pathToRegexp('/aircon_control/:barnNo').exec(pathname)
+        console.log('---in aircon_control models---')
+        console.log('match', match)
+
+        const barnNo = match[1]
+        console.log('match barnNo', barnNo)
+
+        // history.listen((location) => {
+        //   if (location.pathname === '/aircon_control') {
+        //     dispatch({
+        //       type: 'query',
+        //       payload: queryString.parse(location.search),
+        //     })
+        //   }
+
+        dispatch({
+          type: 'fetchBarnNo',
+          payload: {
+            barnNo: barnNo,
+          },
+        })
 
         dispatch({ type: 'fetchBarnsOptions',
+        })
+
+      // dispatch({
+      //   type: 'airconcontrol/fetchGatewayAddr',
+      //   payload: {
+      //     gatewayAddr: value[0],
+      //   },
+      // })
+
+        dispatch({
+          type: 'fetchAirConControlItems',
+          payload: {
+            barnNo: barnNo,
+          },
         })
 
       })
@@ -88,9 +118,6 @@ export default modelExtend(pageModel, {
 
 
     * fetchAirConControlItems ({ payload }, { call, put }) {
-      const { barnNo } = payload
-      console.log('-----barnNo-----!!')
-      console.log(barnNo)
       const data = yield call(getAirConControlItems, payload)
       console.log('-----fetchAirConControlItems-------')
       console.log(data)

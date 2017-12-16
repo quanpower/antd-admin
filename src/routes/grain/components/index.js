@@ -1,4 +1,4 @@
-
 import StoreHouse from './storeHouse'
+import AudioAlarm from './audioAlarm'
 
-export { StoreHouse }
+export { StoreHouse, AudioAlarm }

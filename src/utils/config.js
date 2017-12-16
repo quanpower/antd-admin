@@ -22,29 +22,12 @@ module.exports = {
     user: `${APIV1}/user/:id`,
     dashboard: `${APIV1}/dashboard`,
 
-
     menus: `${APIV1}/menus`,
 
-    loraTemperature: `${APIV1}/loranode_temperature`,
-    loraTemperatures: `${APIV1}/loranode_temperatures`,
-    loraTemperatureRecord: `${APIV1}/loranode_temperature_record`,
-
-    loraBat: `${APIV1}/loranode_battery`,
     barns: `${APIV1}/barns`,
     allBarns: `${APIV1}/all_barns`,
     allNodes: `${APIV1}/all_nodes`,
-    grainSmartTempCtrl: `${APIV1}/grain_smart_temperature_control`,
-    grainRealtimeTemp: `${APIV1}/grain_realtime_temperature`,
-    grainFireAlarm: `${APIV1}/grain_fire_alarm`,
-    grainUnmanned: `${APIV1}/grain_unmanned`,
-    grainDynamicLinkage: `${APIV1}/grain_dynamic_linkage`,
-    grainSecurity: `${APIV1}/grain_security`,
     grainHistory: `${APIV1}/grain_history`,
-
-    concTemp: `${APIV1}/concrete_temperature`,
-    concTemps: `${APIV1}/concrete_temperatures`,
-    concTempRecord: `${APIV1}/concrete_temperature_record`,
-    concDashboard: `${APIV1}/concrete_dashboard`,
 
     airConTemp: `${APIV1}/air-conditioner_temperature`,
     airConTemps: `${APIV1}/air-conditioner_temperatures`,
@@ -62,6 +45,8 @@ module.exports = {
     airconOnOffAllOneKey: `${APIV1}/air-conditioner_on_off_all_one_key`,
     airConControlItems: `${APIV1}/air-conditioner_control_items`,
     electricPowerItems: `${APIV1}/electric_power_control_items`,
+    alarmStatus: `${APIV1}/alarm_status`,
+    airconBlockItems: `${APIV1}/air-conditioner_block_items`,
 
   },
 }

@@ -42,6 +42,7 @@ const AirConControl = ({ location, dispatch, airconcontrol, loading }) => {
   console.log('----airConControlItems-----')
   console.log(airConControlItems)
 
+
   const cascaderProps = {
 
     size: 'large',
@@ -51,29 +52,10 @@ const AirConControl = ({ location, dispatch, airconcontrol, loading }) => {
     onChange (value) {
       console.log('------select value is:--------')
       console.log(value)
+      const barn_no = value[1]
+      dispatch(routerRedux.push(`/aircon_control/${barn_no}`))
 
-      dispatch({
-        type: 'airconcontrol/fetchGatewayAddr',
-        payload: {
-          gatewayAddr: value[0],
-        },
-      })
-
-      dispatch({
-        type: 'airconcontrol/fetchBarnNo',
-        payload: {
-          barnNo: value[1],
-        },
-      })
-
-      dispatch({
-        type: 'airconcontrol/fetchAirConControlItems',
-        payload: {
-          barnNo: value[1],
-        },
-      })
     }
-
   }
 
 

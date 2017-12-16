@@ -4,7 +4,7 @@ import { connect } from 'dva'
 import { Row, Col, Card } from 'antd'
 import { color } from 'utils'
 import { Loader } from 'components'
-import { StoreHouse } from './components'
+import { StoreHouse, AudioAlarm } from './components'
 import styles from './index.less'
 // import TempRecordList from "./components/temprecord";
 
@@ -15,8 +15,8 @@ const bodyStyle = {
   },
 }
 
-function Grain ({ grain }) {
-  const { barns } = grain
+function Grain ({ grain, dispatch }) {
+  const { barns, alarmStatus, showAudio } = grain
 
   console.log('barns are :', barns)
   const barnCards = barns.map((item, key) => (<Col key={key} lg={6} md={12}>
@@ -28,6 +28,9 @@ function Grain ({ grain }) {
       <Row gutter={24}>
         {barnCards}
       </Row>
+
+      <AudioAlarm alarmStatus={alarmStatus} showAudio={showAudio} dispatch={dispatch} />
+
     </div>
   )
 }

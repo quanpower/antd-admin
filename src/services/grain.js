@@ -1,47 +1,8 @@
 import { request, config } from 'utils'
 
 const { api } = config
-const { loraTemperature, loraTemperatures, loraTemperatureRecord, loraBat, barns, allBarns, allNodes, grainUnmanned,
-  airConTemp, airConTemps, airConTempRecord, airConDashboard, grainSmartTempCtrl, grainRealtimeTemp, grainFireAlarm,
-  grainDynamicLinkage, grainSecurity, grainHistory, nodeAddrByBarnNo } = api
-
-export async function loraTemp (params) {
-  return request({
-    // # todo
-    url: loraTemperature.concat('/1/1'),
-    method: 'get',
-    data: params,
-  })
-}
-
-
-export async function loraTemps (params) {
-  return request({
-    // # todo
-    url: loraTemperatures.concat('/1/1'),
-    method: 'get',
-    data: params,
-  })
-}
-
-
-export async function loraTempRecord (params) {
-  return request({
-    // # todo
-    url: loraTemperatureRecord,
-    method: 'post',
-    data: params,
-  })
-}
-
-
-export async function loraBattery (params) {
-  return request({
-    url: loraBat.concat('/1/1'),
-    method: 'get',
-    data: params,
-  })
-}
+const { barns, allBarns, allNodes, airConTemp, airConTemps, airConTempRecord, airConDashboard, 
+   grainHistory, nodeAddrByBarnNo, alarmStatus, airconBlockItems } = api
 
 
 export async function getBarns (params) {
@@ -107,55 +68,6 @@ export async function getAirConDashboard (params) {
 }
 
 
-export async function getGrainUnmanned (params) {
-  return request({
-    url: grainUnmanned.concat('/1/1'),
-    method: 'get',
-    data: params,
-  })
-}
-
-
-export async function getSmartTempCtrl (params) {
-  return request({
-    url: grainSmartTempCtrl.concat('/1/1'),
-    method: 'get',
-    data: params,
-  })
-}
-
-export async function getRealtimeTemp (params) {
-  return request({
-    url: grainRealtimeTemp.concat('/1/1'),
-    method: 'get',
-    data: params,
-  })
-}
-
-export async function getFireAlarm (params) {
-  return request({
-    url: grainFireAlarm.concat('/1/1'),
-    method: 'get',
-    data: params,
-  })
-}
-
-export async function getDynamicLinkage (params) {
-  return request({
-    url: grainDynamicLinkage.concat('/1/1'),
-    method: 'get',
-    data: params,
-  })
-}
-
-export async function getSecurity (params) {
-  return request({
-    url: grainSecurity.concat('/1/1'),
-    method: 'get',
-    data: params,
-  })
-}
-
 
 export async function getGrainHistory (params) {
   return request({
@@ -170,6 +82,24 @@ export async function getNodeAddrByBarnNo (params) {
   return request({
     url: nodeAddrByBarnNo,
     method: 'get',
+    data: params,
+  })
+}
+
+
+export async function getAlarmStatus (params) {
+  return request({
+    url: alarmStatus,
+    method: 'get',
+    data: params,
+  })
+}
+
+
+export async function getAirconBlockItems (params) {
+  return request({
+    url: airconBlockItems,
+    method: 'post',
     data: params,
   })
 }

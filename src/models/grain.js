@@ -8,6 +8,8 @@ import { getBarns } from "../services/grain"
 export default modelExtend(model, {
   namespace: 'grain',
   state: {
+    alarmStatus: false,
+    showAudio: true,
     barns: [],
   },
   subscriptions: {
@@ -18,6 +20,17 @@ export default modelExtend(model, {
           dispatch({ type: 'fetchBarns' })
           console.log('update storehouses begin---')
           setInterval(() => {
+
+          dispatch({ type: 'fetchAlarmStatus',
+          })
+
+          dispatch({
+            type: 'showAudio',
+            payload: {
+              showAudio: true,
+            },
+          })
+
             dispatch({ type: 'fetchBarns' })
           }, 60000)
         } else {
@@ -40,6 +53,27 @@ export default modelExtend(model, {
         }
       })
     },
+
+    * showAudio ({ payload }, { put }) {
+      yield put({
+        type: 'updateState',
+        payload: payload,
+      })
+    },
+
+
+    * fetchAlarmStatus ({ }, { call, put }) {
+      const alarmStatus = yield call(getAlarmStatus)
+      console.log('-----alarmStatus is------ :', alarmStatus)
+      yield put({
+        type: 'updateState',
+        payload: {
+          alarmStatus: alarmStatus.alarmStatus,
+        }
+      })
+    },
+
+
   },
 
   reducers: {
